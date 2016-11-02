@@ -7,6 +7,7 @@ public class MeshGenerator : MonoBehaviour
 {
     public SquareGrid SquareGrid;
     public MeshFilter Walls;
+    public MeshCollider WallCollider;
 
     public int WallHeight = 5;
 
@@ -40,6 +41,8 @@ public class MeshGenerator : MonoBehaviour
         mesh.vertices = _vertices.ToArray();
         mesh.triangles = _triangles.ToArray();
         mesh.RecalculateNormals();
+
+        WallCollider.sharedMesh = mesh;
 
         CreateWallMesh();
     }

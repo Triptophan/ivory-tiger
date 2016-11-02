@@ -77,7 +77,7 @@ namespace Assets.Scripts.MapGeneration.Types
 
         private bool IsInMap(TileType[,] map, int x, int y)
         {
-            return x > 0 && x < map.GetLength(0) && y > 0 && y < map.GetLength(1);
+            return x >= 0 && x < map.GetLength(0) && y >= 0 && y < map.GetLength(1);
         }
     }
 }
