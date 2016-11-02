@@ -1,4 +1,5 @@
-﻿using Assets.Scripts;
+﻿using Assets.Scripts.MapGeneration.Enumerations;
+using Assets.Scripts.MapGeneration.Types;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -64,8 +65,8 @@ public class MeshGenerator : MonoBehaviour
         foreach (List<int> outline in _outlines)
         {
             for (int i = 0; i < outline.Count - 1; i++)
-            {                
-                AddWallHeight(wallVertices, outline, wallTriangles, i);               
+            {
+                AddWallHeight(wallVertices, outline, wallTriangles, i);
             }
         }
 
@@ -76,7 +77,7 @@ public class MeshGenerator : MonoBehaviour
 
     private void AddWallHeight(List<Vector3> wallVertices, List<int> outline, List<int> wallTriangles, int outlineIndex)
     {
-        for(int offset = 0; offset < WallHeight; offset++)
+        for (int offset = 0; offset < WallHeight; offset++)
         {
             int startIndex = wallVertices.Count;
 
@@ -84,7 +85,7 @@ public class MeshGenerator : MonoBehaviour
             wallVertices.Add(_vertices[outline[outlineIndex + 1]] - Vector3.up * offset); //right
             wallVertices.Add(_vertices[outline[outlineIndex]] - Vector3.up * (offset + 1)); //bottom left
             wallVertices.Add(_vertices[outline[outlineIndex + 1]] - Vector3.up * (offset + 1)); //bottom right
-            
+
             wallTriangles.Add(startIndex + 0);
             wallTriangles.Add(startIndex + 3);
             wallTriangles.Add(startIndex + 2);
@@ -92,7 +93,7 @@ public class MeshGenerator : MonoBehaviour
             wallTriangles.Add(startIndex + 0);
             wallTriangles.Add(startIndex + 1);
             wallTriangles.Add(startIndex + 3);
-        }    
+        }
     }
 
     private void MeshFromPoints(params Node[] points)

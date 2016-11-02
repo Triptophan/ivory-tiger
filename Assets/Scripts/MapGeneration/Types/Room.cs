@@ -1,7 +1,8 @@
-﻿using System;
+﻿using Assets.Scripts.MapGeneration.Enumerations;
+using System;
 using System.Collections.Generic;
 
-namespace Assets.Scripts.MapGeneration
+namespace Assets.Scripts.MapGeneration.Types
 {
     public class Room : IComparable<Room>
     {
@@ -34,7 +35,7 @@ namespace Assets.Scripts.MapGeneration
             if (!IsAccessibleFromMainRoom)
             {
                 IsAccessibleFromMainRoom = true;
-                foreach(Room connectedRoom in ConnectedRooms)
+                foreach (Room connectedRoom in ConnectedRooms)
                 {
                     connectedRoom.SetAccessibleFromMainRoom();
                 }

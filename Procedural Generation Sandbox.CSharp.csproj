@@ -71,16 +71,16 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\MapGeneration\ControlNode.cs" />
+    <Compile Include="Assets\Scripts\MapGeneration\Types\ControlNode.cs" />
     <Compile Include="Assets\Scripts\MapGeneration\MapGenerator.cs" />
     <Compile Include="Assets\Scripts\MapGeneration\MeshGenerator.cs" />
-    <Compile Include="Assets\Scripts\MapGeneration\Node.cs" />
-    <Compile Include="Assets\Scripts\MapGeneration\Room.cs" />
-    <Compile Include="Assets\Scripts\MapGeneration\RoomLocation.cs" />
-    <Compile Include="Assets\Scripts\MapGeneration\Square.cs" />
-    <Compile Include="Assets\Scripts\MapGeneration\SquareGrid.cs" />
-    <Compile Include="Assets\Scripts\MapGeneration\Tile.cs" />
-    <Compile Include="Assets\Scripts\MapGeneration\TileType.cs" />
+    <Compile Include="Assets\Scripts\MapGeneration\Types\Node.cs" />
+    <Compile Include="Assets\Scripts\MapGeneration\Types\Room.cs" />
+    <Compile Include="Assets\Scripts\MapGeneration\Types\RoomLocation.cs" />
+    <Compile Include="Assets\Scripts\MapGeneration\Types\Square.cs" />
+    <Compile Include="Assets\Scripts\MapGeneration\Types\SquareGrid.cs" />
+    <Compile Include="Assets\Scripts\MapGeneration\Types\Tile.cs" />
+    <Compile Include="Assets\Scripts\MapGeneration\Enumerations\TileType.cs" />
     <Compile Include="Assets\Scripts\MapGeneration\Types\Triangle.cs" />
   </ItemGroup>
   <ItemGroup>

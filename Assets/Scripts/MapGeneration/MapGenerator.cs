@@ -1,5 +1,5 @@
-﻿using Assets.Scripts;
-using Assets.Scripts.MapGeneration;
+﻿using Assets.Scripts.MapGeneration.Enumerations;
+using Assets.Scripts.MapGeneration.Types;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -201,9 +201,9 @@ public class MapGenerator : MonoBehaviour
         List<Room> roomListA = new List<Room>();
         List<Room> roomListB = new List<Room>();
 
-        if(forceAccessibilityFromMainRoom)
+        if (forceAccessibilityFromMainRoom)
         {
-            foreach(var room in allRooms)
+            foreach (var room in allRooms)
             {
                 if (room.IsAccessibleFromMainRoom) roomListB.Add(room);
                 else roomListA.Add(room);
@@ -228,7 +228,7 @@ public class MapGenerator : MonoBehaviour
             {
                 possibleConnectionFound = false;
                 if (roomA.ConnectedRooms.Count > 0) continue;
-            } 
+            }
 
             foreach (var roomB in roomListB)
             {
@@ -283,7 +283,7 @@ public class MapGenerator : MonoBehaviour
         //Debug.DrawLine()
 
         List<Tile> line = GetPassagePath(tileA, tileB);
-        foreach(Tile c in line)
+        foreach (Tile c in line)
         {
             DrawCircle(c, PathRadius);
         }
@@ -291,10 +291,10 @@ public class MapGenerator : MonoBehaviour
 
     private void DrawCircle(Tile c, int r)
     {
-        for(int x = -r; x <=r; x++)
-            for(int y = -r; y<=r; y++)
+        for (int x = -r; x <= r; x++)
+            for (int y = -r; y <= r; y++)
             {
-                if(x*x + y*y <= r*r)
+                if (x * x + y * y <= r * r)
                 {
                     int drawX = c.X + x;
                     int drawY = c.Y + y;
@@ -334,7 +334,7 @@ public class MapGenerator : MonoBehaviour
             else x += step;
 
             gradientAccumulation += shortest;
-            if(gradientAccumulation >= longest)
+            if (gradientAccumulation >= longest)
             {
                 if (inverted) x += gradientStep;
                 else y += gradientStep;

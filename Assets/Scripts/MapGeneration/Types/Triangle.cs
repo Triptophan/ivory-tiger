@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace Assets.Scripts
+namespace Assets.Scripts.MapGeneration.Types
 {
-    struct Triangle
+    internal struct Triangle
     {
         public int VertexIndexA;
         public int VertexIndexB;

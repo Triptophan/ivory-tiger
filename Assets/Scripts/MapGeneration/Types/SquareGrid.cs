@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.MapGeneration.Enumerations;
+using UnityEngine;
 
-namespace Assets.Scripts
+namespace Assets.Scripts.MapGeneration.Types
 {
     public class SquareGrid
     {
@@ -25,7 +26,7 @@ namespace Assets.Scripts
                     position = new Vector3(-mapWidth / 2 + x * squareSize + squareSize / 2, 0, -mapHeight / 2 + y * squareSize + squareSize / 2);
                     controlNodes[x, y] = new ControlNode(isWall, position, squareSize);
                 }
-            }           
+            }
 
             Squares = new Square[nodeCountX - 1, nodeCountY - 1];
             for (int x = 0; x < nodeCountX - 1; x++)
