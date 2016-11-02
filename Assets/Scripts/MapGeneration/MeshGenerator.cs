@@ -8,8 +8,9 @@ public class MeshGenerator : MonoBehaviour
     public SquareGrid SquareGrid;
     public MeshFilter Walls;
     public MeshCollider WallCollider;
+    public Transform Floor;
 
-    public int WallHeight = 5;
+    public int WallHeight = 4;
 
     private List<Vector3> _vertices;
     private List<int> _triangles;
@@ -20,6 +21,7 @@ public class MeshGenerator : MonoBehaviour
 
     public void GenerateMesh(TileType[,] map, float squareSize)
     {
+        Floor.position = new Vector3(Floor.position.x, WallHeight * -1, Floor.position.z);
         _triangleDictionary.Clear();
         _outlines.Clear();
         _checkedVertices.Clear();
@@ -41,8 +43,6 @@ public class MeshGenerator : MonoBehaviour
         mesh.vertices = _vertices.ToArray();
         mesh.triangles = _triangles.ToArray();
         mesh.RecalculateNormals();
-
-        WallCollider.sharedMesh = mesh;
 
         CreateWallMesh();
     }
@@ -76,6 +76,8 @@ public class MeshGenerator : MonoBehaviour
         wallmesh.vertices = wallVertices.ToArray();
         wallmesh.triangles = wallTriangles.ToArray();
         Walls.mesh = wallmesh;
+
+        WallCollider.sharedMesh = wallmesh;
     }
 
     private void AddWallHeight(List<Vector3> wallVertices, List<int> outline, List<int> wallTriangles, int outlineIndex)

@@ -1,6 +1,7 @@
 ﻿using Assets.Scripts.MapGeneration.Enumerations;
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Assets.Scripts.MapGeneration.Types
 {
@@ -28,6 +29,12 @@ namespace Assets.Scripts.MapGeneration.Types
             {
                 MapEdgeTiles(tile, map);
             }
+        }
+
+        public Vector3 GetRoomCenter(int MapWidth, int MapHeight)
+        {
+            var centerTile = Tiles[Tiles.Count / 2];
+            return new Vector3(centerTile.X - MapWidth/2, 0, centerTile.Y - MapHeight/2);
         }
 
         public void SetAccessibleFromMainRoom()

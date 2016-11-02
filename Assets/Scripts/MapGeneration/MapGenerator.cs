@@ -11,29 +11,22 @@ public class MapGenerator : MonoBehaviour
     private List<RoomLocation> _roomLocations;
     private List<List<Tile>> _roomRegions;
 
-    public int Width = 80;
-    public int Height = 60;
-    public int BorderWidth = 5;
+    public int Width = 128;
+    public int Height = 128;
+    public int BorderWidth = 2;
     public int MinimumRoomDimension = 4;
-    public int MaximumRoomDimension = 10;
+    public int MaximumRoomDimension = 32;
     public int PathWidth = 2;
-
-    public int RoomCount = 20;
+    public int MaxRoomCount = 10;
 
     public string Seed;
     public bool UseRandomSeed;
 
-    private void Start()
-    {
-        GenerateMap();
-    }
+    public int PlayerStartingY;
 
-    private void Update()
-    {
-        if (Input.GetMouseButtonUp(0)) GenerateMap();
-    }
-
-    private void GenerateMap()
+    public List<Room> Rooms;
+    
+    public void GenerateMap()
     {
         _map = new TileType[Width, Height];
         _roomLocations = new List<RoomLocation>();
@@ -50,6 +43,7 @@ public class MapGenerator : MonoBehaviour
 
         MeshGenerator meshGenerator = GetComponent<MeshGenerator>();
         meshGenerator.GenerateMesh(borderedMap, 1);
+        PlayerStartingY = meshGenerator.WallHeight * -1 + 1;
     }
 
     #region Map Building
@@ -67,7 +61,8 @@ public class MapGenerator : MonoBehaviour
 
     private void BuildRooms()
     {
-        for (int i = 0; i < RoomCount; i++)
+        var roomCount = _randomizer.Next(MaxRoomCount / 2, MaxRoomCount);
+        for (int i = 0; i < roomCount; i++)
         {
             int x = _randomizer.Next(MaximumRoomDimension / 2, Width - MaximumRoomDimension / 2);
             int y = _randomizer.Next(MaximumRoomDimension / 2, Height - MaximumRoomDimension / 2);
@@ -129,17 +124,17 @@ public class MapGenerator : MonoBehaviour
     {
         _roomRegions = GetRegions(TileType.Empty);
 
-        List<Room> rooms = new List<Room>();
+        Rooms = new List<Room>();
         foreach (var roomRegion in _roomRegions)
         {
-            rooms.Add(new Room(roomRegion, _map));
+            Rooms.Add(new Room(roomRegion, _map));
         }
 
-        rooms.Sort();
-        rooms[0].IsMainRoom = true;
-        rooms[0].IsAccessibleFromMainRoom = true;
+        Rooms.Sort();
+        Rooms[0].IsMainRoom = true;
+        Rooms[0].IsAccessibleFromMainRoom = true;
 
-        ConnectClosetRooms(rooms);
+        ConnectClosetRooms(Rooms);
     }
 
     private List<List<Tile>> GetRegions(TileType tileType)

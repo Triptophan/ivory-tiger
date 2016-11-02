@@ -71,6 +71,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\LevelManager.cs" />
     <Compile Include="Assets\Scripts\MapGeneration\Types\ControlNode.cs" />
     <Compile Include="Assets\Scripts\MapGeneration\MapGenerator.cs" />
     <Compile Include="Assets\Scripts\MapGeneration\MeshGenerator.cs" />
