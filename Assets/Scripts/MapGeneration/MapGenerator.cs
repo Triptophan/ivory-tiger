@@ -18,6 +18,7 @@ public class MapGenerator : MonoBehaviour
     public int MaximumRoomDimension = 32;
     public int PathWidth = 2;
     public int MaxRoomCount = 10;
+    public int MinRoomCount = 2;
 
     public string Seed;
     public bool UseRandomSeed;
@@ -61,7 +62,7 @@ public class MapGenerator : MonoBehaviour
 
     private void BuildRooms()
     {
-        var roomCount = _randomizer.Next(MaxRoomCount / 2, MaxRoomCount);
+        var roomCount = _randomizer.Next(MinRoomCount , MaxRoomCount);
         for (int i = 0; i < roomCount; i++)
         {
             int x = _randomizer.Next(MaximumRoomDimension / 2, Width - MaximumRoomDimension / 2);
