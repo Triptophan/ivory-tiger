@@ -1,8 +1,8 @@
 ﻿using Assets.Scripts.MapGeneration.Enumerations;
 using Assets.Scripts.MapGeneration.Types;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class MapGenerator : MonoBehaviour
 {
@@ -11,34 +11,27 @@ public class MapGenerator : MonoBehaviour
     private List<RoomLocation> _roomLocations;
     private List<List<Tile>> _roomRegions;
 
-    public int Width = 80;
-    public int Height = 60;
-    public int BorderWidth = 5;
+    public int Width = 128;
+    public int Height = 128;
+    public int BorderWidth = 2;
     public int MinimumRoomDimension = 4;
-    public int MaximumRoomDimension = 10;
-    public int PathRadius = 2;
-
-    public int RoomCount = 20;
+    public int MaximumRoomDimension = 32;
+    public int PathWidth = 2;
+    public int MaxRoomCount = 10;
 
     public string Seed;
     public bool UseRandomSeed;
 
-    private void Start()
-    {
-        GenerateMap();
-    }
+    public int PlayerStartingY;
 
-    private void Update()
-    {
-        if (Input.GetMouseButtonUp(0)) GenerateMap();
-    }
-
-    private void GenerateMap()
+    public List<Room> Rooms;
+    
+    public void GenerateMap()
     {
         _map = new TileType[Width, Height];
         _roomLocations = new List<RoomLocation>();
 
-        if (UseRandomSeed) Seed = Time.time.ToString();
+        if (UseRandomSeed) Seed = Guid.NewGuid().ToString();
 
         _randomizer = new System.Random(Seed.GetHashCode());
 
@@ -50,6 +43,7 @@ public class MapGenerator : MonoBehaviour
 
         MeshGenerator meshGenerator = GetComponent<MeshGenerator>();
         meshGenerator.GenerateMesh(borderedMap, 1);
+        PlayerStartingY = meshGenerator.WallHeight * -1 + 1;
     }
 
     #region Map Building
@@ -67,7 +61,8 @@ public class MapGenerator : MonoBehaviour
 
     private void BuildRooms()
     {
-        for (int i = 0; i < RoomCount; i++)
+        var roomCount = _randomizer.Next(MaxRoomCount / 2, MaxRoomCount);
+        for (int i = 0; i < roomCount; i++)
         {
             int x = _randomizer.Next(MaximumRoomDimension / 2, Width - MaximumRoomDimension / 2);
             int y = _randomizer.Next(MaximumRoomDimension / 2, Height - MaximumRoomDimension / 2);
@@ -129,17 +124,17 @@ public class MapGenerator : MonoBehaviour
     {
         _roomRegions = GetRegions(TileType.Empty);
 
-        List<Room> rooms = new List<Room>();
+        Rooms = new List<Room>();
         foreach (var roomRegion in _roomRegions)
         {
-            rooms.Add(new Room(roomRegion, _map));
+            Rooms.Add(new Room(roomRegion, _map));
         }
 
-        rooms.Sort();
-        rooms[0].IsMainRoom = true;
-        rooms[0].IsAccessibleFromMainRoom = true;
+        Rooms.Sort();
+        Rooms[0].IsMainRoom = true;
+        Rooms[0].IsAccessibleFromMainRoom = true;
 
-        ConnectClosetRooms(rooms);
+        ConnectClosetRooms(Rooms);
     }
 
     private List<List<Tile>> GetRegions(TileType tileType)
@@ -280,13 +275,39 @@ public class MapGenerator : MonoBehaviour
     private void CreatePassage(Room roomA, Room roomB, Tile tileA, Tile tileB)
     {
         Room.ConnectRooms(roomA, roomB);
-        //Debug.DrawLine()
 
         List<Tile> line = GetPassagePath(tileA, tileB);
         foreach (Tile c in line)
         {
-            DrawCircle(c, PathRadius);
+            DrawPath(c, PathWidth);
+            //DrawCircle(c, PathWidth);
         }
+    }
+
+    private void DrawPath(Tile c, int width)
+    {
+        var halfWidth = width / 2;
+        if (halfWidth > 0)
+        {
+            for (int x = -halfWidth; x < halfWidth; x++)
+            {
+                for (int y = -halfWidth; y < halfWidth; y++)
+                {
+                    DrawPathTile(c, x, y);
+                }
+            }
+        }
+        else
+        {
+            DrawPathTile(c, 0, 0);
+        }
+    }
+
+    private void DrawPathTile(Tile c, int x, int y)
+    {
+        int drawX = c.X + x;
+        int drawY = c.Y + y;
+        if (IsInMapBounds(drawX, drawY)) _map[drawX, drawY] = TileType.Empty;
     }
 
     private void DrawCircle(Tile c, int r)
@@ -306,41 +327,21 @@ public class MapGenerator : MonoBehaviour
     private List<Tile> GetPassagePath(Tile from, Tile to)
     {
         List<Tile> line = new List<Tile>();
-        int x = from.X;
-        int y = from.Y;
 
-        int dx = to.X - from.X;
-        int dy = to.Y - from.Y;
+        int dx = Math.Abs(to.X - from.X);
+        int dy = Math.Abs(to.Y - from.Y);
 
-        int longest = Mathf.Abs(dx);
-        int shortest = Mathf.Abs(dy);
+        int xSign = Math.Sign(to.X - from.X);
+        int ySign = Math.Sign(to.Y - from.Y);
 
-        bool inverted = longest < shortest;
-        int step = inverted ? Math.Sign(dy) : Math.Sign(dx);
-        int gradientStep = inverted ? Math.Sign(dx) : Math.Sign(dy);
-
-        if (inverted)
+        for (int x = 1; x <= dx; x++)
         {
-            longest = Mathf.Abs(dy);
-            shortest = Mathf.Abs(dx);
+            line.Add(new Tile(from.X + x * xSign, from.Y));
         }
 
-        int gradientAccumulation = longest / 2;
-        for (int i = 0; i < longest; i++)
+        for(int y = 1; y <= dy; y++)
         {
-            line.Add(new Tile(x, y));
-
-            if (inverted) y += step;
-            else x += step;
-
-            gradientAccumulation += shortest;
-            if (gradientAccumulation >= longest)
-            {
-                if (inverted) x += gradientStep;
-                else y += gradientStep;
-
-                gradientAccumulation -= longest;
-            }
+            line.Add(new Tile(to.X, from.Y + y * ySign));
         }
 
         return line;

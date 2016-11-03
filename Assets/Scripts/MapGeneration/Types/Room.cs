@@ -1,6 +1,7 @@
 ﻿using Assets.Scripts.MapGeneration.Enumerations;
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Assets.Scripts.MapGeneration.Types
 {
@@ -28,6 +29,12 @@ namespace Assets.Scripts.MapGeneration.Types
             {
                 MapEdgeTiles(tile, map);
             }
+        }
+
+        public Vector3 GetRoomCenter(int MapWidth, int MapHeight)
+        {
+            var centerTile = Tiles[Tiles.Count / 2];
+            return new Vector3(centerTile.X - MapWidth/2, 0, centerTile.Y - MapHeight/2);
         }
 
         public void SetAccessibleFromMainRoom()
@@ -77,7 +84,7 @@ namespace Assets.Scripts.MapGeneration.Types
 
         private bool IsInMap(TileType[,] map, int x, int y)
         {
-            return x > 0 && x < map.GetLength(0) && y > 0 && y < map.GetLength(1);
+            return x >= 0 && x < map.GetLength(0) && y >= 0 && y < map.GetLength(1);
         }
     }
 }
