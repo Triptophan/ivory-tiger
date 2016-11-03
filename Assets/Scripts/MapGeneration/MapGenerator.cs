@@ -123,6 +123,17 @@ public class MapGenerator : MonoBehaviour
 
     private void ProcessMap()
     {
+        var wallRegions = GetRegions(TileType.Wall);
+        foreach(var region in wallRegions)
+        {
+            if (region.Count > 4) continue;
+
+            foreach(var tile in region)
+            {
+                _map[tile.X, tile.Y] = TileType.Empty;
+            }
+        }
+
         _roomRegions = GetRegions(TileType.Empty);
 
         Rooms = new List<Room>();
