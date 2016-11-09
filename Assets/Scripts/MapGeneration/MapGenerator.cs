@@ -10,6 +10,9 @@ public class MapGenerator : MonoBehaviour
     private System.Random _randomizer;
     private List<RoomLocation> _roomLocations;
     private List<List<Tile>> _roomRegions;
+    private List<Room> _rooms;
+
+    private bool _renderPassageways;
 
     public int Width = 128;
     public int Height = 128;
@@ -23,12 +26,13 @@ public class MapGenerator : MonoBehaviour
     public string Seed;
     public bool UseRandomSeed;
 
-    public int PlayerStartingY;
+    public bool MapGenerated = false;
 
-    public List<Room> Rooms;
+    public int PlayerStartingY;    
     
-    public void GenerateMap()
+    public void GenerateMap(bool renderPassageways = true)
     {
+        _renderPassageways = renderPassageways;
         _map = new TileType[Width, Height];
         _roomLocations = new List<RoomLocation>();
 
@@ -45,6 +49,7 @@ public class MapGenerator : MonoBehaviour
         MeshGenerator meshGenerator = GetComponent<MeshGenerator>();
         meshGenerator.GenerateMesh(borderedMap, 1);
         PlayerStartingY = meshGenerator.WallHeight * -1 + 1;
+        MapGenerated = true;
     }
 
     #region Map Building
@@ -136,17 +141,20 @@ public class MapGenerator : MonoBehaviour
 
         _roomRegions = GetRegions(TileType.Empty);
 
-        Rooms = new List<Room>();
+        _rooms = new List<Room>();
         foreach (var roomRegion in _roomRegions)
         {
-            Rooms.Add(new Room(roomRegion, _map));
+            _rooms.Add(new Room(roomRegion, _map));
         }
 
-        Rooms.Sort();
-        Rooms[0].IsMainRoom = true;
-        Rooms[0].IsAccessibleFromMainRoom = true;
+        _rooms.Sort();
+        _rooms[0].IsMainRoom = true;
+        _rooms[0].IsAccessibleFromMainRoom = true;
 
-        ConnectClosetRooms(Rooms);
+        if (_renderPassageways)
+        {
+            ConnectClosetRooms(_rooms);
+        }
     }
 
     private List<List<Tile>> GetRegions(TileType tileType)
@@ -364,6 +372,23 @@ public class MapGenerator : MonoBehaviour
         return new Vector3(-Width / 2 + tile.X, 2, -Height / 2 + tile.Y);
     }
 
+    public List<Room> GetRooms()
+    {
+        var rooms = new List<Room>();
+
+        foreach (var room in _rooms)
+        {
+            var tiles = new List<Tile>();
+            foreach(var tile in room.Tiles)
+            {
+                tiles.Add(new Tile(-Width / 2 + tile.X, -Height / 2 + tile.Y));
+            }
+            rooms.Add(new Room(tiles, _map));
+        }
+
+        return rooms;
+    }
+    
     #endregion Map Processing
 
     #region Utility Functions

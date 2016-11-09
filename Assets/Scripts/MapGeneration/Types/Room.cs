@@ -34,7 +34,8 @@ namespace Assets.Scripts.MapGeneration.Types
         public Vector3 GetRoomCenter(int MapWidth, int MapHeight)
         {
             var centerTile = Tiles[Tiles.Count / 2];
-            return new Vector3(centerTile.X - MapWidth/2, 0, centerTile.Y - MapHeight/2);
+            //return new Vector3(centerTile.X - MapWidth/2, 0, centerTile.Y - MapHeight/2);
+            return new Vector3(centerTile.X, 0, centerTile.Y);
         }
 
         public void SetAccessibleFromMainRoom()

@@ -2,6 +2,7 @@
 using Assets.Scripts.MapGeneration.Types;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 public class MeshGenerator : MonoBehaviour
 {
@@ -39,7 +40,7 @@ public class MeshGenerator : MonoBehaviour
 
         Mesh mesh = new Mesh();
         GetComponent<MeshFilter>().mesh = mesh;
-
+        
         mesh.vertices = _vertices.ToArray();
         mesh.triangles = _triangles.ToArray();
         mesh.RecalculateNormals();
