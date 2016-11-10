@@ -5,13 +5,28 @@ namespace Assets.Scripts.Enemies
 {
     [RequireComponent(typeof(NavMeshAgent))]
     [RequireComponent(typeof(WanderBehavior))]
-    [RequireComponent(typeof(BoxCollider))]
+    [RequireComponent(typeof(ChaseBehavior))]
     public class Enemy : MonoBehaviour
     {
-        public bool Active
+        ChaseBehavior chase;
+        WanderBehavior wander;
+
+        
+        public bool Active { get { return isActiveAndEnabled; } set { gameObject.SetActive(value); } }
+
+        public void OnEnable()
         {
-            get { return isActiveAndEnabled; }
-            set { gameObject.SetActive(value); }
+            chase = GetComponent<ChaseBehavior>();
+            wander = GetComponent<WanderBehavior>();
+            
+
+        }
+
+        public void Update()
+        {
+            //If we're chasing, disable the wander behavior
+            wander.isWandering = !chase.isChasing;
+
         }
     }
 }

@@ -36,11 +36,13 @@ namespace Assets.Scripts
 
         private void Update()
         {
-            foreach (var candidate in EnemySpawner.EnemyPool)
-            {
-                var navAgent = candidate.GetComponent<NavMeshAgent>();
-                navAgent.SetDestination(_playerTransform.position);
-            }
+            //foreach (var candidate in EnemySpawner.EnemyPool)
+            //{
+            //    var navAgent = candidate.GetComponent<NavMeshAgent>();
+            //    float distance = Vector3.Distance(candidate.transform.position, _playerTransform.position);
+
+            //    navAgent.SetDestination(_playerTransform.position);
+            //}
         }
 
         private void SetPlayer()
