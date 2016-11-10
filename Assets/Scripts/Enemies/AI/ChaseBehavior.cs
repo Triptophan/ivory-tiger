@@ -31,6 +31,7 @@ namespace Assets.Scripts.Enemies.AI
 
                     var playerPosition = z.transform.position;
                     agent.SetDestination(playerPosition);
+                    break;
                 }
                 else
                 {
