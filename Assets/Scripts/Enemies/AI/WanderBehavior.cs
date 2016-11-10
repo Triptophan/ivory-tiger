@@ -6,6 +6,7 @@ namespace Assets.Scripts.Enemies.AI
     {
         public float wanderRadius = 5f;
         public float wanderTimer = 5f;
+        public bool isWandering = true;
 
         private Transform target;
         private NavMeshAgent agent;
@@ -21,6 +22,9 @@ namespace Assets.Scripts.Enemies.AI
         // Update is called once per frame
         private void Update()
         {
+            if (!isWandering)
+                return;
+
             timer += Time.deltaTime;
 
             if (timer >= wanderTimer)
@@ -34,13 +38,9 @@ namespace Assets.Scripts.Enemies.AI
         public static Vector3 RandomNavSphere(Vector3 origin, float dist, int layermask)
         {
             Vector3 randDirection = Random.insideUnitSphere * dist;
-
             randDirection += origin;
-
             NavMeshHit navHit;
-
             NavMesh.SamplePosition(randDirection, out navHit, dist, layermask);
-
             return navHit.position;
         }
     }
