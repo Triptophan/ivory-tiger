@@ -7,13 +7,30 @@ namespace Assets.Scripts.Combat.Projectiles
     [RequireComponent(typeof(SphereCollider))]
     public class Rock : MonoBehaviour
     {
-        private void OnCollisionEnter(Collision collision)
+        private Rigidbody _rigidbody;
+        private GameObject _gameObject;
+
+        public float Speed = 5f;
+
+        public Transform OwnerTransform;
+
+        private void Start()
         {
-            var enemy = collision.gameObject.GetComponent<Enemy>();
+            _gameObject = gameObject;
+            _rigidbody = GetComponent<Rigidbody>();
 
-            if (enemy == null) return;
+            _rigidbody.velocity = OwnerTransform.TransformDirection(Vector3.forward * Speed);
 
-            Destroy(this);
+            Destroy(_gameObject, 5f);
+        }
+
+        public void OnCollisionEnter(Collision collision)
+        {
+            var collisionObject = collision.gameObject;
+            if (collisionObject.tag == "Walls")
+            {
+                Destroy(_gameObject);
+            }
         }
     }
 }

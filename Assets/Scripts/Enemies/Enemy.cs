@@ -1,5 +1,6 @@
-﻿using UnityEngine;
-using Assets.Scripts.Enemies.AI;
+﻿using Assets.Scripts.Enemies.AI;
+using UnityEngine;
+using Assets.Scripts.Combat.Projectiles;
 
 namespace Assets.Scripts.Enemies
 {
@@ -8,25 +9,37 @@ namespace Assets.Scripts.Enemies
     [RequireComponent(typeof(ChaseBehavior))]
     public class Enemy : MonoBehaviour
     {
-        ChaseBehavior chase;
-        WanderBehavior wander;
+        private ChaseBehavior _chase;
+        private WanderBehavior _wander;
+        private GameObject _gameObject;
 
-        
         public bool Active { get { return isActiveAndEnabled; } set { gameObject.SetActive(value); } }
 
-        public void OnEnable()
+        public void Start()
         {
-            chase = GetComponent<ChaseBehavior>();
-            wander = GetComponent<WanderBehavior>();
-            
-
+            _gameObject = gameObject;
+            _gameObject.tag = "Enemy";
+            _chase = GetComponent<ChaseBehavior>();
+            _wander = GetComponent<WanderBehavior>();
         }
 
         public void Update()
         {
             //If we're chasing, disable the wander behavior
-            wander.isWandering = !chase.isChasing;
+            _wander.isWandering = !_chase.isChasing;
+        }
 
+        public void OnCollisionEnter(Collision collision)
+        {
+            var collisionObject = collision.gameObject;
+            if (collisionObject.tag == "Walls" || collisionObject.tag == "Enemy") return;
+
+            var rockBehavior = collisionObject.GetComponent<Rock>();
+            if(rockBehavior != null)
+            {
+                Destroy(collisionObject);
+                Destroy(_gameObject);
+            }
         }
     }
 }
