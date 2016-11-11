@@ -63,6 +63,12 @@
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEditor.iOS.Extensions.Xcode">
+      <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.iOS.Extensions.Common">
+      <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Common.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="ivory-tiger.CSharp.Plugins.csproj">
@@ -71,6 +77,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Combat\Projectiles\Rock.cs" />
     <Compile Include="Assets\Scripts\Enemies\AI\ChaseBehavior.cs" />
     <Compile Include="Assets\Scripts\Enemies\AI\WanderBehavior.cs" />
     <Compile Include="Assets\Scripts\Enemies\Enemy.cs" />
@@ -88,6 +95,7 @@
     <Compile Include="Assets\Scripts\MapGeneration\Types\SquareGrid.cs" />
     <Compile Include="Assets\Scripts\MapGeneration\Types\Tile.cs" />
     <Compile Include="Assets\Scripts\MapGeneration\Types\Triangle.cs" />
+    <Compile Include="Assets\Scripts\Player\CombatController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Standard Assets\Characters\FirstPersonCharacter\FirstPersonCharacterGuidelines.txt" />
