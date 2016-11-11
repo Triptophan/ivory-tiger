@@ -12,7 +12,7 @@ namespace Assets.Scripts.Enemies.AI
         private bool hadPlayer = false;
         Vector3 initialPosition;
 
-        private void OnStart()
+        private void Start()
         {
             agent = GetComponent<NavMeshAgent>();
             //Save off initial position

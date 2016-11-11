@@ -10,7 +10,6 @@ namespace Assets.Scripts.Enemies
     {
         ChaseBehavior chase;
         WanderBehavior wander;
-
         
         public bool Active { get { return isActiveAndEnabled; } set { gameObject.SetActive(value); } }
 
@@ -18,8 +17,6 @@ namespace Assets.Scripts.Enemies
         {
             chase = GetComponent<ChaseBehavior>();
             wander = GetComponent<WanderBehavior>();
-            
-
         }
 
         public void Update()
