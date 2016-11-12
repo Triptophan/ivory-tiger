@@ -2,7 +2,6 @@
 using Assets.Scripts.MapGeneration.Types;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 
 public class MeshGenerator : MonoBehaviour
 {
@@ -40,7 +39,7 @@ public class MeshGenerator : MonoBehaviour
 
         Mesh mesh = new Mesh();
         GetComponent<MeshFilter>().mesh = mesh;
-        
+
         mesh.vertices = _vertices.ToArray();
         mesh.triangles = _triangles.ToArray();
         mesh.RecalculateNormals();
@@ -96,9 +95,9 @@ public class MeshGenerator : MonoBehaviour
             wallTriangles.Add(startIndex + 3);
             wallTriangles.Add(startIndex + 2);
 
+            wallTriangles.Add(startIndex + 3);
             wallTriangles.Add(startIndex + 0);
             wallTriangles.Add(startIndex + 1);
-            wallTriangles.Add(startIndex + 3);
         }
     }
 

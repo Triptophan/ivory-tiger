@@ -1,8 +1,9 @@
 ﻿using Assets.Scripts.MapGeneration.Enumerations;
 using Assets.Scripts.MapGeneration.Types;
-using System.Collections.Generic;
-using UnityEngine;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 
 public class MapGenerator : MonoBehaviour
 {
@@ -20,16 +21,18 @@ public class MapGenerator : MonoBehaviour
     public int MinimumRoomDimension = 4;
     public int MaximumRoomDimension = 32;
     public int PathWidth = 2;
-    public int MaxRoomCount = 10;
     public int MinRoomCount = 2;
+    public int MaxRoomCount = 10;
 
     public string Seed;
     public bool UseRandomSeed;
 
+    [HideInInspector]
     public bool MapGenerated = false;
 
-    public int PlayerStartingY;    
-    
+    [HideInInspector]
+    public int PlayerStartingY;
+
     public void GenerateMap(bool renderPassageways = true)
     {
         _renderPassageways = renderPassageways;
@@ -67,7 +70,7 @@ public class MapGenerator : MonoBehaviour
 
     private void BuildRooms()
     {
-        var roomCount = _randomizer.Next(MinRoomCount , MaxRoomCount);
+        var roomCount = _randomizer.Next(MinRoomCount, MaxRoomCount);
         for (int i = 0; i < roomCount; i++)
         {
             int x = _randomizer.Next(MaximumRoomDimension / 2, Width - MaximumRoomDimension / 2);
@@ -128,17 +131,6 @@ public class MapGenerator : MonoBehaviour
 
     private void ProcessMap()
     {
-        var wallRegions = GetRegions(TileType.Wall);
-        foreach(var region in wallRegions)
-        {
-            if (region.Count > 4) continue;
-
-            foreach(var tile in region)
-            {
-                _map[tile.X, tile.Y] = TileType.Empty;
-            }
-        }
-
         _roomRegions = GetRegions(TileType.Empty);
 
         _rooms = new List<Room>();
@@ -154,6 +146,25 @@ public class MapGenerator : MonoBehaviour
         if (_renderPassageways)
         {
             ConnectClosetRooms(_rooms);
+        }
+
+        //ProcessWalls();
+    }
+
+    private void ProcessWalls()
+    {
+        var wallRegions = GetRegions(TileType.Wall);
+        foreach (var region in wallRegions)
+        {
+            var xCount = region.Select(tile => tile.X).Distinct().Count();
+            var yCount = region.Select(tile => tile.Y).Distinct().Count();
+
+            if (xCount > 2 && yCount > 2) continue;
+
+            foreach (var tile in region)
+            {
+                _map[tile.X, tile.Y] = TileType.Empty;
+            }
         }
     }
 
@@ -359,7 +370,7 @@ public class MapGenerator : MonoBehaviour
             line.Add(new Tile(from.X + x * xSign, from.Y));
         }
 
-        for(int y = 1; y <= dy; y++)
+        for (int y = 1; y <= dy; y++)
         {
             line.Add(new Tile(to.X, from.Y + y * ySign));
         }
@@ -379,7 +390,7 @@ public class MapGenerator : MonoBehaviour
         foreach (var room in _rooms)
         {
             var tiles = new List<Tile>();
-            foreach(var tile in room.Tiles)
+            foreach (var tile in room.Tiles)
             {
                 tiles.Add(new Tile(-Width / 2 + tile.X, -Height / 2 + tile.Y));
             }
@@ -388,7 +399,7 @@ public class MapGenerator : MonoBehaviour
 
         return rooms;
     }
-    
+
     #endregion Map Processing
 
     #region Utility Functions
