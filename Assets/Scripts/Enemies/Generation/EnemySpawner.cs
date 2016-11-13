@@ -23,6 +23,7 @@ namespace Assets.Scripts.Enemies.Generation
                 var enemy = _enemyFactory.Spawn();
                 enemy.transform.parent = _transform;
                 enemy.Active = false;
+                
                 EnemyPool.Add(enemy);
             }
         }
