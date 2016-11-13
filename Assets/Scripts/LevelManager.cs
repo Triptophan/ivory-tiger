@@ -40,7 +40,8 @@ namespace Assets.Scripts
         {
             var mainRoom = _rooms[0];
             var roomPosition = mainRoom.GetRoomCenter(MapGenerator.Width, MapGenerator.Height);
-            var playerPosition = new Vector3(roomPosition.x, MapGenerator.PlayerStartingY, roomPosition.z);            
+            var playerPosition = new Vector3(roomPosition.x, MapGenerator.PlayerStartingY, roomPosition.z);
+            PlayerPrefab.layer = LayerMask.NameToLayer("Players");     
             Instantiate(PlayerPrefab, playerPosition, Quaternion.identity);
         }
 
@@ -56,6 +57,7 @@ namespace Assets.Scripts
                 var randomTileIndex = Random.Range(0, room.Tiles.Count-1);
                 var tile = room.Tiles[randomTileIndex];
                 candidate.transform.position = new Vector3(tile.X, MapGenerator.PlayerStartingY, tile.Y);
+                
                 candidate.Active = true;
                 WanderBehavior wander = candidate.GetComponent<WanderBehavior>();
                 wander.enabled = false;
