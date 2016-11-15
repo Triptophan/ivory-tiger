@@ -17,6 +17,7 @@ public class FieldOfView : MonoBehaviour
     public LayerMask targetMask;
 
     public float playerFoundDetectionRadiusMultiplier = 3.0f;
+    public float playerFoundAgentSpeedMultiplier = 2.0f;
     public bool showDebugText = false;
     public bool showConeOfShame = false;
     
@@ -155,7 +156,7 @@ public class FieldOfView : MonoBehaviour
                 viewRadius = viewRadius / playerFoundDetectionRadiusMultiplier;
                 viewAngle = previousViewAngle;
                 hadPlayer = false;
-                agent.speed = agent.speed / 2;
+                agent.speed = agent.speed / playerFoundAgentSpeedMultiplier;
                 agent.SetDestination(initialPosition);
             }
 
@@ -179,7 +180,7 @@ public class FieldOfView : MonoBehaviour
                         viewRadius = viewRadius * playerFoundDetectionRadiusMultiplier;
                         previousViewAngle = viewAngle;
                         viewAngle = discoveredViewAngle;
-                        agent.speed = agent.speed * 2;
+                        agent.speed = agent.speed * playerFoundAgentSpeedMultiplier;
                     }
 
                     isChasing = true;
