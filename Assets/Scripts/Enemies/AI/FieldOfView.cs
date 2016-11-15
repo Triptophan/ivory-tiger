@@ -141,6 +141,7 @@ public class FieldOfView : MonoBehaviour
     void FindVisibleTargets()
     {
         visibleTargets.Clear();
+        
         Collider[] targetsInviewRadius = Physics.OverlapSphere(transform.position, viewRadius, targetMask);
 
         //If we have no "targets", clean up and get outta here!
@@ -167,9 +168,31 @@ public class FieldOfView : MonoBehaviour
         {
             Transform target = targetsInviewRadius[i].transform;
             Vector3 dirToTarget = (target.position - transform.position).normalized;
+
+            float dstToTarget = Vector3.Distance(transform.position, target.position);
+            float adjustedViewAngle = viewAngle;
+
+            //if we're really close to the target, regardless of if they are facing us
+            //or not, double the view angle (simulate sixth sense or sound)
+            if (!hadPlayer)
+            {
+                if (dstToTarget <= 10f && dstToTarget >= 5f)
+                {
+                    adjustedViewAngle = viewAngle * 2;
+                }
+                else if (dstToTarget < 5)
+                {
+                    adjustedViewAngle = viewAngle * 3;
+                }
+                else
+                {
+                    adjustedViewAngle = viewAngle;
+                }
+            }
+            
             if (Vector3.Angle(transform.forward, dirToTarget) < viewAngle / 2)
             {
-                float dstToTarget = Vector3.Distance(transform.position, target.position);
+//                float dstToTarget = Vector3.Distance(transform.position, target.position);
                 if (!Physics.Raycast(transform.position, dirToTarget, dstToTarget, obstacleMask))
                 {
                     visibleTargets.Add(target);
