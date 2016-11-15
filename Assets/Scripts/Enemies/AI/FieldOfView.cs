@@ -147,7 +147,7 @@ public class FieldOfView : MonoBehaviour
         {
             //Can't find player, turn off chasing
             isChasing = false;
-
+            
             //We are no longer chasing the player so return to my original location
             if (hadPlayer)
             {
@@ -155,6 +155,7 @@ public class FieldOfView : MonoBehaviour
                 viewRadius = viewRadius / playerFoundDetectionRadiusMultiplier;
                 viewAngle = previousViewAngle;
                 hadPlayer = false;
+                agent.speed = agent.speed / 2;
                 agent.SetDestination(initialPosition);
             }
 
@@ -178,6 +179,7 @@ public class FieldOfView : MonoBehaviour
                         viewRadius = viewRadius * playerFoundDetectionRadiusMultiplier;
                         previousViewAngle = viewAngle;
                         viewAngle = discoveredViewAngle;
+                        agent.speed = agent.speed * 2;
                     }
 
                     isChasing = true;

@@ -6,17 +6,26 @@ namespace Assets.Scripts.Enemies.AI
     {
         public float wanderRadius = 5f;
         public float wanderTimer = 5f;
+       
+         
+        public int maxWanderMoves = 5;
         public bool isWandering = true;
 
-        private Transform target;
+        private Transform mob;
+        
+        //Start Position of the mob.
+        private Vector3 startPosition;
+
         private NavMeshAgent agent;
         private float timer;
+        private int numberOfMoves = 0;
 
-        // Use this for initialization
-        private void OnEnable()
+        private void Start()
         {
             agent = GetComponent<NavMeshAgent>();
             timer = wanderTimer;
+            mob = transform;
+            startPosition = mob.position;
         }
 
         // Update is called once per frame
@@ -27,11 +36,20 @@ namespace Assets.Scripts.Enemies.AI
 
             timer += Time.deltaTime;
 
-            if (timer >= wanderTimer)
+            if (timer >= wanderTimer && agent.remainingDistance == 0.0f)
             {
-                Vector3 newPos = RandomNavSphere(transform.position, wanderRadius, -1);
-                agent.SetDestination(newPos);
-                timer = 0;
+                if (numberOfMoves == maxWanderMoves)
+                {
+                    agent.SetDestination(startPosition);
+                    numberOfMoves = 0;
+                }
+                else
+                {
+                    Vector3 newPos = RandomNavSphere(transform.position, wanderRadius, -1);
+                    agent.SetDestination(newPos);
+                    timer = 0;
+                    numberOfMoves++;
+                }
             }
         }
 

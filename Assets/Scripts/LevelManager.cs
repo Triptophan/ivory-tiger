@@ -54,13 +54,14 @@ namespace Assets.Scripts
                 if (candidate.Active) continue;
                 var randomRoomIndex = Random.Range(1, _rooms.Count-1);
                 var room = _rooms[randomRoomIndex];
+               
                 var randomTileIndex = Random.Range(0, room.Tiles.Count-1);
                 var tile = room.Tiles[randomTileIndex];
                 candidate.transform.position = new Vector3(tile.X, MapGenerator.PlayerStartingY, tile.Y);
                 
                 candidate.Active = true;
-                WanderBehavior wander = candidate.GetComponent<WanderBehavior>();
-                wander.enabled = false;
+                //WanderBehavior wander = candidate.GetComponent<WanderBehavior>();
+                //wander.enabled = false;
             }
         }
     }
