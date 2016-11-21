@@ -8,9 +8,11 @@ namespace Assets.Scripts.Enemies.AI
         public float playerDetectionRadius = 20f;
         public float playerFoundDetectionRadiusMultiplier = 1.5f;
         private NavMeshAgent agent;
+
         //private LevelManager levelManager;
         private bool hadPlayer = false;
-        Vector3 initialPosition;
+
+        private Vector3 initialPosition;
 
         private void Start()
         {
@@ -21,21 +23,20 @@ namespace Assets.Scripts.Enemies.AI
 
         private void OnEnable()
         {
-
         }
 
         public void Update()
         {
             var collisions = Physics.OverlapSphere(transform.position, playerDetectionRadius);
-            
+
             foreach (var collision in collisions)
             {
-               if(collision.GetType() == typeof(CharacterController))  //is the player being detected?
+                if (collision.GetType() == typeof(CharacterController))  //is the player being detected?
                 {
                     //We have player
                     isChasing = true;
                     hadPlayer = true;
-                    
+
                     //enemy is focused now, increase the playerdetectionradius
                     playerDetectionRadius = playerDetectionRadius * playerFoundDetectionRadiusMultiplier;
 

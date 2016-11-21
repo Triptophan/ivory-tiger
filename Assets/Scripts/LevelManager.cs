@@ -1,5 +1,4 @@
-﻿using Assets.Scripts.Enemies.AI;
-using Assets.Scripts.Enemies.Generation;
+﻿using Assets.Scripts.Enemies.Generation;
 using Assets.Scripts.MapGeneration.Types;
 using System.Collections.Generic;
 using UnityEditor;
@@ -34,7 +33,7 @@ namespace Assets.Scripts
 
         private void Update()
         {
-            if(Input.GetKeyUp(KeyCode.BackQuote))
+            if (Input.GetKeyUp(KeyCode.BackQuote))
             {
                 MapGenerator.GenerateMap();
             }
@@ -56,13 +55,13 @@ namespace Assets.Scripts
             foreach (var candidate in EnemySpawner.EnemyPool)
             {
                 if (candidate.Active) continue;
-                var randomRoomIndex = Random.Range(1, _rooms.Count-1);
+                var randomRoomIndex = Random.Range(1, _rooms.Count - 1);
                 var room = _rooms[randomRoomIndex];
-               
-                var randomTileIndex = Random.Range(0, room.Tiles.Count-1);
+
+                var randomTileIndex = Random.Range(0, room.Tiles.Count - 1);
                 var tile = room.Tiles[randomTileIndex];
                 candidate.transform.position = new Vector3(tile.X, MapGenerator.PlayerStartingY, tile.Y);
-                
+
                 candidate.Active = true;
                 //WanderBehavior wander = candidate.GetComponent<WanderBehavior>();
                 //wander.enabled = false;

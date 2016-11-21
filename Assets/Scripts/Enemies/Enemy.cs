@@ -1,6 +1,6 @@
-﻿using Assets.Scripts.Enemies.AI;
+﻿using Assets.Scripts.Combat.Projectiles;
+using Assets.Scripts.Enemies.AI;
 using UnityEngine;
-using Assets.Scripts.Combat.Projectiles;
 
 namespace Assets.Scripts.Enemies
 {
@@ -10,7 +10,7 @@ namespace Assets.Scripts.Enemies
     public class Enemy : MonoBehaviour
     {
         private WanderBehavior _wander;
-        private FieldOfView  _fieldOfView;
+        private FieldOfView _fieldOfView;
         private GameObject _gameObject;
 
         public bool Active { get { return isActiveAndEnabled; } set { gameObject.SetActive(value); } }
@@ -36,7 +36,7 @@ namespace Assets.Scripts.Enemies
             if (collisionObject.tag == "Walls" || collisionObject.tag == "Enemy") return;
 
             var rockBehavior = collisionObject.GetComponent<Rock>();
-            if(rockBehavior != null)
+            if (rockBehavior != null)
             {
                 Destroy(collisionObject);
                 Destroy(_gameObject);

@@ -1,6 +1,6 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class FieldOfView : MonoBehaviour
 {
@@ -9,8 +9,10 @@ public class FieldOfView : MonoBehaviour
 
     public float edgeDistanceThreshold;
     public int edgeResolveIterations;
+
     [HideInInspector]
     public bool isChasing = false;
+
     public float meshResolution = 6f;
 
     public LayerMask obstacleMask;
@@ -20,12 +22,13 @@ public class FieldOfView : MonoBehaviour
     public float playerFoundAgentSpeedMultiplier = 2.0f;
     public bool showDebugText = false;
     public bool showConeOfShame = false;
-    
+
     [Range(0, 360)]
     public float viewAngle = 90f;
 
     public MeshFilter viewMeshFilter;
     public float viewRadius = 10f;
+
     [HideInInspector]
     public List<Transform> visibleTargets = new List<Transform>();
 
@@ -35,6 +38,7 @@ public class FieldOfView : MonoBehaviour
     private float previousViewAngle;
     private Rect textArea = new Rect(0, 0, Screen.width, Screen.height);
     private Mesh viewMesh;
+
     public Vector3 DirFromAngle(float angleInDegrees, bool angleIsGlobal)
     {
         if (!angleIsGlobal)
@@ -44,7 +48,7 @@ public class FieldOfView : MonoBehaviour
         return new Vector3(Mathf.Sin(angleInDegrees * Mathf.Deg2Rad), 0, Mathf.Cos(angleInDegrees * Mathf.Deg2Rad));
     }
 
-    void DrawFieldOfView()
+    private void DrawFieldOfView()
     {
         int stepCount = Mathf.RoundToInt(viewAngle * meshResolution);
         float stepAngleSize = viewAngle / stepCount;
@@ -72,7 +76,6 @@ public class FieldOfView : MonoBehaviour
                         viewPoints.Add(edge.pointB);
                     }
                 }
-
             }
             viewPoints.Add(newViewCast.point);
             oldViewCast = newViewCast;
@@ -102,7 +105,7 @@ public class FieldOfView : MonoBehaviour
         viewMesh.RecalculateNormals();
     }
 
-    EdgeInfo FindEdge(ViewCastInfo minViewCast, ViewCastInfo maxViewCast)
+    private EdgeInfo FindEdge(ViewCastInfo minViewCast, ViewCastInfo maxViewCast)
     {
         float minAngle = minViewCast.angle;
         float maxAngle = maxViewCast.angle;
@@ -129,7 +132,7 @@ public class FieldOfView : MonoBehaviour
         return new EdgeInfo(minPoint, maxPoint);
     }
 
-    IEnumerator FindTargetsWithDelay(float delay)
+    private IEnumerator FindTargetsWithDelay(float delay)
     {
         while (true)
         {
@@ -138,10 +141,10 @@ public class FieldOfView : MonoBehaviour
         }
     }
 
-    void FindVisibleTargets()
+    private void FindVisibleTargets()
     {
         visibleTargets.Clear();
-        
+
         Collider[] targetsInviewRadius = Physics.OverlapSphere(transform.position, viewRadius, targetMask);
 
         //If we have no "targets", clean up and get outta here!
@@ -149,7 +152,7 @@ public class FieldOfView : MonoBehaviour
         {
             //Can't find player, turn off chasing
             isChasing = false;
-            
+
             //We are no longer chasing the player so return to my original location
             if (hadPlayer)
             {
@@ -189,10 +192,10 @@ public class FieldOfView : MonoBehaviour
                     adjustedViewAngle = viewAngle;
                 }
             }
-            
+
             if (Vector3.Angle(transform.forward, dirToTarget) < viewAngle / 2)
             {
-//                float dstToTarget = Vector3.Distance(transform.position, target.position);
+                //                float dstToTarget = Vector3.Distance(transform.position, target.position);
                 if (!Physics.Raycast(transform.position, dirToTarget, dstToTarget, obstacleMask))
                 {
                     visibleTargets.Add(target);
@@ -217,13 +220,13 @@ public class FieldOfView : MonoBehaviour
         }
     }
 
-    void LateUpdate()
+    private void LateUpdate()
     {
         if (showConeOfShame)
             DrawFieldOfView();
     }
 
-    void OnGUI()
+    private void OnGUI()
     {
         if (showDebugText)
         {
@@ -231,7 +234,7 @@ public class FieldOfView : MonoBehaviour
         }
     }
 
-    void Start()
+    private void Start()
     {
         viewMesh = new Mesh();
         viewMesh.name = "View Mesh";
@@ -240,14 +243,14 @@ public class FieldOfView : MonoBehaviour
         //Save off initial position
         initialPosition = transform.position;
         StartCoroutine("FindTargetsWithDelay", .5f);
-
     }
-    void UpdateDebugGUIDisplay()
-    {
 
+    private void UpdateDebugGUIDisplay()
+    {
         GUI.Label(textArea, string.Format("{0} targets visible", visibleTargets.Count.ToString()));
     }
-    ViewCastInfo ViewCast(float globalAngle)
+
+    private ViewCastInfo ViewCast(float globalAngle)
     {
         Vector3 dir = DirFromAngle(globalAngle, true);
         RaycastHit hit;
@@ -261,6 +264,7 @@ public class FieldOfView : MonoBehaviour
             return new ViewCastInfo(false, transform.position + dir * viewRadius, viewRadius, globalAngle);
         }
     }
+
     public struct EdgeInfo
     {
         public Vector3 pointA;
@@ -279,6 +283,7 @@ public class FieldOfView : MonoBehaviour
         public float dst;
         public bool hit;
         public Vector3 point;
+
         public ViewCastInfo(bool _hit, Vector3 _point, float _dst, float _angle)
         {
             hit = _hit;

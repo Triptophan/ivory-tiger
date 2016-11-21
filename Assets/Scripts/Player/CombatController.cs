@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using Assets.Scripts.Combat.Projectiles;
+﻿using Assets.Scripts.Combat.Projectiles;
+using UnityEngine;
 
 namespace Assets.Scripts.Player
 {
@@ -25,7 +25,7 @@ namespace Assets.Scripts.Player
 
         private void GetInput()
         {
-            if(Input.GetButtonUp("Fire1"))
+            if (Input.GetButtonUp("Fire1"))
             {
                 var projectileObject = (GameObject)Instantiate(Projectile, _viewTransform.TransformPoint(Vector3.forward - Vector3.up / 2f), _viewTransform.rotation);
 

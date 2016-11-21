@@ -85,7 +85,7 @@ public class MeshGenerator : MonoBehaviour
         List<int> wallTriangles = new List<int>();
         Mesh wallmesh = new Mesh();
         List<Vector2> uvs = new List<Vector2>();
-        
+
         foreach (var square in SquareGrid.Squares)
         {
             if (square == null) continue;
@@ -104,7 +104,7 @@ public class MeshGenerator : MonoBehaviour
 
     private void AddActiveWalls(List<Vector3> wallVertices, List<int> wallTriangles, List<Vector2> uvs, Square square)
     {
-        if(square.BottomEdgeActive)
+        if (square.BottomEdgeActive)
         {
             AddWallHeight(square.BottomLeft.VertexIndex, square.BottomRight.VertexIndex, wallVertices, uvs, wallTriangles);
         }

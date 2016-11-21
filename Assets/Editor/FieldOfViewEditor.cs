@@ -1,12 +1,10 @@
-﻿using UnityEngine;
-using System.Collections;
-using UnityEditor;
+﻿using UnityEditor;
+using UnityEngine;
 
 [CustomEditor(typeof(FieldOfView))]
 public class FieldOfViewEditor : Editor
 {
-
-    void OnSceneGUI()
+    private void OnSceneGUI()
     {
         FieldOfView fov = (FieldOfView)target;
         Handles.color = Color.white;

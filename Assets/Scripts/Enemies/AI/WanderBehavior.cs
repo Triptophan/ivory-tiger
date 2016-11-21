@@ -6,13 +6,12 @@ namespace Assets.Scripts.Enemies.AI
     {
         public float wanderRadius = 5f;
         public float wanderTimer = 5f;
-       
-         
+
         public int maxWanderMoves = 5;
         public bool isWandering = true;
 
         private Transform mob;
-        
+
         //Start Position of the mob.
         private Vector3 startPosition;
 

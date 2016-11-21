@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Assets.Scripts.Enemies.Generation
 {
@@ -13,7 +13,7 @@ namespace Assets.Scripts.Enemies.Generation
         public void Awake()
         {
             _transform = transform;
-            _enemyFactory = GetComponent<EnemyFactory>();                
+            _enemyFactory = GetComponent<EnemyFactory>();
         }
 
         public void GenerateEnemies(int enemyPoolCapacity)
@@ -23,9 +23,9 @@ namespace Assets.Scripts.Enemies.Generation
                 var enemy = _enemyFactory.Spawn();
                 enemy.transform.parent = _transform;
                 enemy.Active = false;
-                
+
                 EnemyPool.Add(enemy);
             }
         }
-    }    
+    }
 }

@@ -89,8 +89,8 @@ namespace Assets.Scripts.MapGeneration.Types
 
         private void MapEdgeTiles(Tile tile, TileType[,] map)
         {
-            for (int x = tile.X - 1; x <= tile.X +1; x++)
-                for (int y = tile.Y - 1; y <= tile.Y +1; y++)
+            for (int x = tile.X - 1; x <= tile.X + 1; x++)
+                for (int y = tile.Y - 1; y <= tile.Y + 1; y++)
                 {
                     if (IsNonCheckedNonCurrentInMapTile(map, tile, x, y)) continue;
 

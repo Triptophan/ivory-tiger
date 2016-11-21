@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using System.Diagnostics;
+﻿using System.Diagnostics;
+using UnityEngine;
 
 namespace Assets.Scripts.MapGeneration.Types
 {

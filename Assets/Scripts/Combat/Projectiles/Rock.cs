@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using Assets.Scripts.Enemies;
 
 namespace Assets.Scripts.Combat.Projectiles
 {
