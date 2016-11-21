@@ -1,16 +1,26 @@
 ﻿using Assets.Scripts.MapGeneration.Enumerations;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 using UnityEngine;
 
 namespace Assets.Scripts.MapGeneration.Types
 {
+    [DebuggerDisplay("Room Size: {RoomSize}, Width: {Width}, Height: {Height}, Center: {Center}")]
     public class Room : IComparable<Room>
     {
         public List<Tile> Tiles;
         public List<Tile> EdgeTiles;
+
         public List<Room> ConnectedRooms;
+
         public int RoomSize;
+        public int Width;
+        public int Height;
+
+        public Vector2 Center;
+
         public bool IsAccessibleFromMainRoom;
         public bool IsMainRoom;
 
@@ -25,17 +35,12 @@ namespace Assets.Scripts.MapGeneration.Types
             ConnectedRooms = new List<Room>();
             EdgeTiles = new List<Tile>();
 
+            ParseDimensionInfo();
+
             foreach (var tile in Tiles)
             {
                 MapEdgeTiles(tile, map);
             }
-        }
-
-        public Vector3 GetRoomCenter(int MapWidth, int MapHeight)
-        {
-            var centerTile = Tiles[Tiles.Count / 2];
-            //return new Vector3(centerTile.X - MapWidth/2, 0, centerTile.Y - MapHeight/2);
-            return new Vector3(centerTile.X, 0, centerTile.Y);
         }
 
         public void SetAccessibleFromMainRoom()
@@ -69,18 +74,41 @@ namespace Assets.Scripts.MapGeneration.Types
             return otherRoom.RoomSize.CompareTo(RoomSize);
         }
 
+        private void ParseDimensionInfo()
+        {
+            var minX = Tiles.Min(t => t.X);
+            var maxX = Tiles.Max(t => t.X);
+            var minY = Tiles.Min(t => t.Y);
+            var maxY = Tiles.Max(t => t.Y);
+
+            Width = maxX - minX + 1;
+            Height = maxY - minY + 1;
+
+            Center = new Vector2(minX + Width / 2, minY + Height / 2);
+        }
+
         private void MapEdgeTiles(Tile tile, TileType[,] map)
         {
-            for (int x = tile.X - 1; x <= tile.X; x++)
-                for (int y = tile.Y - 1; y <= tile.Y; y++)
+            for (int x = tile.X - 1; x <= tile.X +1; x++)
+                for (int y = tile.Y - 1; y <= tile.Y +1; y++)
                 {
-                    if (!IsInMap(map, x, y)) continue;
+                    if (IsNonCheckedNonCurrentInMapTile(map, tile, x, y)) continue;
 
-                    if (x == tile.X || y == tile.Y)
+                    if (IsEligibleTile(map, tile, x, y))
                     {
-                        if (map[x, y] == TileType.Wall) EdgeTiles.Add(tile);
+                        EdgeTiles.Add(tile);
                     }
                 }
+        }
+
+        private bool IsNonCheckedNonCurrentInMapTile(TileType[,] map, Tile tile, int x, int y)
+        {
+            return EdgeTiles.Contains(tile) || (x == tile.X && y == tile.Y) || !IsInMap(map, x, y);
+        }
+
+        private bool IsEligibleTile(TileType[,] map, Tile tile, int x, int y)
+        {
+            return (x == tile.X || y == tile.Y) && map[x, y] == TileType.Wall;
         }
 
         private bool IsInMap(TileType[,] map, int x, int y)

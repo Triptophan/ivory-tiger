@@ -1,7 +1,8 @@
-﻿using UnityEngine;
+﻿using System.Diagnostics;
 
 namespace Assets.Scripts.MapGeneration.Types
 {
+    [DebuggerDisplay("A:{VertexIndexA}, B:{VertexIndexB}, C:{VertexIndexC}")]
     internal struct Triangle
     {
         public int VertexIndexA;
@@ -32,11 +33,6 @@ namespace Assets.Scripts.MapGeneration.Types
             return vertexIndex == VertexIndexA ||
                     vertexIndex == VertexIndexB ||
                     vertexIndex == VertexIndexC;
-        }
-
-        public void Print()
-        {
-            Debug.Log(string.Format("VertexIndexA: {0}, VertexIndexB: {1}, VertexIndexC: {2}", VertexIndexA, VertexIndexB, VertexIndexC));
         }
     }
 }

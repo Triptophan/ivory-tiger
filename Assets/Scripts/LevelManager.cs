@@ -21,7 +21,7 @@ namespace Assets.Scripts
 
         private void Start()
         {
-            MapGenerator.GenerateMap(RenderHallways);
+            MapGenerator.GenerateMap();
 
             NavMeshBuilder.BuildNavMesh();
 
@@ -34,14 +34,18 @@ namespace Assets.Scripts
 
         private void Update()
         {
+            if(Input.GetKeyUp(KeyCode.BackQuote))
+            {
+                MapGenerator.GenerateMap();
+            }
         }
 
         private void SetPlayer()
         {
             var mainRoom = _rooms[0];
-            var roomPosition = mainRoom.GetRoomCenter(MapGenerator.Width, MapGenerator.Height);
-            var playerPosition = new Vector3(roomPosition.x, MapGenerator.PlayerStartingY, roomPosition.z);
-            PlayerPrefab.layer = LayerMask.NameToLayer("Players");     
+            var roomPosition = mainRoom.Center;//mainRoom.GetRoomCenter(MapGenerator.Width, MapGenerator.Height);
+            var playerPosition = new Vector3(roomPosition.x, MapGenerator.PlayerStartingY, roomPosition.y);
+            PlayerPrefab.layer = LayerMask.NameToLayer("Players");
             Instantiate(PlayerPrefab, playerPosition, Quaternion.identity);
         }
 
