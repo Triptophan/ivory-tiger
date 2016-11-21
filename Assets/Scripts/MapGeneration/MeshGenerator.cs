@@ -34,7 +34,12 @@ public class MeshGenerator : MonoBehaviour
         for (int x = 0; x < SquareGrid.Squares.GetLength(0); x++)
             for (int y = 0; y < SquareGrid.Squares.GetLength(1); y++)
             {
-                TriangulateSquare(SquareGrid.Squares[x, y]);
+                var square = SquareGrid.Squares[x, y];
+                if (square == null || square.TileType != TileType.Wall) continue;
+                if (square.TileType == TileType.Wall)
+                {
+                    MeshFromPoints(square.TopLeft, square.TopRight, square.BottomRight, square.BottomLeft);
+                }
             }
 
         Mesh mesh = new Mesh();
@@ -47,66 +52,12 @@ public class MeshGenerator : MonoBehaviour
         CreateWallMesh();
     }
 
-    private void TriangulateSquare(Square square)
-    {
-        if (square.Configuration == 0) return;
-
-        if ((square.Configuration & (1 << 0)) != 0)
-        {
-            MeshFromPoints(square.TopLeft, square.TopRight, square.BottomRight, square.BottomLeft);
-        }
-    }
-
-    private void CreateWallMesh()
-    {
-        CalculateMeshOutlines();
-
-        List<Vector3> wallVertices = new List<Vector3>();
-        List<int> wallTriangles = new List<int>();
-        Mesh wallmesh = new Mesh();
-
-        foreach (List<int> outline in _outlines)
-        {
-            for (int i = 0; i < outline.Count - 1; i++)
-            {
-                AddWallHeight(wallVertices, outline, wallTriangles, i);
-            }
-        }
-
-        wallmesh.vertices = wallVertices.ToArray();
-        wallmesh.triangles = wallTriangles.ToArray();
-        Walls.mesh = wallmesh;
-
-        WallCollider.sharedMesh = wallmesh;
-    }
-
-    private void AddWallHeight(List<Vector3> wallVertices, List<int> outline, List<int> wallTriangles, int outlineIndex)
-    {
-        for (int offset = 0; offset < WallHeight; offset++)
-        {
-            int startIndex = wallVertices.Count;
-
-            wallVertices.Add(_vertices[outline[outlineIndex]] - Vector3.up * offset); //left
-            wallVertices.Add(_vertices[outline[outlineIndex + 1]] - Vector3.up * offset); //right
-            wallVertices.Add(_vertices[outline[outlineIndex]] - Vector3.up * (offset + 1)); //bottom left
-            wallVertices.Add(_vertices[outline[outlineIndex + 1]] - Vector3.up * (offset + 1)); //bottom right
-
-            wallTriangles.Add(startIndex + 0);
-            wallTriangles.Add(startIndex + 3);
-            wallTriangles.Add(startIndex + 2);
-
-            wallTriangles.Add(startIndex + 3);
-            wallTriangles.Add(startIndex + 0);
-            wallTriangles.Add(startIndex + 1);
-        }
-    }
-
     private void MeshFromPoints(params Node[] points)
     {
         AssignVertices(points);
 
-        CreateTriangle(points[0], points[1], points[2]);
-        CreateTriangle(points[1], points[3], points[2]);
+        CreateTriangle(points[1], points[3], points[0]);
+        CreateTriangle(points[1], points[2], points[3]);
     }
 
     private void AssignVertices(Node[] points)
@@ -126,92 +77,79 @@ public class MeshGenerator : MonoBehaviour
         _triangles.Add(a.VertexIndex);
         _triangles.Add(b.VertexIndex);
         _triangles.Add(c.VertexIndex);
-
-        Triangle triangle = new Triangle(a.VertexIndex, b.VertexIndex, c.VertexIndex);
-        AddTriangleToDictionary(triangle.VertexIndexA, triangle);
-        AddTriangleToDictionary(triangle.VertexIndexB, triangle);
-        AddTriangleToDictionary(triangle.VertexIndexC, triangle);
     }
 
-    private void AddTriangleToDictionary(int vertexIndexKey, Triangle triangle)
+    private void CreateWallMesh()
     {
-        if (_triangleDictionary.ContainsKey(vertexIndexKey))
+        List<Vector3> wallVertices = new List<Vector3>();
+        List<int> wallTriangles = new List<int>();
+        Mesh wallmesh = new Mesh();
+        List<Vector2> uvs = new List<Vector2>();
+        
+        foreach (var square in SquareGrid.Squares)
         {
-            _triangleDictionary[vertexIndexKey].Add(triangle);
+            if (square == null) continue;
+            AddActiveWalls(wallVertices, wallTriangles, uvs, square);
         }
-        else
+
+        wallmesh.vertices = wallVertices.ToArray();
+        wallmesh.triangles = wallTriangles.ToArray();
+        wallmesh.RecalculateNormals();
+
+        wallmesh.uv = uvs.ToArray();
+        Walls.mesh = wallmesh;
+
+        WallCollider.sharedMesh = wallmesh;
+    }
+
+    private void AddActiveWalls(List<Vector3> wallVertices, List<int> wallTriangles, List<Vector2> uvs, Square square)
+    {
+        if(square.BottomEdgeActive)
         {
-            List<Triangle> triangleList = new List<Triangle>();
-            triangleList.Add(triangle);
-            _triangleDictionary.Add(vertexIndexKey, triangleList);
+            AddWallHeight(square.BottomLeft.VertexIndex, square.BottomRight.VertexIndex, wallVertices, uvs, wallTriangles);
+        }
+        if (square.LeftEdgeActive)
+        {
+            AddWallHeight(square.TopLeft.VertexIndex, square.BottomLeft.VertexIndex, wallVertices, uvs, wallTriangles);
+        }
+        if (square.RightEdgeActive)
+        {
+            AddWallHeight(square.BottomRight.VertexIndex, square.TopRight.VertexIndex, wallVertices, uvs, wallTriangles);
+        }
+        if (square.TopEdgeActive)
+        {
+            AddWallHeight(square.TopRight.VertexIndex, square.TopLeft.VertexIndex, wallVertices, uvs, wallTriangles);
         }
     }
 
-    private void CalculateMeshOutlines()
+    private void AddWallHeight(int vertexIndexA, int vertexIndexB, List<Vector3> wallVertices, List<Vector2> uvs, List<int> wallTriangles)
     {
-        for (int vertexIndex = 0; vertexIndex < _vertices.Count; vertexIndex++)
+        for (int offset = 0; offset < WallHeight; offset++)
         {
-            if (!_checkedVertices.Contains(vertexIndex))
-            {
-                int newOutlineVertex = GetConnectedOutlineVertex(vertexIndex);
-                if (newOutlineVertex != -1)
-                {
-                    _checkedVertices.Add(vertexIndex);
+            int startIndex = wallVertices.Count;
 
-                    List<int> newOutline = new List<int>();
-                    newOutline.Add(vertexIndex);
-                    _outlines.Add(newOutline);
-                    FollowRoomOutline(newOutlineVertex, _outlines.Count - 1);
-                    _outlines[_outlines.Count - 1].Add(vertexIndex);
-                }
-            }
+            wallVertices.Add(_vertices[vertexIndexA] - Vector3.up * offset); //left
+            wallVertices.Add(_vertices[vertexIndexB] - Vector3.up * offset); //right
+            wallVertices.Add(_vertices[vertexIndexA] - Vector3.up * (offset + 1)); //bottom left
+            wallVertices.Add(_vertices[vertexIndexB] - Vector3.up * (offset + 1)); //bottom right
+
+            wallTriangles.Add(startIndex + 0);
+            wallTriangles.Add(startIndex + 3);
+            wallTriangles.Add(startIndex + 2);
+
+            wallTriangles.Add(startIndex + 0);
+            wallTriangles.Add(startIndex + 1);
+            wallTriangles.Add(startIndex + 3);
+
+            AddUVs(uvs);
         }
     }
 
-    private void FollowRoomOutline(int vertexIndex, int outlineIndex)
+    private void AddUVs(List<Vector2> uvs)
     {
-        _outlines[outlineIndex].Add(vertexIndex);
-        _checkedVertices.Add(vertexIndex);
-        int nextVertexIndex = GetConnectedOutlineVertex(vertexIndex);
-
-        if (nextVertexIndex != -1) FollowRoomOutline(nextVertexIndex, outlineIndex);
-    }
-
-    private int GetConnectedOutlineVertex(int vertexIndex)
-    {
-        List<Triangle> trianglesContainingVertex = _triangleDictionary[vertexIndex];
-
-        for (int i = 0; i < trianglesContainingVertex.Count; i++)
-        {
-            Triangle triangle = trianglesContainingVertex[i];
-
-            for (int j = 0; j < 3; j++)
-            {
-                int vertexB = triangle[j];
-                if (vertexB != vertexIndex && !_checkedVertices.Contains(vertexB))
-                {
-                    if (IsRoomOutlineEdge(vertexIndex, vertexB)) return vertexB;
-                }
-            }
-        }
-
-        return -1;
-    }
-
-    private bool IsRoomOutlineEdge(int vertexA, int vertexB)
-    {
-        List<Triangle> trianglesContainingVertexA = _triangleDictionary[vertexA];
-        int sharedTriangleCount = 0;
-
-        for (int i = 0; i < trianglesContainingVertexA.Count; i++)
-        {
-            if (trianglesContainingVertexA[i].Contains(vertexB))
-            {
-                sharedTriangleCount++;
-                if (sharedTriangleCount > 1) break;
-            }
-        }
-
-        return sharedTriangleCount == 1;
+        uvs.Add(new Vector2(0, 1));
+        uvs.Add(new Vector2(1, 1));
+        uvs.Add(new Vector2(0, 0));
+        uvs.Add(new Vector2(1, 0));
     }
 }

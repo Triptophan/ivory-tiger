@@ -2,18 +2,15 @@
 using Assets.Scripts.MapGeneration.Types;
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Text;
 using UnityEngine;
 
 public class MapGenerator : MonoBehaviour
 {
     private TileType[,] _map;
     private System.Random _randomizer;
-    private List<RoomLocation> _roomLocations;
     private List<List<Tile>> _roomRegions;
     private List<Room> _rooms;
-
-    private bool _renderPassageways;
 
     public int Width = 128;
     public int Height = 128;
@@ -23,7 +20,7 @@ public class MapGenerator : MonoBehaviour
     public int PathWidth = 2;
     public int MinRoomCount = 2;
     public int MaxRoomCount = 10;
-
+    public bool RenderPassageways = true;
     public string Seed;
     public bool UseRandomSeed;
 
@@ -33,11 +30,9 @@ public class MapGenerator : MonoBehaviour
     [HideInInspector]
     public int PlayerStartingY;
 
-    public void GenerateMap(bool renderPassageways = true)
+    public void GenerateMap()
     {
-        _renderPassageways = renderPassageways;
         _map = new TileType[Width, Height];
-        _roomLocations = new List<RoomLocation>();
 
         if (UseRandomSeed) Seed = Guid.NewGuid().ToString();
 
@@ -47,10 +42,9 @@ public class MapGenerator : MonoBehaviour
 
         ProcessMap();
 
-        var borderedMap = BuildBorderedMap();
-
+        //PrintMap(borderedMap, "Bordered Map");
         MeshGenerator meshGenerator = GetComponent<MeshGenerator>();
-        meshGenerator.GenerateMesh(borderedMap, 1);
+        meshGenerator.GenerateMesh(_map, 1);
         PlayerStartingY = meshGenerator.WallHeight * -1 + 1;
         MapGenerated = true;
     }
@@ -71,42 +65,53 @@ public class MapGenerator : MonoBehaviour
     private void BuildRooms()
     {
         var roomCount = _randomizer.Next(MinRoomCount, MaxRoomCount);
+        List<RoomLocation> roomLocations = new List<RoomLocation>();
         for (int i = 0; i < roomCount; i++)
         {
-            int x = _randomizer.Next(MaximumRoomDimension / 2, Width - MaximumRoomDimension / 2);
-            int y = _randomizer.Next(MaximumRoomDimension / 2, Height - MaximumRoomDimension / 2);
-            _map[x, y] = (int)TileType.Empty;
-            _roomLocations.Add(new RoomLocation(x, y));
-        }
+            int x = _randomizer.Next(0, Width - MaximumRoomDimension / 2);
+            int y = _randomizer.Next(0, Height - MaximumRoomDimension / 2);
+            if (_map[x, y] == TileType.Room)
+            {
+                i--;
+                continue;
+            }
 
-        foreach (var location in _roomLocations)
-        {
+            _map[x, y] = TileType.Room;
+
             var sizeX = _randomizer.Next(MinimumRoomDimension, MaximumRoomDimension);
             var sizeY = _randomizer.Next(MinimumRoomDimension, MaximumRoomDimension);
 
-            FillRoomSize(location, sizeX, sizeY);
+            roomLocations.Add(new RoomLocation(x, y, sizeX, sizeY));
         }
+
+        //PrintMap(_map, "Post Room Location: Room Count = " + roomCount);
+
+        foreach (var location in roomLocations)
+        {
+            FillRoomSize(location);
+        }
+
+        //PrintMap(_map, "Post Room Fill");
     }
 
-    private void FillRoomSize(RoomLocation location, int sizeX, int sizeY)
+    private void FillRoomSize(RoomLocation location)
     {
-        var offsetX = sizeX % 2 == 0 ? 1 : 0;
-        var offsetY = sizeY % 2 == 0 ? 1 : 0;
-        var startX = location.X - sizeX / 2 + offsetX;
-        var endX = location.X + sizeX / 2;
-        var startY = location.Y - sizeY / 2 + offsetY;
-        var endY = location.Y + sizeY / 2;
+        var offsetX = location.Width % 2 == 0 ? 1 : 0;
+        var offsetY = location.Height % 2 == 0 ? 1 : 0;
+        var startX = location.X - location.Width / 2 + offsetX;
+        var endX = location.X + location.Width / 2;
+        var startY = location.Y - location.Height / 2 + offsetY;
+        var endY = location.Y + location.Height / 2;
 
-        //Debug.Log(string.Format("startX: {0}, endX: {1}, startY: {2}, endY: {3}", startX, endX, startY, endY));
         for (int x = startX; x <= endX; x++)
             for (int y = startY; y <= endY; y++)
             {
                 if (!IsInMapBounds(x, y)) continue;
-                _map[x, y] = (int)TileType.Empty;
+                _map[x, y] = TileType.Room;
             }
     }
 
-    private TileType[,] BuildBorderedMap()
+    private void BuildBorderedMap()
     {
         TileType[,] borderedMap = new TileType[Width + BorderWidth * 2, Height + BorderWidth * 2];
         for (int x = 0; x < borderedMap.GetLength(0); x++)
@@ -122,7 +127,7 @@ public class MapGenerator : MonoBehaviour
                 }
             }
 
-        return borderedMap;
+        _map = borderedMap;
     }
 
     #endregion Map Building
@@ -131,7 +136,7 @@ public class MapGenerator : MonoBehaviour
 
     private void ProcessMap()
     {
-        _roomRegions = GetRegions(TileType.Empty);
+        _roomRegions = GetRegions(TileType.Room);
 
         _rooms = new List<Room>();
         foreach (var roomRegion in _roomRegions)
@@ -143,35 +148,30 @@ public class MapGenerator : MonoBehaviour
         _rooms[0].IsMainRoom = true;
         _rooms[0].IsAccessibleFromMainRoom = true;
 
-        if (_renderPassageways)
+        if (RenderPassageways)
         {
             ConnectClosetRooms(_rooms);
         }
 
-        //ProcessWalls();
-    }
+        //PrintMap(_map, "After Passageways");
 
-    private void ProcessWalls()
-    {
+        BuildBorderedMap();
+
+        //PrintMap(_map, "After bordering");
+
         var wallRegions = GetRegions(TileType.Wall);
-        foreach (var region in wallRegions)
+        foreach (var wallRegion in wallRegions)
         {
-            var xCount = region.Select(tile => tile.X).Distinct().Count();
-            var yCount = region.Select(tile => tile.Y).Distinct().Count();
-
-            if (xCount > 2 && yCount > 2) continue;
-
-            foreach (var tile in region)
-            {
-                _map[tile.X, tile.Y] = TileType.Empty;
-            }
+            RemoveExtraWallTiles(wallRegion);
         }
+
+        //PrintMap(_map, "After wall culling");
     }
 
     private List<List<Tile>> GetRegions(TileType tileType)
     {
         List<List<Tile>> regions = new List<List<Tile>>();
-        int[,] mapFlags = new int[Width, Height];
+        int[,] mapFlags = new int[_map.GetLength(0), _map.GetLength(1)];
 
         for (int x = 0; x < Width; x++)
             for (int y = 0; y < Height; y++)
@@ -193,7 +193,7 @@ public class MapGenerator : MonoBehaviour
     private List<Tile> GetRegionTiles(int startX, int startY)
     {
         List<Tile> tiles = new List<Tile>();
-        int[,] mapFlags = new int[Width, Height];
+        int[,] mapFlags = new int[_map.GetLength(0), _map.GetLength(1)];
         TileType tileType = _map[startX, startY];
 
         Queue<Tile> queue = new Queue<Tile>();
@@ -311,7 +311,6 @@ public class MapGenerator : MonoBehaviour
         foreach (Tile c in line)
         {
             DrawPath(c, PathWidth);
-            //DrawCircle(c, PathWidth);
         }
     }
 
@@ -338,21 +337,7 @@ public class MapGenerator : MonoBehaviour
     {
         int drawX = c.X + x;
         int drawY = c.Y + y;
-        if (IsInMapBounds(drawX, drawY)) _map[drawX, drawY] = TileType.Empty;
-    }
-
-    private void DrawCircle(Tile c, int r)
-    {
-        for (int x = -r; x <= r; x++)
-            for (int y = -r; y <= r; y++)
-            {
-                if (x * x + y * y <= r * r)
-                {
-                    int drawX = c.X + x;
-                    int drawY = c.Y + y;
-                    if (IsInMapBounds(drawX, drawY)) _map[drawX, drawY] = TileType.Empty;
-                }
-            }
+        if (IsInMapBounds(drawX, drawY)) _map[drawX, drawY] = TileType.Room;
     }
 
     private List<Tile> GetPassagePath(Tile from, Tile to)
@@ -400,19 +385,44 @@ public class MapGenerator : MonoBehaviour
         return rooms;
     }
 
+    private void RemoveExtraWallTiles(List<Tile> tiles)
+    {
+        foreach (var tile in tiles)
+        {
+            MarkExtraWallTile(tile);
+        }
+    }
+
+    private void MarkExtraWallTile(Tile tile)
+    {
+        bool isEligible = true;
+        for (int x = tile.X - 1; x <= tile.X + 1; x++)
+            for (int y = tile.Y - 1; y <= tile.Y + 1; y++)
+            {
+                if (!IsInMapBounds(x, y)) continue;
+
+                isEligible &= _map[x, y] == TileType.Wall || _map[x, y] == TileType.Nothing;
+            }
+
+        if (isEligible)
+        {
+            _map[tile.X, tile.Y] = TileType.Nothing;
+        }
+    }
+
     #endregion Map Processing
 
     #region Utility Functions
 
     private bool IsInMapBounds(int x, int y)
     {
-        return x >= 0 && x < Width && y >= 0 && y < Height;
+        return x >= 0 && x < _map.GetLength(0) && y >= 0 && y < _map.GetLength(1);
     }
 
-    private void PrintMap(TileType[,] map)
+    private void PrintMap(TileType[,] map, string message = "")
     {
-        var output = new System.Text.StringBuilder();
-        for (int y = 0; y < map.GetLength(1); y++)
+        var output = new StringBuilder(message + "\n");
+        for (int y = map.GetLength(1) - 1; y >= 0; y--)
         {
             var temp = "";
             for (int x = 0; x < map.GetLength(0); x++)

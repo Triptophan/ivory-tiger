@@ -1,5 +1,8 @@
-﻿namespace Assets.Scripts.MapGeneration.Types
+﻿using System.Diagnostics;
+
+namespace Assets.Scripts.MapGeneration.Types
 {
+    [DebuggerDisplay("({X},{Y})")]
     public struct Tile
     {
         public int X;

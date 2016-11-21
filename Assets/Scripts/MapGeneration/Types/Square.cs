@@ -1,25 +1,29 @@
-﻿namespace Assets.Scripts.MapGeneration.Types
+﻿using Assets.Scripts.MapGeneration.Enumerations;
+
+namespace Assets.Scripts.MapGeneration.Types
 {
     public class Square
     {
-        public ControlNode TopLeft,
-                           TopRight,
-                           BottomLeft,
-                           BottomRight;
+        public Node TopLeft;
+        public Node TopRight;
+        public Node BottomLeft;
+        public Node BottomRight;
 
-        public int Configuration;
+        public bool TopEdgeActive;
+        public bool LeftEdgeActive;
+        public bool RightEdgeActive;
+        public bool BottomEdgeActive;
 
-        public Square(ControlNode topLeft, ControlNode topRight, ControlNode bottomLeft, ControlNode bottomRight)
+        public TileType TileType;
+
+        public Square(TileType tileType, Node topLeft, Node topRight, Node bottomLeft, Node bottomRight)
         {
+            TileType = tileType;
+
             TopLeft = topLeft;
             TopRight = topRight;
             BottomLeft = bottomLeft;
             BottomRight = bottomRight;
-
-            if (topLeft.Active) Configuration += 8;
-            if (topRight.Active) Configuration += 4;
-            if (bottomRight.Active) Configuration += 2;
-            if (bottomLeft.Active) Configuration += 1;
         }
     }
 }

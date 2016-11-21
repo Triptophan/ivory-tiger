@@ -1,21 +1,22 @@
-﻿using UnityEngine;
+﻿using System.Diagnostics;
 
 namespace Assets.Scripts.MapGeneration.Types
 {
+    [DebuggerDisplay("Location: ({X}, {Y}), Size: ({Width}, {Height})")]
     public struct RoomLocation
     {
         public int X;
         public int Y;
 
-        public RoomLocation(int x, int y)
+        public int Width;
+        public int Height;
+
+        public RoomLocation(int x, int y, int width, int height)
         {
             X = x;
             Y = y;
-        }
-
-        public void Print()
-        {
-            Debug.Log(string.Format("X: {0}, Y: {1}", X, Y));
+            Width = width;
+            Height = height;
         }
     }
 }
