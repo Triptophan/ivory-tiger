@@ -16,8 +16,6 @@ namespace Assets.Scripts
 
         public int EnemyScale = 2;
 
-        public bool RenderHallways = true;
-
         private void Start()
         {
             MapGenerator.GenerateMap();
@@ -28,7 +26,7 @@ namespace Assets.Scripts
 
             SetPlayer();
 
-            SpawnEnemies();
+            EnemySpawner.Spawn(_rooms, MapGenerator.SquareSize, EnemyScale, MapGenerator.PlayerStartingY);
         }
 
         private void Update()
@@ -42,30 +40,10 @@ namespace Assets.Scripts
         private void SetPlayer()
         {
             var mainRoom = _rooms[0];
-            var roomPosition = mainRoom.Center;//mainRoom.GetRoomCenter(MapGenerator.Width, MapGenerator.Height);
-            var playerPosition = new Vector3(roomPosition.x, MapGenerator.PlayerStartingY, roomPosition.y);
+            var roomPosition = mainRoom.Center;
+            var playerPosition = new Vector3(roomPosition.x * MapGenerator.SquareSize, MapGenerator.PlayerStartingY, roomPosition.y * MapGenerator.SquareSize);
             PlayerPrefab.layer = LayerMask.NameToLayer("Players");
             Instantiate(PlayerPrefab, playerPosition, Quaternion.identity);
-        }
-
-        private void SpawnEnemies()
-        {
-            EnemySpawner.GenerateEnemies(_rooms.Count * EnemyScale);
-
-            foreach (var candidate in EnemySpawner.EnemyPool)
-            {
-                if (candidate.Active) continue;
-                var randomRoomIndex = Random.Range(1, _rooms.Count - 1);
-                var room = _rooms[randomRoomIndex];
-
-                var randomTileIndex = Random.Range(0, room.Tiles.Count - 1);
-                var tile = room.Tiles[randomTileIndex];
-                candidate.transform.position = new Vector3(tile.X, MapGenerator.PlayerStartingY, tile.Y);
-
-                candidate.Active = true;
-                //WanderBehavior wander = candidate.GetComponent<WanderBehavior>();
-                //wander.enabled = false;
-            }
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Assets.Scripts.MapGeneration.Types;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.Scripts.Enemies.Generation
@@ -14,6 +15,24 @@ namespace Assets.Scripts.Enemies.Generation
         {
             _transform = transform;
             _enemyFactory = GetComponent<EnemyFactory>();
+        }
+
+        public void Spawn(List<Room> rooms, int roomScale, int enemyScale, float playerStartingY)
+        {
+            GenerateEnemies(rooms.Count * enemyScale);
+
+            foreach (var candidate in EnemyPool)
+            {
+                if (candidate.Active) continue;
+                var randomRoomIndex = Random.Range(1, rooms.Count - 1);
+                var room = rooms[randomRoomIndex];
+
+                var randomTileIndex = Random.Range(0, room.Tiles.Count - 1);
+                var tile = room.Tiles[randomTileIndex];
+                candidate.transform.position = new Vector3(tile.X * roomScale, playerStartingY, tile.Y * roomScale);
+
+                candidate.Active = true;
+            }
         }
 
         public void GenerateEnemies(int enemyPoolCapacity)
