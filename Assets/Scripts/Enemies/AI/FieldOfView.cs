@@ -208,6 +208,7 @@ public class FieldOfView : MonoBehaviour
                         viewAngle = discoveredViewAngle;
                         agent.speed = agent.speed * playerFoundAgentSpeedMultiplier;
                     }
+                     
 
                     isChasing = true;
                     hadPlayer = true;

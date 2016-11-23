@@ -9,6 +9,7 @@ namespace Assets.Scripts.Enemies
     [RequireComponent(typeof(FieldOfView))]
     public class Enemy : MonoBehaviour
     {
+        public bool CanAttack = false;
         private WanderBehavior _wander;
         private FieldOfView _fieldOfView;
         private GameObject _gameObject;
@@ -28,6 +29,8 @@ namespace Assets.Scripts.Enemies
         {
             //If we're chasing, disable the wander behavior
             _wander.isWandering = !_fieldOfView.isChasing;
+            //If we are chasing, we can attack
+            CanAttack = _fieldOfView.isChasing;
         }
 
         public void OnCollisionEnter(Collision collision)
