@@ -10,23 +10,27 @@ public class MeshGenerator : MonoBehaviour
     public MeshCollider WallCollider;
     public Transform Floor;
 
-    public int WallHeight = 4;
-
     private List<Vector3> _vertices;
     private List<int> _triangles;
+
+    private int _wallHeight;
+    private int _squareSize;
 
     private Dictionary<int, List<Triangle>> _triangleDictionary = new Dictionary<int, List<Triangle>>();
     private HashSet<int> _checkedVertices = new HashSet<int>();
     private List<List<int>> _outlines = new List<List<int>>();
 
-    public void GenerateMesh(TileType[,] map, float squareSize)
+    public void GenerateMesh(TileType[,] map, int wallHeight, int squareSize)
     {
-        Floor.position = new Vector3(Floor.position.x, WallHeight * -1, Floor.position.z);
+        _wallHeight = wallHeight;
+        _squareSize = squareSize;
+        Floor.position = new Vector3(Floor.position.x, wallHeight * -squareSize, Floor.position.z);
         _triangleDictionary.Clear();
         _outlines.Clear();
         _checkedVertices.Clear();
 
         SquareGrid = new SquareGrid(map, squareSize);
+        Floor.localScale = new Vector3(map.GetLength(0) / 8 * squareSize, 1, map.GetLength(1) / 8 * squareSize);
 
         _vertices = new List<Vector3>();
         _triangles = new List<int>();
@@ -124,14 +128,14 @@ public class MeshGenerator : MonoBehaviour
 
     private void AddWallHeight(int vertexIndexA, int vertexIndexB, List<Vector3> wallVertices, List<Vector2> uvs, List<int> wallTriangles)
     {
-        for (int offset = 0; offset < WallHeight; offset++)
+        for (int offset = 0; offset < _wallHeight; offset++)
         {
             int startIndex = wallVertices.Count;
 
-            wallVertices.Add(_vertices[vertexIndexA] - Vector3.up * offset); //left
-            wallVertices.Add(_vertices[vertexIndexB] - Vector3.up * offset); //right
-            wallVertices.Add(_vertices[vertexIndexA] - Vector3.up * (offset + 1)); //bottom left
-            wallVertices.Add(_vertices[vertexIndexB] - Vector3.up * (offset + 1)); //bottom right
+            wallVertices.Add(_vertices[vertexIndexA] - Vector3.up * offset * _squareSize); //left
+            wallVertices.Add(_vertices[vertexIndexB] - Vector3.up * offset * _squareSize); //right
+            wallVertices.Add(_vertices[vertexIndexA] - Vector3.up * (offset + 1) * _squareSize); //bottom left
+            wallVertices.Add(_vertices[vertexIndexB] - Vector3.up * (offset + 1) * _squareSize); //bottom right
 
             wallTriangles.Add(startIndex + 0);
             wallTriangles.Add(startIndex + 3);

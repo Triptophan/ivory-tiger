@@ -18,6 +18,8 @@ public class MapGenerator : MonoBehaviour
     public int MinimumRoomDimension = 4;
     public int MaximumRoomDimension = 32;
     public int PathWidth = 2;
+    public int WallHeight = 4;
+    public int SquareSize = 1;
     public int MinRoomCount = 2;
     public int MaxRoomCount = 10;
     public bool RenderPassageways = true;
@@ -28,7 +30,7 @@ public class MapGenerator : MonoBehaviour
     public bool MapGenerated = false;
 
     [HideInInspector]
-    public int PlayerStartingY;
+    public float PlayerStartingY;
 
     public void GenerateMap()
     {
@@ -44,8 +46,8 @@ public class MapGenerator : MonoBehaviour
 
         //PrintMap(borderedMap, "Bordered Map");
         MeshGenerator meshGenerator = GetComponent<MeshGenerator>();
-        meshGenerator.GenerateMesh(_map, 1);
-        PlayerStartingY = meshGenerator.WallHeight * -1 + 1;
+        meshGenerator.GenerateMesh(_map, WallHeight, SquareSize);
+        PlayerStartingY = WallHeight * -SquareSize + 1;
         MapGenerated = true;
     }
 
