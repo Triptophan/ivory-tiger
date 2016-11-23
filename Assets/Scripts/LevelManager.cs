@@ -20,13 +20,13 @@ namespace Assets.Scripts
         {
             MapGenerator.GenerateMap();
 
-            NavMeshBuilder.BuildNavMesh();
+            //NavMeshBuilder.BuildNavMesh();
 
-            _rooms = MapGenerator.GetRooms();
+            //_rooms = MapGenerator.GetRooms();
 
-            SetPlayer();
+            //SetPlayer();
 
-            EnemySpawner.Spawn(_rooms, MapGenerator.SquareSize, EnemyScale, MapGenerator.PlayerStartingY);
+            //EnemySpawner.Spawn(_rooms, MapGenerator.SquareSize, EnemyScale, MapGenerator.PlayerStartingY);
         }
 
         private void Update()
