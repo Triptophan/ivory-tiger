@@ -1,6 +1,7 @@
 ﻿using Assets.Scripts.Combat.Projectiles;
 using Assets.Scripts.Enemies.AI;
 using UnityEngine;
+using System.Collections.Generic;
 
 namespace Assets.Scripts.Enemies
 {
@@ -16,7 +17,10 @@ namespace Assets.Scripts.Enemies
 
         public bool Active { get { return isActiveAndEnabled; } set { gameObject.SetActive(value); } }
 
-        public void Start()
+        public List<Enemy> EnemyPool;
+        public List<Enemy> DeadEnemyPool;
+
+        public void Awake()
         {
             _gameObject = gameObject;
             _gameObject.tag = "Enemy";
@@ -42,7 +46,8 @@ namespace Assets.Scripts.Enemies
             if (rockBehavior != null)
             {
                 Destroy(collisionObject);
-                Destroy(_gameObject);
+                _gameObject.SetActive(false);
+                DeadEnemyPool.Add(this);
             }
         }
     }
