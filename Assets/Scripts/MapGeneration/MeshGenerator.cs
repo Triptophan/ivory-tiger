@@ -8,8 +8,11 @@ public class MeshGenerator : MonoBehaviour
     public SquareGrid SquareGrid;
     public MeshFilter Walls;
     public MeshCollider WallCollider;
-    public Transform Floor;
+    public GameObject FloorObject;
 
+    private MeshFilter _floorMesh;
+    private MeshCollider _floorCollider;
+    private Transform _floorTransform;
     private List<Vector3> _vertices;
     private List<int> _triangles;
 
@@ -24,13 +27,15 @@ public class MeshGenerator : MonoBehaviour
     {
         _wallHeight = wallHeight;
         _squareSize = squareSize;
-        Floor.position = new Vector3(Floor.position.x, wallHeight * -squareSize, Floor.position.z);
+        _floorTransform = FloorObject.transform;
+        _floorTransform.position = new Vector3(_floorTransform.position.x, wallHeight * -squareSize, _floorTransform.position.z);
+        _floorMesh = FloorObject.GetComponent<MeshFilter>();
+        _floorCollider = FloorObject.GetComponent<MeshCollider>();
         _triangleDictionary.Clear();
         _outlines.Clear();
         _checkedVertices.Clear();
 
         SquareGrid = new SquareGrid(map, squareSize);
-        Floor.localScale = new Vector3(map.GetLength(0) / 8 * squareSize, 1, map.GetLength(1) / 8 * squareSize);
 
         _vertices = new List<Vector3>();
         _triangles = new List<int>();
@@ -40,10 +45,8 @@ public class MeshGenerator : MonoBehaviour
             {
                 var square = SquareGrid.Squares[x, y];
                 if (square == null || square.TileType != TileType.Wall) continue;
-                if (square.TileType == TileType.Wall)
-                {
-                    MeshFromPoints(square.TopLeft, square.TopRight, square.BottomRight, square.BottomLeft);
-                }
+
+                MeshFromPoints(_vertices, _triangles, square.TopLeft, square.TopRight, square.BottomRight, square.BottomLeft);
             }
 
         Mesh mesh = new Mesh();
@@ -54,33 +57,34 @@ public class MeshGenerator : MonoBehaviour
         mesh.RecalculateNormals();
 
         CreateWallMesh();
+        CreateFloorMesh();
     }
 
-    private void MeshFromPoints(params Node[] points)
+    private void MeshFromPoints(List<Vector3> vertices, List<int> triangles, params Node[] points)
     {
-        AssignVertices(points);
+        AssignVertices(vertices, points);
 
-        CreateTriangle(points[1], points[3], points[0]);
-        CreateTriangle(points[1], points[2], points[3]);
+        CreateTriangle(triangles, points[1], points[3], points[0]);
+        CreateTriangle(triangles, points[1], points[2], points[3]);
     }
 
-    private void AssignVertices(Node[] points)
+    private void AssignVertices(List<Vector3> vertices, Node[] points)
     {
         for (int i = 0; i < points.Length; i++)
         {
             if (points[i].VertexIndex == -1)
             {
-                points[i].VertexIndex = _vertices.Count;
-                _vertices.Add(points[i].Position);
+                points[i].VertexIndex = vertices.Count;
+                vertices.Add(points[i].Position);
             }
         }
     }
 
-    private void CreateTriangle(Node a, Node b, Node c)
+    private void CreateTriangle(List<int> triangles, Node a, Node b, Node c)
     {
-        _triangles.Add(a.VertexIndex);
-        _triangles.Add(b.VertexIndex);
-        _triangles.Add(c.VertexIndex);
+        triangles.Add(a.VertexIndex);
+        triangles.Add(b.VertexIndex);
+        triangles.Add(c.VertexIndex);
     }
 
     private void CreateWallMesh()
@@ -92,7 +96,7 @@ public class MeshGenerator : MonoBehaviour
 
         foreach (var square in SquareGrid.Squares)
         {
-            if (square == null) continue;
+            if (square == null || square.TileType != TileType.Wall) continue;
             AddActiveWalls(wallVertices, wallTriangles, uvs, square);
         }
 
@@ -104,6 +108,31 @@ public class MeshGenerator : MonoBehaviour
         Walls.mesh = wallmesh;
 
         WallCollider.sharedMesh = wallmesh;
+    }
+
+    private void CreateFloorMesh()
+    {
+        List<Vector3> floorVertices = new List<Vector3>();
+        List<int> floorTriangles = new List<int>();
+        Mesh floorMesh = new Mesh();
+        List<Vector2> uvs = new List<Vector2>();
+
+        foreach(var square in SquareGrid.Squares)
+        {
+            if (square == null || square.TileType != TileType.Room) continue;
+            ResetSquareNodes(square);
+            MeshFromPoints(floorVertices, floorTriangles, square.TopLeft, square.TopRight, square.BottomRight, square.BottomLeft);
+            AddUVs(uvs);
+        }
+
+        floorMesh.vertices = floorVertices.ToArray();
+        floorMesh.triangles = floorTriangles.ToArray();
+        floorMesh.RecalculateNormals();
+
+        floorMesh.uv = uvs.ToArray();
+        _floorMesh.mesh = floorMesh;
+
+        _floorCollider.sharedMesh = floorMesh;
     }
 
     private void AddActiveWalls(List<Vector3> wallVertices, List<int> wallTriangles, List<Vector2> uvs, Square square)
@@ -155,5 +184,18 @@ public class MeshGenerator : MonoBehaviour
         uvs.Add(new Vector2(1, 1));
         uvs.Add(new Vector2(0, 0));
         uvs.Add(new Vector2(1, 0));
+    }
+
+    private void ResetSquareNodes(Square square)
+    {
+        ResetNodeIndex(square.TopLeft);
+        ResetNodeIndex(square.TopRight);
+        ResetNodeIndex(square.BottomRight);
+        ResetNodeIndex(square.BottomLeft);
+    }
+
+    private void ResetNodeIndex(Node node)
+    {
+        node.VertexIndex = -1;
     }
 }

@@ -16,9 +16,13 @@ namespace Assets.Scripts
 
         public int EnemyScale = 2;
 
+        public bool MapDebugMode = false;
+
         private void Start()
         {
             MapGenerator.GenerateMap();
+
+            if (MapDebugMode) return;
 
             NavMeshBuilder.BuildNavMesh();
 

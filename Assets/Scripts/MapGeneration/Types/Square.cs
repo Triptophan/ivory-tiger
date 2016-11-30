@@ -1,7 +1,10 @@
 ﻿using Assets.Scripts.MapGeneration.Enumerations;
+using System.Diagnostics;
+using System;
 
 namespace Assets.Scripts.MapGeneration.Types
 {
+    [DebuggerDisplay("Type: {TileTypeName}")]
     public class Square
     {
         public Node TopLeft;
@@ -15,6 +18,8 @@ namespace Assets.Scripts.MapGeneration.Types
         public bool BottomEdgeActive;
 
         public TileType TileType;
+
+        protected string TileTypeName { get { return Enum.GetName(typeof(TileType), TileType); } }
 
         public Square(TileType tileType, Node topLeft, Node topRight, Node bottomLeft, Node bottomRight)
         {

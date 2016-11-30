@@ -22,7 +22,7 @@ namespace Assets.Scripts.MapGeneration.Types
                     for (int nx = x; nx <= x + 1; nx++)
                         for (int ny = y; ny <= y + 1; ny++)
                         {
-                            if (map[x, y] != TileType.Wall) continue;
+                            if (map[x, y] == TileType.Nothing) continue;
                             Vector3 position = new Vector3(-mapWidth / 2 + nx * squareSize + squareSize / 2, 0, -mapHeight / 2 + ny * squareSize + squareSize / 2);
                             nodes[nx, ny] = new Node(position);
                         }
