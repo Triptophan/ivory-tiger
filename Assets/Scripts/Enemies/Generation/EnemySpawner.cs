@@ -10,15 +10,19 @@ namespace Assets.Scripts.Enemies.Generation
         private Transform _transform;
 
         public List<Enemy> EnemyPool;
+        public List<Enemy> DeadEnemyPool;
 
         public void Awake()
         {
             _transform = transform;
             _enemyFactory = GetComponent<EnemyFactory>();
+            EnemyPool = new List<Enemy>();
+            DeadEnemyPool = new List<Enemy>();
         }
 
         public void Spawn(List<Room> rooms, int roomScale, int enemyScale, float playerStartingY)
         {
+            ResetDeadEnemies();
             GenerateEnemies(rooms.Count * enemyScale);
 
             foreach (var candidate in EnemyPool)
@@ -35,16 +39,24 @@ namespace Assets.Scripts.Enemies.Generation
             }
         }
 
-        public void GenerateEnemies(int enemyPoolCapacity)
+        private void GenerateEnemies(int enemyPoolCapacity)
         {
-            for (int i = 0; i < enemyPoolCapacity; i++)
+            int enemiesToAddToPool = enemiesToAddToPool = enemyPoolCapacity - EnemyPool.Count;
+
+            for (int i = 0; i < enemiesToAddToPool; i++)
             {
                 var enemy = _enemyFactory.Spawn();
                 enemy.transform.parent = _transform;
-                enemy.Active = false;
+                enemy.EnemyPool = EnemyPool;
+                enemy.DeadEnemyPool = DeadEnemyPool;
 
                 EnemyPool.Add(enemy);
             }
+        }
+
+        private void ResetDeadEnemies()
+        {
+            DeadEnemyPool.Clear();
         }
     }
 }
