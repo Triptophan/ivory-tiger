@@ -18,6 +18,7 @@ namespace Assets.Scripts.MapGeneration.Types
         public int RoomSize;
         public int Width;
         public int Height;
+        public int TileSize;
 
         public Vector2 Center;
 
@@ -28,8 +29,9 @@ namespace Assets.Scripts.MapGeneration.Types
         {
         }
 
-        public Room(List<Tile> roomTiles, TileType[,] map)
+        public Room(int tileSize, List<Tile> roomTiles, TileType[,] map)
         {
+            TileSize = tileSize;
             Tiles = roomTiles;
             RoomSize = Tiles.Count;
             ConnectedRooms = new List<Room>();
@@ -84,7 +86,7 @@ namespace Assets.Scripts.MapGeneration.Types
             Width = maxX - minX + 1;
             Height = maxY - minY + 1;
 
-            Center = new Vector2(minX + Width / 2, minY + Height / 2);
+            Center = new Vector2(minX + Width / 2 + 1, minY + Height / 2 + 1);
         }
 
         private void MapEdgeTiles(Tile tile, TileType[,] map)

@@ -44,7 +44,7 @@ public class MapGenerator : MonoBehaviour
 
         ProcessMap();
 
-        //PrintMap(borderedMap, "Bordered Map");
+        //PrintMap(_map, "Bordered Map");
         MeshGenerator meshGenerator = GetComponent<MeshGenerator>();
         meshGenerator.GenerateMesh(_map, WallHeight, SquareSize);
         PlayerStartingY = WallHeight * -SquareSize + 1;
@@ -143,7 +143,7 @@ public class MapGenerator : MonoBehaviour
         _rooms = new List<Room>();
         foreach (var roomRegion in _roomRegions)
         {
-            _rooms.Add(new Room(roomRegion, _map));
+            _rooms.Add(new Room(SquareSize, roomRegion, _map));
         }
 
         _rooms.Sort();
@@ -285,11 +285,10 @@ public class MapGenerator : MonoBehaviour
                             bestRoomB = roomB;
                         }
                     }
-
-                if (possibleConnectionFound && !forceAccessibilityFromMainRoom)
-                {
-                    CreatePassage(bestRoomA, bestRoomB, bestTileA, bestTileB);
-                }
+            }
+            if (possibleConnectionFound && !forceAccessibilityFromMainRoom)
+            {
+                CreatePassage(bestRoomA, bestRoomB, bestTileA, bestTileB);
             }
         }
 
@@ -381,7 +380,7 @@ public class MapGenerator : MonoBehaviour
             {
                 tiles.Add(new Tile(-Width / 2 + tile.X, -Height / 2 + tile.Y));
             }
-            rooms.Add(new Room(tiles, _map));
+            rooms.Add(new Room(SquareSize, tiles, _map));
         }
 
         return rooms;

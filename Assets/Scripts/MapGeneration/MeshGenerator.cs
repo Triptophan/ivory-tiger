@@ -44,9 +44,9 @@ public class MeshGenerator : MonoBehaviour
             for (int y = 0; y < SquareGrid.Squares.GetLength(1); y++)
             {
                 var square = SquareGrid.Squares[x, y];
-                if (square == null) continue;
+                if (square == null || square.TileType != TileType.Wall) continue;
 
-                MeshFromPoints(square.TopLeft, square.TopRight, square.BottomRight, square.BottomLeft);
+                MeshFromPoints(_vertices, _triangles, square.TopLeft, square.TopRight, square.BottomRight, square.BottomLeft);
             }
 
         Mesh mesh = new Mesh();
@@ -57,34 +57,34 @@ public class MeshGenerator : MonoBehaviour
         mesh.RecalculateNormals();
 
         CreateWallMesh();
-        //CreateFloorMesh();
+        CreateFloorMesh();
     }
 
-    private void MeshFromPoints(params Node[] points)
+    private void MeshFromPoints(List<Vector3> vertices, List<int> triangles, params Node[] points)
     {
-        AssignVertices(points);
+        AssignVertices(vertices, points);
 
-        CreateTriangle(points[1], points[3], points[0]);
-        CreateTriangle(points[1], points[2], points[3]);
+        CreateTriangle(triangles, points[1], points[3], points[0]);
+        CreateTriangle(triangles, points[1], points[2], points[3]);
     }
 
-    private void AssignVertices(Node[] points)
+    private void AssignVertices(List<Vector3> vertices, Node[] points)
     {
         for (int i = 0; i < points.Length; i++)
         {
             if (points[i].VertexIndex == -1)
             {
-                points[i].VertexIndex = _vertices.Count;
-                _vertices.Add(points[i].Position);
+                points[i].VertexIndex = vertices.Count;
+                vertices.Add(points[i].Position);
             }
         }
     }
 
-    private void CreateTriangle(Node a, Node b, Node c)
+    private void CreateTriangle(List<int> triangles, Node a, Node b, Node c)
     {
-        _triangles.Add(a.VertexIndex);
-        _triangles.Add(b.VertexIndex);
-        _triangles.Add(c.VertexIndex);
+        triangles.Add(a.VertexIndex);
+        triangles.Add(b.VertexIndex);
+        triangles.Add(c.VertexIndex);
     }
 
     private void CreateWallMesh()
@@ -120,7 +120,9 @@ public class MeshGenerator : MonoBehaviour
         foreach(var square in SquareGrid.Squares)
         {
             if (square == null || square.TileType != TileType.Room) continue;
-            AddFloors(floorVertices, floorTriangles, uvs, square);
+            ResetSquareNodes(square);
+            MeshFromPoints(floorVertices, floorTriangles, square.TopLeft, square.TopRight, square.BottomRight, square.BottomLeft);
+            AddUVs(uvs);
         }
 
         floorMesh.vertices = floorVertices.ToArray();
@@ -176,31 +178,24 @@ public class MeshGenerator : MonoBehaviour
         }
     }
 
-    private void AddFloors(List<Vector3> floorVertices, List<int> floorTriangles, List<Vector2> uvs, Square square)
-    {
-        int startIndex = floorVertices.Count;
-
-        floorVertices.Add(_vertices[square.TopLeft.VertexIndex]);
-        floorVertices.Add(_vertices[square.TopRight.VertexIndex]);
-        floorVertices.Add(_vertices[square.BottomRight.VertexIndex]);
-        floorVertices.Add(_vertices[square.BottomLeft.VertexIndex]);
-
-        floorTriangles.Add(startIndex + 0);
-        floorTriangles.Add(startIndex + 1);
-        floorTriangles.Add(startIndex + 3);
-
-        floorTriangles.Add(startIndex + 1);
-        floorTriangles.Add(startIndex + 2);
-        floorTriangles.Add(startIndex + 3);
-
-        AddUVs(uvs);
-    }
-
     private void AddUVs(List<Vector2> uvs)
     {
         uvs.Add(new Vector2(0, 1));
         uvs.Add(new Vector2(1, 1));
         uvs.Add(new Vector2(0, 0));
         uvs.Add(new Vector2(1, 0));
+    }
+
+    private void ResetSquareNodes(Square square)
+    {
+        ResetNodeIndex(square.TopLeft);
+        ResetNodeIndex(square.TopRight);
+        ResetNodeIndex(square.BottomRight);
+        ResetNodeIndex(square.BottomLeft);
+    }
+
+    private void ResetNodeIndex(Node node)
+    {
+        node.VertexIndex = -1;
     }
 }

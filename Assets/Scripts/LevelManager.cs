@@ -16,17 +16,21 @@ namespace Assets.Scripts
 
         public int EnemyScale = 2;
 
+        public bool MapDebugMode = false;
+
         private void Start()
         {
             MapGenerator.GenerateMap();
 
-            //NavMeshBuilder.BuildNavMesh();
+            if (MapDebugMode) return;
 
-            //_rooms = MapGenerator.GetRooms();
+            NavMeshBuilder.BuildNavMesh();
 
-            //SetPlayer();
+            _rooms = MapGenerator.GetRooms();
 
-            //EnemySpawner.Spawn(_rooms, MapGenerator.SquareSize, EnemyScale, MapGenerator.PlayerStartingY);
+            SetPlayer();
+
+            EnemySpawner.Spawn(_rooms, MapGenerator.SquareSize, EnemyScale, MapGenerator.PlayerStartingY);
         }
 
         private void Update()
