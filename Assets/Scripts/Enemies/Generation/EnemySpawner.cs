@@ -41,7 +41,7 @@ namespace Assets.Scripts.Enemies.Generation
 
         private void GenerateEnemies(int enemyPoolCapacity)
         {
-            int enemiesToAddToPool = enemiesToAddToPool = enemyPoolCapacity - EnemyPool.Count;
+            int enemiesToAddToPool = enemyPoolCapacity - EnemyPool.Count;
 
             for (int i = 0; i < enemiesToAddToPool; i++)
             {

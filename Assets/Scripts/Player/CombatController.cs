@@ -5,7 +5,6 @@ namespace Assets.Scripts.Player
 {
     public class CombatController : MonoBehaviour
     {
-        private Transform _transform;
         private Transform _viewTransform;
 
         public GameObject Projectile;
@@ -16,7 +15,6 @@ namespace Assets.Scripts.Player
 
         public void Start()
         {
-            _transform = transform;
             if (PlayerView != null) _viewTransform = PlayerView.transform;
         }
 

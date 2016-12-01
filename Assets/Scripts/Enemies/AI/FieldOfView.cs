@@ -173,29 +173,31 @@ public class FieldOfView : MonoBehaviour
             Vector3 dirToTarget = (target.position - transform.position).normalized;
 
             float dstToTarget = Vector3.Distance(transform.position, target.position);
-            float adjustedViewAngle = viewAngle;
 
-            //if we're really close to the target, regardless of if they are facing us
-            //or not, double the view angle (simulate sixth sense or sound)
-            if (!hadPlayer)
-            {
-                if (dstToTarget <= 10f && dstToTarget >= 5f)
-                {
-                    adjustedViewAngle = viewAngle * 2;
-                }
-                else if (dstToTarget < 5)
-                {
-                    adjustedViewAngle = viewAngle * 3;
-                }
-                else
-                {
-                    adjustedViewAngle = viewAngle;
-                }
-            }
+            // - DRK 12/1 Commented out, but left this code in.  Didn't seem to be used and was throwing compiler warnings.
+            //float adjustedViewAngle = viewAngle;
+
+            ////if we're really close to the target, regardless of if they are facing us
+            ////or not, double the view angle (simulate sixth sense or sound)
+            //if (!hadPlayer)
+            //{
+            //    if (dstToTarget <= 10f && dstToTarget >= 5f)
+            //    {
+            //        adjustedViewAngle = viewAngle * 2;
+            //    }
+            //    else if (dstToTarget < 5)
+            //    {
+            //        adjustedViewAngle = viewAngle * 3;
+            //    }
+            //    else
+            //    {
+            //        adjustedViewAngle = viewAngle;
+            //    }
+            //}
 
             if (Vector3.Angle(transform.forward, dirToTarget) < viewAngle / 2)
             {
-                //                float dstToTarget = Vector3.Distance(transform.position, target.position);
+                //float dstToTarget = Vector3.Distance(transform.position, target.position);
                 if (!Physics.Raycast(transform.position, dirToTarget, dstToTarget, obstacleMask))
                 {
                     visibleTargets.Add(target);
@@ -208,7 +210,6 @@ public class FieldOfView : MonoBehaviour
                         viewAngle = discoveredViewAngle;
                         agent.speed = agent.speed * playerFoundAgentSpeedMultiplier;
                     }
-                     
 
                     isChasing = true;
                     hadPlayer = true;

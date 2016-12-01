@@ -9,10 +9,14 @@ public class MeshGenerator : MonoBehaviour
     public MeshFilter Walls;
     public MeshCollider WallCollider;
     public GameObject FloorObject;
+    public GameObject CeilingObject;
 
     private MeshFilter _floorMesh;
     private MeshCollider _floorCollider;
     private Transform _floorTransform;
+    private MeshFilter _ceilingMesh;
+    private MeshCollider _ceilingCollider;
+    private Transform _ceilingTransform;
     private List<Vector3> _vertices;
     private List<int> _triangles;
 
@@ -31,6 +35,10 @@ public class MeshGenerator : MonoBehaviour
         _floorTransform.position = new Vector3(_floorTransform.position.x, wallHeight * -squareSize, _floorTransform.position.z);
         _floorMesh = FloorObject.GetComponent<MeshFilter>();
         _floorCollider = FloorObject.GetComponent<MeshCollider>();
+        _ceilingTransform = CeilingObject.transform;
+        _ceilingTransform.position = new Vector3(_ceilingTransform.position.x, 0, _ceilingTransform.position.z);
+        _ceilingMesh = CeilingObject.GetComponent<MeshFilter>();
+        _ceilingCollider = CeilingObject.GetComponent<MeshCollider>();
         _triangleDictionary.Clear();
         _outlines.Clear();
         _checkedVertices.Clear();
@@ -58,6 +66,7 @@ public class MeshGenerator : MonoBehaviour
 
         CreateWallMesh();
         CreateFloorMesh();
+        CreateCeilingMesh();
     }
 
     private void MeshFromPoints(List<Vector3> vertices, List<int> triangles, params Node[] points)
@@ -133,6 +142,31 @@ public class MeshGenerator : MonoBehaviour
         _floorMesh.mesh = floorMesh;
 
         _floorCollider.sharedMesh = floorMesh;
+    }
+
+    private void CreateCeilingMesh()
+    {
+        List<Vector3> ceilingVertices = new List<Vector3>();
+        List<int> ceilingTriangles = new List<int>();
+        Mesh ceilingMesh = new Mesh();
+        List<Vector2> uvs = new List<Vector2>();
+
+        foreach (var square in SquareGrid.Squares)
+        {
+            if (square == null || square.TileType != TileType.Room) continue;
+            ResetSquareNodes(square);
+            MeshFromPoints(ceilingVertices, ceilingTriangles, square.TopRight, square.TopLeft, square.BottomLeft, square.BottomRight);
+            AddUVs(uvs);
+        }
+
+        ceilingMesh.vertices = ceilingVertices.ToArray();
+        ceilingMesh.triangles = ceilingTriangles.ToArray();
+        ceilingMesh.RecalculateNormals();
+
+        ceilingMesh.uv = uvs.ToArray();
+        _ceilingMesh.mesh = ceilingMesh;
+
+        _ceilingCollider.sharedMesh = ceilingMesh;
     }
 
     private void AddActiveWalls(List<Vector3> wallVertices, List<int> wallTriangles, List<Vector2> uvs, Square square)

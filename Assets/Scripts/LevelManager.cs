@@ -24,7 +24,7 @@ namespace Assets.Scripts
 
         public void RestartNewLevel()
         {
-            _rooms.Clear();
+            _rooms = new List<Room>();
             SetupLevel();
         }
 
@@ -40,7 +40,7 @@ namespace Assets.Scripts
 
         private void Update()
         {
-            if (CanPlayerProceedLevels() || Input.GetKeyUp(KeyCode.BackQuote))
+            if (!MapDebugMode && (CanPlayerProceedLevels() || Input.GetKeyUp(KeyCode.BackQuote)))
             {
                 RestartNewLevel();
             }
@@ -52,11 +52,11 @@ namespace Assets.Scripts
             {
                 MapGenerator.GenerateMap();
 
+                _rooms = MapGenerator.GetRooms();
+
                 if (MapDebugMode) return;
 
                 NavMeshBuilder.BuildNavMesh();
-
-                _rooms = MapGenerator.GetRooms();
             }
             SetPlayer();
 

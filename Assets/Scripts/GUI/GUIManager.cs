@@ -70,6 +70,8 @@ public class GUIManager : MonoBehaviour
 
     private void TogglePlayer()
     {
+        if (!PlayerCombatController) return;
+
         PlayerCombatController.CanFire = !_inGameMenuVisible;
         PlayerCombatController.gameObject.SetActive(!_inGameMenuVisible);
     }
