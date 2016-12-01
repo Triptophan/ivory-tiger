@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts.Enemies.Generation;
 using Assets.Scripts.MapGeneration.Types;
+using Assets.Scripts.Player;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -13,11 +14,24 @@ namespace Assets.Scripts
 
         public MapGenerator MapGenerator;
         public EnemySpawner EnemySpawner;
+        public GUIManager GUIManager;
+
         public GameObject PlayerPrefab;
 
         public int EnemyScale = 2;
 
         public bool MapDebugMode = false;
+
+        public void RestartNewLevel()
+        {
+            _rooms.Clear();
+            SetupLevel();
+        }
+
+        private void Awake()
+        {
+            GUIManager.LevelManager = this;
+        }
 
         private void Start()
         {
@@ -28,8 +42,7 @@ namespace Assets.Scripts
         {
             if (CanPlayerProceedLevels() || Input.GetKeyUp(KeyCode.BackQuote))
             {
-                _rooms.Clear();
-                SetupLevel();
+                RestartNewLevel();
             }
         }
 
@@ -59,6 +72,7 @@ namespace Assets.Scripts
             {
                 PlayerPrefab.layer = LayerMask.NameToLayer("Players");
                 _playerObject = (GameObject)Instantiate(PlayerPrefab, playerPosition, Quaternion.identity);
+                GUIManager.PlayerCombatController = _playerObject.GetComponent<CombatController>();
                 return;
             }
 

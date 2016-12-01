@@ -84,6 +84,7 @@
     <Compile Include="Assets\Scripts\Enemies\Enemy.cs" />
     <Compile Include="Assets\Scripts\Enemies\Generation\EnemyFactory.cs" />
     <Compile Include="Assets\Scripts\Enemies\Generation\EnemySpawner.cs" />
+    <Compile Include="Assets\Scripts\GUI\GUIManager.cs" />
     <Compile Include="Assets\Scripts\LevelManager.cs" />
     <Compile Include="Assets\Scripts\MapGeneration\Enumerations\TileType.cs" />
     <Compile Include="Assets\Scripts\MapGeneration\MapGenerator.cs" />

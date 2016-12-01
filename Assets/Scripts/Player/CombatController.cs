@@ -12,6 +12,8 @@ namespace Assets.Scripts.Player
 
         public Camera PlayerView;
 
+        public bool CanFire;
+
         public void Start()
         {
             _transform = transform;
@@ -25,7 +27,7 @@ namespace Assets.Scripts.Player
 
         private void GetInput()
         {
-            if (Input.GetButtonUp("Fire1"))
+            if (CanFire && Input.GetButtonUp("Fire1"))
             {
                 var projectileObject = (GameObject)Instantiate(Projectile, _viewTransform.TransformPoint(Vector3.forward - Vector3.up / 2f), _viewTransform.rotation);
 
