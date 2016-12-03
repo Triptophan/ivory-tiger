@@ -22,18 +22,17 @@ namespace Assets.Scripts.Enemies.Generation
 
         public void Spawn(List<Room> rooms, int roomScale, int enemyScale, float playerStartingY)
         {
-            ResetDeadEnemies();
+            ResetPools();
             GenerateEnemies(rooms.Count * enemyScale);
 
             foreach (var candidate in EnemyPool)
             {
-                if (candidate.Active) continue;
                 var randomRoomIndex = Random.Range(1, rooms.Count - 1);
                 var room = rooms[randomRoomIndex];
 
-                var randomTileIndex = Random.Range(0, room.Tiles.Count - 1);
-                var tile = room.Tiles[randomTileIndex];
-                candidate.transform.position = new Vector3(tile.X * roomScale, playerStartingY, tile.Y * roomScale);
+                var randomTileX = (int)Random.Range(room.MinimumBounds.x + 1, room.MaximumBounds.x - 1);
+                var randomTileY = (int)Random.Range(room.MinimumBounds.y + 1, room.MaximumBounds.y - 1);
+                candidate.transform.position = new Vector3(randomTileX * roomScale, playerStartingY, randomTileY * roomScale);
 
                 candidate.Active = true;
             }
@@ -54,8 +53,13 @@ namespace Assets.Scripts.Enemies.Generation
             }
         }
 
-        private void ResetDeadEnemies()
+        private void ResetPools()
         {
+            foreach(var enemy in EnemyPool)
+            {
+                enemy.Active = false;
+            }
+
             DeadEnemyPool.Clear();
         }
     }

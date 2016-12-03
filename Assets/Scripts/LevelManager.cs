@@ -65,8 +65,10 @@ namespace Assets.Scripts
 
         private void SetPlayer()
         {
-            var roomPosition = _rooms[0].Center;
-            var playerPosition = new Vector3(roomPosition.x * MapGenerator.SquareSize, MapGenerator.PlayerStartingY, roomPosition.y * MapGenerator.SquareSize);
+            var mainRoom = _rooms[0];
+            var randomTileIndex = Random.Range(0, mainRoom.Tiles.Count);
+            var roomPosition = mainRoom.Tiles[randomTileIndex];
+            var playerPosition = new Vector3(roomPosition.X * MapGenerator.SquareSize, MapGenerator.PlayerStartingY, roomPosition.Y * MapGenerator.SquareSize);
 
             if (_playerObject == null)
             {
@@ -76,7 +78,10 @@ namespace Assets.Scripts
                 return;
             }
 
-            _playerObject.transform.position = playerPosition;
+            var playerTransform = _playerObject.transform;
+            playerTransform.position = playerPosition;
+            playerTransform.LookAt(mainRoom.Center);
+
         }
 
         private bool CanPlayerProceedLevels()

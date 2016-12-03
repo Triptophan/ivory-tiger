@@ -23,7 +23,9 @@ public class GUIManager : MonoBehaviour
 
     public void RestartNewLevel()
     {
+        Time.timeScale = 1;
         LevelManager.RestartNewLevel();
+        ResumeGame();
     }
 
     public void ExitGame()

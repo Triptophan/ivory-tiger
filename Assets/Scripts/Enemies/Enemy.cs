@@ -1,7 +1,7 @@
 ﻿using Assets.Scripts.Combat.Projectiles;
 using Assets.Scripts.Enemies.AI;
-using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Assets.Scripts.Enemies
 {
@@ -15,7 +15,15 @@ namespace Assets.Scripts.Enemies
         private FieldOfView _fieldOfView;
         private GameObject _gameObject;
 
-        public bool Active { get { return isActiveAndEnabled; } set { gameObject.SetActive(value); } }
+        public bool Active
+        {
+            get { return isActiveAndEnabled; }
+            set
+            {
+                if (_gameObject == null) _gameObject = gameObject;
+                _gameObject.SetActive(value);
+            }
+        }
 
         public List<Enemy> EnemyPool;
         public List<Enemy> DeadEnemyPool;

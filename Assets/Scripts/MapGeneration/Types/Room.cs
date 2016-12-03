@@ -21,6 +21,8 @@ namespace Assets.Scripts.MapGeneration.Types
         public int TileSize;
 
         public Vector2 Center;
+        public Vector2 MinimumBounds;
+        public Vector2 MaximumBounds;
 
         public bool IsAccessibleFromMainRoom;
         public bool IsMainRoom;
@@ -83,10 +85,12 @@ namespace Assets.Scripts.MapGeneration.Types
             var minY = Tiles.Min(t => t.Y);
             var maxY = Tiles.Max(t => t.Y);
 
-            Width = maxX - minX + 1;
-            Height = maxY - minY + 1;
+            Width = maxX - minX;
+            Height = maxY - minY;
 
-            Center = new Vector2(minX + Width / 2 + 1, minY + Height / 2 + 1);
+            Center = new Vector2(minX + Width / 2, minY + Height / 2);
+            MinimumBounds = new Vector2(minX, minY);
+            MaximumBounds = new Vector2(maxX, maxY);
         }
 
         private void MapEdgeTiles(Tile tile, TileType[,] map)
