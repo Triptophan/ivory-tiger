@@ -11,6 +11,7 @@ public class MeshGenerator : MonoBehaviour
     public GameObject FloorObject;
     public GameObject CeilingObject;
 
+
     private MeshFilter _floorMesh;
     private MeshCollider _floorCollider;
     private Transform _floorTransform;
@@ -137,7 +138,7 @@ public class MeshGenerator : MonoBehaviour
         floorMesh.vertices = floorVertices.ToArray();
         floorMesh.triangles = floorTriangles.ToArray();
         floorMesh.RecalculateNormals();
-
+        
         floorMesh.uv = uvs.ToArray();
         _floorMesh.mesh = floorMesh;
 

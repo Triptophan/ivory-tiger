@@ -25,6 +25,7 @@ public class MapGenerator : MonoBehaviour
     public bool RenderPassageways = true;
     public string Seed;
     public bool UseRandomSeed;
+    public Grid PathfindingGrid;
 
     [HideInInspector]
     public bool MapGenerated = false;
@@ -48,6 +49,7 @@ public class MapGenerator : MonoBehaviour
         MeshGenerator meshGenerator = GetComponent<MeshGenerator>();
         meshGenerator.GenerateMesh(_map, WallHeight, SquareSize);
         PlayerStartingY = WallHeight * -SquareSize + 1;
+        PathfindingGrid.CreateGrid();
         MapGenerated = true;
     }
 
@@ -437,4 +439,11 @@ public class MapGenerator : MonoBehaviour
     }
 
     #endregion Utility Functions
+
+    #region Grid
+
+
+
+    #endregion
+
 }
