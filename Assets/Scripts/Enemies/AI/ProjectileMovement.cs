@@ -1,16 +1,19 @@
 ﻿using UnityEngine;
-using System.Collections;
+
 namespace Assets.Scripts.Enemies
 {
     public class ProjectileMovement : MonoBehaviour
     {
-        public float Speed = 150.0f;
         private GameObject _gameObject;
         private Rigidbody _rigidbody;
 
+        public float Speed = 150.0f;
+
+        public float DamageValue = 10f;
+
         public Transform OwnerTransform;
 
-        void Start()
+        private void Start()
         {
             _gameObject = gameObject;
             _rigidbody = GetComponent<Rigidbody>();
@@ -23,10 +26,21 @@ namespace Assets.Scripts.Enemies
         public void OnCollisionEnter(Collision collision)
         {
             var collisionObject = collision.gameObject;
+            if (collisionObject.tag == "Player")
+            {
+                var playerHealth = collisionObject.GetComponent<PlayerHealth>();
+                playerHealth.DoDamage(DamageValue);
+                SelfDestruct();
+            }
             if (collisionObject.tag == "Walls")
             {
-                Destroy(_gameObject);
+                SelfDestruct();
             }
+        }
+
+        private void SelfDestruct()
+        {
+            Destroy(_gameObject);
         }
     }
 }

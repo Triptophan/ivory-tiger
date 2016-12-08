@@ -11,6 +11,7 @@ namespace Assets.Scripts
     {
         private List<Room> _rooms;
         private GameObject _playerObject;
+        private CombatController _playerCombatController;
 
         public MapGenerator MapGenerator;
         public EnemySpawner EnemySpawner;
@@ -40,7 +41,7 @@ namespace Assets.Scripts
 
         private void Update()
         {
-            if (!MapDebugMode && (CanPlayerProceedLevels() || Input.GetKeyUp(KeyCode.BackQuote)))
+            if (!MapDebugMode && (CanPlayerProceedLevels() || Input.GetKeyUp(KeyCode.F12)))
             {
                 RestartNewLevel();
             }
@@ -68,7 +69,7 @@ namespace Assets.Scripts
             var mainRoom = _rooms[0];
             var randomTileIndex = Random.Range(0, mainRoom.Tiles.Count);
             var roomPosition = mainRoom.Tiles[randomTileIndex];
-            var playerPosition = new Vector3(roomPosition.X * MapGenerator.SquareSize, MapGenerator.PlayerStartingY, roomPosition.Y * MapGenerator.SquareSize);
+            var playerPosition = new Vector3(roomPosition.X * MapGenerator.SquareSize, MapGenerator.PlayerStartingY - .5f, roomPosition.Y * MapGenerator.SquareSize);
 
             if (_playerObject == null)
             {
