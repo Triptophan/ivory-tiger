@@ -75,6 +75,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Combat\PlayerHealth.cs" />
     <Compile Include="Assets\Scripts\Combat\Projectiles\Rock.cs" />
     <Compile Include="Assets\Scripts\Enemies\AI\ChaseBehavior.cs" />
     <Compile Include="Assets\Scripts\Enemies\AI\FieldOfView.cs" />
