@@ -3,6 +3,7 @@ using Assets.Scripts.MapGeneration.Types;
 using Assets.Scripts.Player;
 using System.Collections.Generic;
 using UnityEditor;
+using MachineOfStates = Assets.Scripts.StateMachine.StateMachine;
 using UnityEngine;
 
 namespace Assets.Scripts
@@ -13,6 +14,7 @@ namespace Assets.Scripts
         private GameObject _playerObject;
         private CombatController _playerCombatController;
 
+        public MachineOfStates StateMachine;
         public MapGenerator MapGenerator;
         public EnemySpawner EnemySpawner;
         public GUIManager GUIManager;
@@ -36,7 +38,7 @@ namespace Assets.Scripts
 
         private void Start()
         {
-            SetupLevel();
+            //SetupLevel();
         }
 
         private void Update()
