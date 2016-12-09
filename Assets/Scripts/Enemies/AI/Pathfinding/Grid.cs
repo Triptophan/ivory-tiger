@@ -6,7 +6,7 @@ using Assets.Scripts.MapGeneration.Types;
 public class Grid : MonoBehaviour
 {
 
-    public LayerMask unwalkableMask;
+    public LayerMask walkableMask;
     public Vector2 gridWorldSize;
     public float nodeRadius;
     public bool displayGridGizmos;
@@ -33,7 +33,7 @@ public class Grid : MonoBehaviour
             for (int y = 0; y < gridSizeY; y++)
             {
                 Vector3 worldPoint = worldBottomLeft + Vector3.right * (x * nodeDiameter + nodeRadius) + Vector3.forward * (y * nodeDiameter + nodeRadius);
-                bool walkable = !(Physics.CheckSphere(worldPoint, nodeRadius, unwalkableMask));
+                bool walkable = (Physics.CheckSphere(worldPoint, nodeRadius, walkableMask));
                 grid[x, y] = new Node(walkable, worldPoint, x, y);
             }
         }

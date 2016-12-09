@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Unit : MonoBehaviour
+public class ChaseTarget : MonoBehaviour
 {
 
     public Transform Target;
@@ -9,10 +9,12 @@ public class Unit : MonoBehaviour
 
     Vector3[] path;
     int targetIndex;
+    public bool isChasing = false;
 
-    private void Start()
+    public void Chase(Vector3 TargetPosition)
     {
-        PathRequestManager.RequestPath(transform.position, Target.position, OnPathFound);
+        if(!isChasing)
+            PathRequestManager.RequestPath(transform.position, TargetPosition, OnPathFound);
     }
 
     public void OnPathFound(Vector3[] newPath, bool pathSuccessful)
@@ -35,14 +37,18 @@ public class Unit : MonoBehaviour
                 targetIndex++;
                 if(targetIndex >= path.Length)
                 {
+                    isChasing = false;
                     yield break;
                 }
                 else
                 {
+                    isChasing = true;
                     currentWaypoint = path[targetIndex];
                 }
             }
             transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, speed * Time.deltaTime);
+            
+
             yield return null;
         }
     }

@@ -8,12 +8,14 @@ namespace Assets.Scripts.Enemies
     [RequireComponent(typeof(NavMeshAgent))]
     [RequireComponent(typeof(WanderBehavior))]
     [RequireComponent(typeof(FieldOfView))]
+    [RequireComponent(typeof(ChaseTarget))]
     public class Enemy : MonoBehaviour
     {
         public bool CanAttack = false;
         private WanderBehavior _wander;
         private FieldOfView _fieldOfView;
         private GameObject _gameObject;
+        private ChaseTarget _chaseTarget;
 
         public bool Active
         {
@@ -35,14 +37,29 @@ namespace Assets.Scripts.Enemies
             _gameObject.layer = LayerMask.NameToLayer("Enemies");
             _wander = GetComponent<WanderBehavior>();
             _fieldOfView = GetComponent<FieldOfView>();
+            _chaseTarget = GetComponent<ChaseTarget>();
         }
 
         public void Update()
         {
-            //If we're chasing, disable the wander behavior
-            _wander.isWandering = !_fieldOfView.isChasing;
-            //If we are chasing, we can attack
-            CanAttack = _fieldOfView.isChasing;
+            if(_chaseTarget.isChasing)
+            {
+                _fieldOfView.TargetFound = false;
+                _wander.isWandering = false;
+                CanAttack = true;
+            }
+            else if (_fieldOfView.TargetFound)
+            {
+                _fieldOfView.StopFOV();
+                _chaseTarget.Chase(_fieldOfView.targetPosition);
+                CanAttack = true;
+            }
+            else
+            {
+                _wander.isWandering = true;
+                _fieldOfView.StartFOV();
+                CanAttack = false;
+            }
         }
 
         public void OnCollisionEnter(Collision collision)
