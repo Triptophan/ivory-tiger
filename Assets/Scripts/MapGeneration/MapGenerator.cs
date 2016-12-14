@@ -46,7 +46,7 @@ public class MapGenerator : MonoBehaviour
 
         //PrintMap(_map, "Bordered Map");
         MeshGenerator meshGenerator = GetComponent<MeshGenerator>();
-        meshGenerator.GenerateMesh(_map, WallHeight, SquareSize);
+        meshGenerator.GenerateMesh(_map, _rooms, WallHeight, SquareSize);
         PlayerStartingY = WallHeight * -SquareSize + 1;
         MapGenerated = true;
     }

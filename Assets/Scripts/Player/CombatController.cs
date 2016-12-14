@@ -15,10 +15,9 @@ namespace Assets.Scripts.Player
 
         public Camera PlayerView;
 
-        public Image PlayerHealthIndicator
+        public float PlayerHealthIndicatorFillAmount
         {
-            get { return _playerHealth.HealthIndicatorImage; }
-            set { if (_playerHealth) _playerHealth.HealthIndicatorImage = value; }
+            get { return _playerHealth.HealthIndicatorFillAmount; }
         }
 
         public bool CanFire;
@@ -74,7 +73,6 @@ namespace Assets.Scripts.Player
         {
             if (collidedObject.tag == "Enemy")
             {
-                Debug.Log("Collided with " + collidedObject.name);
                 _playerHealth.DoDamage(10f);
 
                 IsDead = _playerHealth.CurrentHealth <= 0;

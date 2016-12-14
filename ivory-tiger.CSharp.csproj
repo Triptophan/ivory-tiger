@@ -90,6 +90,8 @@
     <Compile Include="Assets\Scripts\GUI\GUIManager.cs" />
     <Compile Include="Assets\Scripts\LevelManager.cs" />
     <Compile Include="Assets\Scripts\MapGeneration\Enumerations\TileType.cs" />
+    <Compile Include="Assets\Scripts\MapGeneration\Generators\FloorMeshGenerator.cs" />
+    <Compile Include="Assets\Scripts\MapGeneration\Generators\MeshGeneratorHelper.cs" />
     <Compile Include="Assets\Scripts\MapGeneration\MapGenerator.cs" />
     <Compile Include="Assets\Scripts\MapGeneration\MeshGenerator.cs" />
     <Compile Include="Assets\Scripts\MapGeneration\Types\ControlNode.cs" />

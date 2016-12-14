@@ -38,7 +38,7 @@ namespace Assets.Scripts
 
         private void Start()
         {
-            //SetupLevel();
+            SetupLevel();
         }
 
         private void Update()
@@ -84,7 +84,6 @@ namespace Assets.Scripts
             var playerTransform = _playerObject.transform;
             playerTransform.position = playerPosition;
             playerTransform.LookAt(mainRoom.Center);
-
         }
 
         private bool CanPlayerProceedLevels()

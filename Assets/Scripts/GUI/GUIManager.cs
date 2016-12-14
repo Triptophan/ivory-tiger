@@ -49,7 +49,7 @@ public class GUIManager : MonoBehaviour
         Time.timeScale = 1f;
         Cursor.visible = false;
         GameOverScreen.SetActive(false);
-        PlayerCombatController.PlayerHealthIndicator.enabled = true;
+        PlayerHealthIndicator.enabled = true;
         HealthBar.SetActive(true);
         LevelManager.RestartNewLevel();
         PlayerCombatController.ResetPlayer();
@@ -66,11 +66,6 @@ public class GUIManager : MonoBehaviour
 #endif
     }
 
-    private void Start()
-    {
-        PlayerCombatController.PlayerHealthIndicator = PlayerHealthIndicator;
-    }
-
     private void Update()
     {
         if (Input.GetKeyUp(_menuKeyCode))
@@ -84,9 +79,10 @@ public class GUIManager : MonoBehaviour
 
         TogglePlayer();
 
-        if (PlayerCombatController.IsDead)
+        if (PlayerCombatController)
         {
-            SetGameOver();
+            PlayerHealthIndicator.fillAmount = PlayerCombatController.PlayerHealthIndicatorFillAmount;
+            if (PlayerCombatController.IsDead) SetGameOver();
         }
     }
 
@@ -118,7 +114,7 @@ public class GUIManager : MonoBehaviour
     private void SetGameOver()
     {
         GameOverScreen.SetActive(true);
-        PlayerCombatController.PlayerHealthIndicator.enabled = false;
+        PlayerHealthIndicator.fillAmount = PlayerCombatController.PlayerHealthIndicatorFillAmount;PlayerHealthIndicator.enabled = false;
         HealthBar.SetActive(false);
     }
 }
