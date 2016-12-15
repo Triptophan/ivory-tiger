@@ -1,0 +1,1866 @@
+fileFormatVersion: 2
+guid: 76a5f35b814f96847a799493612a2b72
+timeCreated: 1481078050
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Base Human001Head
+    100002: Base Human001LArmCollarbone
+    100004: Base Human001LArmDigit11
+    100006: Base Human001LArmDigit12
+    100008: Base Human001LArmDigit13
+    100010: Base Human001LArmDigit21
+    100012: Base Human001LArmDigit22
+    100014: Base Human001LArmDigit23
+    100016: Base Human001LArmForearm
+    100018: Base Human001LArmPalm
+    100020: Base Human001LArmUpperarm
+    100022: Base Human001LEar01
+    100024: Base Human001LEar02
+    100026: Base Human001LLegCalf
+    100028: Base Human001LLegFoot
+    100030: Base Human001LLegThigh
+    100032: Base Human001Neck1
+    100034: Base Human001Neck2
+    100036: Base Human001Nose
+    100038: Base Human001Pelvis
+    100040: Base Human001RCalf
+    100042: Base Human001RCollarbone
+    100044: Base Human001RDigit11
+    100046: Base Human001RDigit12
+    100048: Base Human001RDigit13
+    100050: Base Human001RDigit21
+    100052: Base Human001RDigit22
+    100054: Base Human001RDigit23
+    100056: Base Human001REar01
+    100058: Base Human001REar02
+    100060: Base Human001RFoot
+    100062: Base Human001RForearm
+    100064: Base Human001Ribcage
+    100066: Base Human001RPalm
+    100068: Base Human001RThigh
+    100070: Base Human001RUpperarm
+    100072: Base Human001Spine1
+    100074: Base Human001Spine2
+    100076: Base Human001Spine3
+    100078: Base Human001Spine4
+    100080: Base HumanHead
+    100082: Base HumanLCalf
+    100084: Base HumanLCollarbone
+    100086: Base HumanLFoot
+    100088: Base HumanLForearm
+    100090: Base HumanLPalm
+    100092: Base HumanLThigh
+    100094: Base HumanLUpperarm
+    100096: Base HumanNeck1
+    100098: Base HumanNeck2
+    100100: Base HumanPelvis
+    100102: Base HumanRCalf
+    100104: Base HumanRCollarbone
+    100106: Base HumanRFoot
+    100108: Base HumanRForearm
+    100110: Base HumanRibcage
+    100112: Base HumanRPalm
+    100114: Base HumanRThigh
+    100116: Base HumanRUpperarm
+    100118: Base HumanSpine1
+    100120: Base HumanSpine2
+    100122: Base HumanSpine3
+    100124: Base HumanSpine4
+    100126: //RootNode
+    100128: Goblin_Mesh
+    400000: Base Human001Head
+    400002: Base Human001LArmCollarbone
+    400004: Base Human001LArmDigit11
+    400006: Base Human001LArmDigit12
+    400008: Base Human001LArmDigit13
+    400010: Base Human001LArmDigit21
+    400012: Base Human001LArmDigit22
+    400014: Base Human001LArmDigit23
+    400016: Base Human001LArmForearm
+    400018: Base Human001LArmPalm
+    400020: Base Human001LArmUpperarm
+    400022: Base Human001LEar01
+    400024: Base Human001LEar02
+    400026: Base Human001LLegCalf
+    400028: Base Human001LLegFoot
+    400030: Base Human001LLegThigh
+    400032: Base Human001Neck1
+    400034: Base Human001Neck2
+    400036: Base Human001Nose
+    400038: Base Human001Pelvis
+    400040: Base Human001RCalf
+    400042: Base Human001RCollarbone
+    400044: Base Human001RDigit11
+    400046: Base Human001RDigit12
+    400048: Base Human001RDigit13
+    400050: Base Human001RDigit21
+    400052: Base Human001RDigit22
+    400054: Base Human001RDigit23
+    400056: Base Human001REar01
+    400058: Base Human001REar02
+    400060: Base Human001RFoot
+    400062: Base Human001RForearm
+    400064: Base Human001Ribcage
+    400066: Base Human001RPalm
+    400068: Base Human001RThigh
+    400070: Base Human001RUpperarm
+    400072: Base Human001Spine1
+    400074: Base Human001Spine2
+    400076: Base Human001Spine3
+    400078: Base Human001Spine4
+    400080: Base HumanHead
+    400082: Base HumanLCalf
+    400084: Base HumanLCollarbone
+    400086: Base HumanLFoot
+    400088: Base HumanLForearm
+    400090: Base HumanLPalm
+    400092: Base HumanLThigh
+    400094: Base HumanLUpperarm
+    400096: Base HumanNeck1
+    400098: Base HumanNeck2
+    400100: Base HumanPelvis
+    400102: Base HumanRCalf
+    400104: Base HumanRCollarbone
+    400106: Base HumanRFoot
+    400108: Base HumanRForearm
+    400110: Base HumanRibcage
+    400112: Base HumanRPalm
+    400114: Base HumanRThigh
+    400116: Base HumanRUpperarm
+    400118: Base HumanSpine1
+    400120: Base HumanSpine2
+    400122: Base HumanSpine3
+    400124: Base HumanSpine4
+    400126: //RootNode
+    400128: Goblin_Mesh
+    4300000: Goblin_Mesh
+    7400000: 'Idle 1 '
+    7400002: Idle 2
+    7400004: Walk
+    7400006: Run
+    7400008: Detection
+    7400010: Death
+    7400012: Attack
+    9500000: //RootNode
+    13700000: Goblin_Mesh
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: 'Idle 1 '
+      takeName: Take 001
+      firstFrame: 5
+      lastFrame: 65
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Base Human001Pelvis
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001LLegThigh
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001LLegThigh/Base Human001LLegCalf
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001LLegThigh/Base Human001LLegCalf/Base
+          Human001LLegFoot
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001RThigh
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001RThigh/Base Human001RCalf
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001RThigh/Base Human001RCalf/Base Human001RFoot
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001LArmCollarbone
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001LArmCollarbone/Base Human001LArmUpperarm
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001LArmCollarbone/Base Human001LArmUpperarm/Base
+          Human001LArmForearm
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001LArmCollarbone/Base Human001LArmUpperarm/Base
+          Human001LArmForearm/Base Human001LArmPalm
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001LArmCollarbone/Base Human001LArmUpperarm/Base
+          Human001LArmForearm/Base Human001LArmPalm/Base Human001LArmDigit11
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001LArmCollarbone/Base Human001LArmUpperarm/Base
+          Human001LArmForearm/Base Human001LArmPalm/Base Human001LArmDigit11/Base
+          Human001LArmDigit12
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001LArmCollarbone/Base Human001LArmUpperarm/Base
+          Human001LArmForearm/Base Human001LArmPalm/Base Human001LArmDigit11/Base
+          Human001LArmDigit12/Base Human001LArmDigit13
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001LArmCollarbone/Base Human001LArmUpperarm/Base
+          Human001LArmForearm/Base Human001LArmPalm/Base Human001LArmDigit21
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001LArmCollarbone/Base Human001LArmUpperarm/Base
+          Human001LArmForearm/Base Human001LArmPalm/Base Human001LArmDigit21/Base
+          Human001LArmDigit22
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001LArmCollarbone/Base Human001LArmUpperarm/Base
+          Human001LArmForearm/Base Human001LArmPalm/Base Human001LArmDigit21/Base
+          Human001LArmDigit22/Base Human001LArmDigit23
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001Neck1
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001Neck1/Base Human001Neck2
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001Neck1/Base Human001Neck2/Base
+          Human001Head
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001Neck1/Base Human001Neck2/Base
+          Human001Head/Base Human001LEar02
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001Neck1/Base Human001Neck2/Base
+          Human001Head/Base Human001LEar02/Base Human001LEar01
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001Neck1/Base Human001Neck2/Base
+          Human001Head/Base Human001Nose
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001Neck1/Base Human001Neck2/Base
+          Human001Head/Base Human001REar02
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001Neck1/Base Human001Neck2/Base
+          Human001Head/Base Human001REar02/Base Human001REar01
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001RCollarbone
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001RCollarbone/Base Human001RUpperarm
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001RCollarbone/Base Human001RUpperarm/Base
+          Human001RForearm
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001RCollarbone/Base Human001RUpperarm/Base
+          Human001RForearm/Base Human001RPalm
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001RCollarbone/Base Human001RUpperarm/Base
+          Human001RForearm/Base Human001RPalm/Base Human001RDigit11
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001RCollarbone/Base Human001RUpperarm/Base
+          Human001RForearm/Base Human001RPalm/Base Human001RDigit11/Base Human001RDigit12
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001RCollarbone/Base Human001RUpperarm/Base
+          Human001RForearm/Base Human001RPalm/Base Human001RDigit11/Base Human001RDigit12/Base
+          Human001RDigit13
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001RCollarbone/Base Human001RUpperarm/Base
+          Human001RForearm/Base Human001RPalm/Base Human001RDigit21
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001RCollarbone/Base Human001RUpperarm/Base
+          Human001RForearm/Base Human001RPalm/Base Human001RDigit21/Base Human001RDigit22
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001RCollarbone/Base Human001RUpperarm/Base
+          Human001RForearm/Base Human001RPalm/Base Human001RDigit21/Base Human001RDigit22/Base
+          Human001RDigit23
+        weight: 1
+      - path: Base HumanPelvis
+        weight: 1
+      - path: Base HumanPelvis/Base HumanLThigh
+        weight: 1
+      - path: Base HumanPelvis/Base HumanLThigh/Base HumanLCalf
+        weight: 1
+      - path: Base HumanPelvis/Base HumanLThigh/Base HumanLCalf/Base HumanLFoot
+        weight: 1
+      - path: Base HumanPelvis/Base HumanRThigh
+        weight: 1
+      - path: Base HumanPelvis/Base HumanRThigh/Base HumanRCalf
+        weight: 1
+      - path: Base HumanPelvis/Base HumanRThigh/Base HumanRCalf/Base HumanRFoot
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage/Base HumanLCollarbone
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage/Base HumanLCollarbone/Base HumanLUpperarm
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage/Base HumanLCollarbone/Base HumanLUpperarm/Base
+          HumanLForearm
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage/Base HumanLCollarbone/Base HumanLUpperarm/Base
+          HumanLForearm/Base HumanLPalm
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage/Base HumanNeck1
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage/Base HumanNeck1/Base HumanNeck2
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage/Base HumanNeck1/Base HumanNeck2/Base HumanHead
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage/Base HumanRCollarbone
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage/Base HumanRCollarbone/Base HumanRUpperarm
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage/Base HumanRCollarbone/Base HumanRUpperarm/Base
+          HumanRForearm
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage/Base HumanRCollarbone/Base HumanRUpperarm/Base
+          HumanRForearm/Base HumanRPalm
+        weight: 1
+      - path: Goblin_Mesh
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Idle 2
+      takeName: Take 001
+      firstFrame: 70
+      lastFrame: 160
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Base Human001Pelvis
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001LLegThigh
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001LLegThigh/Base Human001LLegCalf
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001LLegThigh/Base Human001LLegCalf/Base
+          Human001LLegFoot
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001RThigh
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001RThigh/Base Human001RCalf
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001RThigh/Base Human001RCalf/Base Human001RFoot
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001LArmCollarbone
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001LArmCollarbone/Base Human001LArmUpperarm
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001LArmCollarbone/Base Human001LArmUpperarm/Base
+          Human001LArmForearm
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001LArmCollarbone/Base Human001LArmUpperarm/Base
+          Human001LArmForearm/Base Human001LArmPalm
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001LArmCollarbone/Base Human001LArmUpperarm/Base
+          Human001LArmForearm/Base Human001LArmPalm/Base Human001LArmDigit11
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001LArmCollarbone/Base Human001LArmUpperarm/Base
+          Human001LArmForearm/Base Human001LArmPalm/Base Human001LArmDigit11/Base
+          Human001LArmDigit12
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001LArmCollarbone/Base Human001LArmUpperarm/Base
+          Human001LArmForearm/Base Human001LArmPalm/Base Human001LArmDigit11/Base
+          Human001LArmDigit12/Base Human001LArmDigit13
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001LArmCollarbone/Base Human001LArmUpperarm/Base
+          Human001LArmForearm/Base Human001LArmPalm/Base Human001LArmDigit21
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001LArmCollarbone/Base Human001LArmUpperarm/Base
+          Human001LArmForearm/Base Human001LArmPalm/Base Human001LArmDigit21/Base
+          Human001LArmDigit22
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001LArmCollarbone/Base Human001LArmUpperarm/Base
+          Human001LArmForearm/Base Human001LArmPalm/Base Human001LArmDigit21/Base
+          Human001LArmDigit22/Base Human001LArmDigit23
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001Neck1
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001Neck1/Base Human001Neck2
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001Neck1/Base Human001Neck2/Base
+          Human001Head
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001Neck1/Base Human001Neck2/Base
+          Human001Head/Base Human001LEar02
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001Neck1/Base Human001Neck2/Base
+          Human001Head/Base Human001LEar02/Base Human001LEar01
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001Neck1/Base Human001Neck2/Base
+          Human001Head/Base Human001Nose
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001Neck1/Base Human001Neck2/Base
+          Human001Head/Base Human001REar02
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001Neck1/Base Human001Neck2/Base
+          Human001Head/Base Human001REar02/Base Human001REar01
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001RCollarbone
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001RCollarbone/Base Human001RUpperarm
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001RCollarbone/Base Human001RUpperarm/Base
+          Human001RForearm
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001RCollarbone/Base Human001RUpperarm/Base
+          Human001RForearm/Base Human001RPalm
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001RCollarbone/Base Human001RUpperarm/Base
+          Human001RForearm/Base Human001RPalm/Base Human001RDigit11
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001RCollarbone/Base Human001RUpperarm/Base
+          Human001RForearm/Base Human001RPalm/Base Human001RDigit11/Base Human001RDigit12
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001RCollarbone/Base Human001RUpperarm/Base
+          Human001RForearm/Base Human001RPalm/Base Human001RDigit11/Base Human001RDigit12/Base
+          Human001RDigit13
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001RCollarbone/Base Human001RUpperarm/Base
+          Human001RForearm/Base Human001RPalm/Base Human001RDigit21
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001RCollarbone/Base Human001RUpperarm/Base
+          Human001RForearm/Base Human001RPalm/Base Human001RDigit21/Base Human001RDigit22
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001RCollarbone/Base Human001RUpperarm/Base
+          Human001RForearm/Base Human001RPalm/Base Human001RDigit21/Base Human001RDigit22/Base
+          Human001RDigit23
+        weight: 1
+      - path: Base HumanPelvis
+        weight: 1
+      - path: Base HumanPelvis/Base HumanLThigh
+        weight: 1
+      - path: Base HumanPelvis/Base HumanLThigh/Base HumanLCalf
+        weight: 1
+      - path: Base HumanPelvis/Base HumanLThigh/Base HumanLCalf/Base HumanLFoot
+        weight: 1
+      - path: Base HumanPelvis/Base HumanRThigh
+        weight: 1
+      - path: Base HumanPelvis/Base HumanRThigh/Base HumanRCalf
+        weight: 1
+      - path: Base HumanPelvis/Base HumanRThigh/Base HumanRCalf/Base HumanRFoot
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage/Base HumanLCollarbone
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage/Base HumanLCollarbone/Base HumanLUpperarm
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage/Base HumanLCollarbone/Base HumanLUpperarm/Base
+          HumanLForearm
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage/Base HumanLCollarbone/Base HumanLUpperarm/Base
+          HumanLForearm/Base HumanLPalm
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage/Base HumanNeck1
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage/Base HumanNeck1/Base HumanNeck2
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage/Base HumanNeck1/Base HumanNeck2/Base HumanHead
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage/Base HumanRCollarbone
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage/Base HumanRCollarbone/Base HumanRUpperarm
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage/Base HumanRCollarbone/Base HumanRUpperarm/Base
+          HumanRForearm
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage/Base HumanRCollarbone/Base HumanRUpperarm/Base
+          HumanRForearm/Base HumanRPalm
+        weight: 1
+      - path: Goblin_Mesh
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Walk
+      takeName: Take 001
+      firstFrame: 170
+      lastFrame: 210
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Base Human001Pelvis
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001LLegThigh
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001LLegThigh/Base Human001LLegCalf
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001LLegThigh/Base Human001LLegCalf/Base
+          Human001LLegFoot
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001RThigh
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001RThigh/Base Human001RCalf
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001RThigh/Base Human001RCalf/Base Human001RFoot
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001LArmCollarbone
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001LArmCollarbone/Base Human001LArmUpperarm
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001LArmCollarbone/Base Human001LArmUpperarm/Base
+          Human001LArmForearm
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001LArmCollarbone/Base Human001LArmUpperarm/Base
+          Human001LArmForearm/Base Human001LArmPalm
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001LArmCollarbone/Base Human001LArmUpperarm/Base
+          Human001LArmForearm/Base Human001LArmPalm/Base Human001LArmDigit11
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001LArmCollarbone/Base Human001LArmUpperarm/Base
+          Human001LArmForearm/Base Human001LArmPalm/Base Human001LArmDigit11/Base
+          Human001LArmDigit12
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001LArmCollarbone/Base Human001LArmUpperarm/Base
+          Human001LArmForearm/Base Human001LArmPalm/Base Human001LArmDigit11/Base
+          Human001LArmDigit12/Base Human001LArmDigit13
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001LArmCollarbone/Base Human001LArmUpperarm/Base
+          Human001LArmForearm/Base Human001LArmPalm/Base Human001LArmDigit21
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001LArmCollarbone/Base Human001LArmUpperarm/Base
+          Human001LArmForearm/Base Human001LArmPalm/Base Human001LArmDigit21/Base
+          Human001LArmDigit22
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001LArmCollarbone/Base Human001LArmUpperarm/Base
+          Human001LArmForearm/Base Human001LArmPalm/Base Human001LArmDigit21/Base
+          Human001LArmDigit22/Base Human001LArmDigit23
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001Neck1
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001Neck1/Base Human001Neck2
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001Neck1/Base Human001Neck2/Base
+          Human001Head
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001Neck1/Base Human001Neck2/Base
+          Human001Head/Base Human001LEar02
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001Neck1/Base Human001Neck2/Base
+          Human001Head/Base Human001LEar02/Base Human001LEar01
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001Neck1/Base Human001Neck2/Base
+          Human001Head/Base Human001Nose
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001Neck1/Base Human001Neck2/Base
+          Human001Head/Base Human001REar02
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001Neck1/Base Human001Neck2/Base
+          Human001Head/Base Human001REar02/Base Human001REar01
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001RCollarbone
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001RCollarbone/Base Human001RUpperarm
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001RCollarbone/Base Human001RUpperarm/Base
+          Human001RForearm
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001RCollarbone/Base Human001RUpperarm/Base
+          Human001RForearm/Base Human001RPalm
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001RCollarbone/Base Human001RUpperarm/Base
+          Human001RForearm/Base Human001RPalm/Base Human001RDigit11
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001RCollarbone/Base Human001RUpperarm/Base
+          Human001RForearm/Base Human001RPalm/Base Human001RDigit11/Base Human001RDigit12
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001RCollarbone/Base Human001RUpperarm/Base
+          Human001RForearm/Base Human001RPalm/Base Human001RDigit11/Base Human001RDigit12/Base
+          Human001RDigit13
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001RCollarbone/Base Human001RUpperarm/Base
+          Human001RForearm/Base Human001RPalm/Base Human001RDigit21
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001RCollarbone/Base Human001RUpperarm/Base
+          Human001RForearm/Base Human001RPalm/Base Human001RDigit21/Base Human001RDigit22
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001RCollarbone/Base Human001RUpperarm/Base
+          Human001RForearm/Base Human001RPalm/Base Human001RDigit21/Base Human001RDigit22/Base
+          Human001RDigit23
+        weight: 1
+      - path: Base HumanPelvis
+        weight: 1
+      - path: Base HumanPelvis/Base HumanLThigh
+        weight: 1
+      - path: Base HumanPelvis/Base HumanLThigh/Base HumanLCalf
+        weight: 1
+      - path: Base HumanPelvis/Base HumanLThigh/Base HumanLCalf/Base HumanLFoot
+        weight: 1
+      - path: Base HumanPelvis/Base HumanRThigh
+        weight: 1
+      - path: Base HumanPelvis/Base HumanRThigh/Base HumanRCalf
+        weight: 1
+      - path: Base HumanPelvis/Base HumanRThigh/Base HumanRCalf/Base HumanRFoot
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage/Base HumanLCollarbone
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage/Base HumanLCollarbone/Base HumanLUpperarm
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage/Base HumanLCollarbone/Base HumanLUpperarm/Base
+          HumanLForearm
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage/Base HumanLCollarbone/Base HumanLUpperarm/Base
+          HumanLForearm/Base HumanLPalm
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage/Base HumanNeck1
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage/Base HumanNeck1/Base HumanNeck2
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage/Base HumanNeck1/Base HumanNeck2/Base HumanHead
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage/Base HumanRCollarbone
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage/Base HumanRCollarbone/Base HumanRUpperarm
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage/Base HumanRCollarbone/Base HumanRUpperarm/Base
+          HumanRForearm
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage/Base HumanRCollarbone/Base HumanRUpperarm/Base
+          HumanRForearm/Base HumanRPalm
+        weight: 1
+      - path: Goblin_Mesh
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Run
+      takeName: Take 001
+      firstFrame: 220
+      lastFrame: 236
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Base Human001Pelvis
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001LLegThigh
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001LLegThigh/Base Human001LLegCalf
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001LLegThigh/Base Human001LLegCalf/Base
+          Human001LLegFoot
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001RThigh
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001RThigh/Base Human001RCalf
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001RThigh/Base Human001RCalf/Base Human001RFoot
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001LArmCollarbone
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001LArmCollarbone/Base Human001LArmUpperarm
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001LArmCollarbone/Base Human001LArmUpperarm/Base
+          Human001LArmForearm
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001LArmCollarbone/Base Human001LArmUpperarm/Base
+          Human001LArmForearm/Base Human001LArmPalm
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001LArmCollarbone/Base Human001LArmUpperarm/Base
+          Human001LArmForearm/Base Human001LArmPalm/Base Human001LArmDigit11
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001LArmCollarbone/Base Human001LArmUpperarm/Base
+          Human001LArmForearm/Base Human001LArmPalm/Base Human001LArmDigit11/Base
+          Human001LArmDigit12
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001LArmCollarbone/Base Human001LArmUpperarm/Base
+          Human001LArmForearm/Base Human001LArmPalm/Base Human001LArmDigit11/Base
+          Human001LArmDigit12/Base Human001LArmDigit13
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001LArmCollarbone/Base Human001LArmUpperarm/Base
+          Human001LArmForearm/Base Human001LArmPalm/Base Human001LArmDigit21
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001LArmCollarbone/Base Human001LArmUpperarm/Base
+          Human001LArmForearm/Base Human001LArmPalm/Base Human001LArmDigit21/Base
+          Human001LArmDigit22
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001LArmCollarbone/Base Human001LArmUpperarm/Base
+          Human001LArmForearm/Base Human001LArmPalm/Base Human001LArmDigit21/Base
+          Human001LArmDigit22/Base Human001LArmDigit23
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001Neck1
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001Neck1/Base Human001Neck2
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001Neck1/Base Human001Neck2/Base
+          Human001Head
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001Neck1/Base Human001Neck2/Base
+          Human001Head/Base Human001LEar02
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001Neck1/Base Human001Neck2/Base
+          Human001Head/Base Human001LEar02/Base Human001LEar01
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001Neck1/Base Human001Neck2/Base
+          Human001Head/Base Human001Nose
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001Neck1/Base Human001Neck2/Base
+          Human001Head/Base Human001REar02
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001Neck1/Base Human001Neck2/Base
+          Human001Head/Base Human001REar02/Base Human001REar01
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001RCollarbone
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001RCollarbone/Base Human001RUpperarm
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001RCollarbone/Base Human001RUpperarm/Base
+          Human001RForearm
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001RCollarbone/Base Human001RUpperarm/Base
+          Human001RForearm/Base Human001RPalm
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001RCollarbone/Base Human001RUpperarm/Base
+          Human001RForearm/Base Human001RPalm/Base Human001RDigit11
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001RCollarbone/Base Human001RUpperarm/Base
+          Human001RForearm/Base Human001RPalm/Base Human001RDigit11/Base Human001RDigit12
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001RCollarbone/Base Human001RUpperarm/Base
+          Human001RForearm/Base Human001RPalm/Base Human001RDigit11/Base Human001RDigit12/Base
+          Human001RDigit13
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001RCollarbone/Base Human001RUpperarm/Base
+          Human001RForearm/Base Human001RPalm/Base Human001RDigit21
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001RCollarbone/Base Human001RUpperarm/Base
+          Human001RForearm/Base Human001RPalm/Base Human001RDigit21/Base Human001RDigit22
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001RCollarbone/Base Human001RUpperarm/Base
+          Human001RForearm/Base Human001RPalm/Base Human001RDigit21/Base Human001RDigit22/Base
+          Human001RDigit23
+        weight: 1
+      - path: Base HumanPelvis
+        weight: 1
+      - path: Base HumanPelvis/Base HumanLThigh
+        weight: 1
+      - path: Base HumanPelvis/Base HumanLThigh/Base HumanLCalf
+        weight: 1
+      - path: Base HumanPelvis/Base HumanLThigh/Base HumanLCalf/Base HumanLFoot
+        weight: 1
+      - path: Base HumanPelvis/Base HumanRThigh
+        weight: 1
+      - path: Base HumanPelvis/Base HumanRThigh/Base HumanRCalf
+        weight: 1
+      - path: Base HumanPelvis/Base HumanRThigh/Base HumanRCalf/Base HumanRFoot
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage/Base HumanLCollarbone
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage/Base HumanLCollarbone/Base HumanLUpperarm
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage/Base HumanLCollarbone/Base HumanLUpperarm/Base
+          HumanLForearm
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage/Base HumanLCollarbone/Base HumanLUpperarm/Base
+          HumanLForearm/Base HumanLPalm
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage/Base HumanNeck1
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage/Base HumanNeck1/Base HumanNeck2
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage/Base HumanNeck1/Base HumanNeck2/Base HumanHead
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage/Base HumanRCollarbone
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage/Base HumanRCollarbone/Base HumanRUpperarm
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage/Base HumanRCollarbone/Base HumanRUpperarm/Base
+          HumanRForearm
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage/Base HumanRCollarbone/Base HumanRUpperarm/Base
+          HumanRForearm/Base HumanRPalm
+        weight: 1
+      - path: Goblin_Mesh
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Detection
+      takeName: Take 001
+      firstFrame: 240
+      lastFrame: 250
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Base Human001Pelvis
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001LLegThigh
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001LLegThigh/Base Human001LLegCalf
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001LLegThigh/Base Human001LLegCalf/Base
+          Human001LLegFoot
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001RThigh
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001RThigh/Base Human001RCalf
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001RThigh/Base Human001RCalf/Base Human001RFoot
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001LArmCollarbone
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001LArmCollarbone/Base Human001LArmUpperarm
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001LArmCollarbone/Base Human001LArmUpperarm/Base
+          Human001LArmForearm
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001LArmCollarbone/Base Human001LArmUpperarm/Base
+          Human001LArmForearm/Base Human001LArmPalm
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001LArmCollarbone/Base Human001LArmUpperarm/Base
+          Human001LArmForearm/Base Human001LArmPalm/Base Human001LArmDigit11
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001LArmCollarbone/Base Human001LArmUpperarm/Base
+          Human001LArmForearm/Base Human001LArmPalm/Base Human001LArmDigit11/Base
+          Human001LArmDigit12
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001LArmCollarbone/Base Human001LArmUpperarm/Base
+          Human001LArmForearm/Base Human001LArmPalm/Base Human001LArmDigit11/Base
+          Human001LArmDigit12/Base Human001LArmDigit13
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001LArmCollarbone/Base Human001LArmUpperarm/Base
+          Human001LArmForearm/Base Human001LArmPalm/Base Human001LArmDigit21
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001LArmCollarbone/Base Human001LArmUpperarm/Base
+          Human001LArmForearm/Base Human001LArmPalm/Base Human001LArmDigit21/Base
+          Human001LArmDigit22
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001LArmCollarbone/Base Human001LArmUpperarm/Base
+          Human001LArmForearm/Base Human001LArmPalm/Base Human001LArmDigit21/Base
+          Human001LArmDigit22/Base Human001LArmDigit23
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001Neck1
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001Neck1/Base Human001Neck2
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001Neck1/Base Human001Neck2/Base
+          Human001Head
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001Neck1/Base Human001Neck2/Base
+          Human001Head/Base Human001LEar02
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001Neck1/Base Human001Neck2/Base
+          Human001Head/Base Human001LEar02/Base Human001LEar01
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001Neck1/Base Human001Neck2/Base
+          Human001Head/Base Human001Nose
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001Neck1/Base Human001Neck2/Base
+          Human001Head/Base Human001REar02
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001Neck1/Base Human001Neck2/Base
+          Human001Head/Base Human001REar02/Base Human001REar01
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001RCollarbone
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001RCollarbone/Base Human001RUpperarm
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001RCollarbone/Base Human001RUpperarm/Base
+          Human001RForearm
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001RCollarbone/Base Human001RUpperarm/Base
+          Human001RForearm/Base Human001RPalm
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001RCollarbone/Base Human001RUpperarm/Base
+          Human001RForearm/Base Human001RPalm/Base Human001RDigit11
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001RCollarbone/Base Human001RUpperarm/Base
+          Human001RForearm/Base Human001RPalm/Base Human001RDigit11/Base Human001RDigit12
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001RCollarbone/Base Human001RUpperarm/Base
+          Human001RForearm/Base Human001RPalm/Base Human001RDigit11/Base Human001RDigit12/Base
+          Human001RDigit13
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001RCollarbone/Base Human001RUpperarm/Base
+          Human001RForearm/Base Human001RPalm/Base Human001RDigit21
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001RCollarbone/Base Human001RUpperarm/Base
+          Human001RForearm/Base Human001RPalm/Base Human001RDigit21/Base Human001RDigit22
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001RCollarbone/Base Human001RUpperarm/Base
+          Human001RForearm/Base Human001RPalm/Base Human001RDigit21/Base Human001RDigit22/Base
+          Human001RDigit23
+        weight: 1
+      - path: Base HumanPelvis
+        weight: 1
+      - path: Base HumanPelvis/Base HumanLThigh
+        weight: 1
+      - path: Base HumanPelvis/Base HumanLThigh/Base HumanLCalf
+        weight: 1
+      - path: Base HumanPelvis/Base HumanLThigh/Base HumanLCalf/Base HumanLFoot
+        weight: 1
+      - path: Base HumanPelvis/Base HumanRThigh
+        weight: 1
+      - path: Base HumanPelvis/Base HumanRThigh/Base HumanRCalf
+        weight: 1
+      - path: Base HumanPelvis/Base HumanRThigh/Base HumanRCalf/Base HumanRFoot
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage/Base HumanLCollarbone
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage/Base HumanLCollarbone/Base HumanLUpperarm
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage/Base HumanLCollarbone/Base HumanLUpperarm/Base
+          HumanLForearm
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage/Base HumanLCollarbone/Base HumanLUpperarm/Base
+          HumanLForearm/Base HumanLPalm
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage/Base HumanNeck1
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage/Base HumanNeck1/Base HumanNeck2
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage/Base HumanNeck1/Base HumanNeck2/Base HumanHead
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage/Base HumanRCollarbone
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage/Base HumanRCollarbone/Base HumanRUpperarm
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage/Base HumanRCollarbone/Base HumanRUpperarm/Base
+          HumanRForearm
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage/Base HumanRCollarbone/Base HumanRUpperarm/Base
+          HumanRForearm/Base HumanRPalm
+        weight: 1
+      - path: Goblin_Mesh
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Death
+      takeName: Take 001
+      firstFrame: 255
+      lastFrame: 325
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Base Human001Pelvis
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001LLegThigh
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001LLegThigh/Base Human001LLegCalf
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001LLegThigh/Base Human001LLegCalf/Base
+          Human001LLegFoot
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001RThigh
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001RThigh/Base Human001RCalf
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001RThigh/Base Human001RCalf/Base Human001RFoot
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001LArmCollarbone
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001LArmCollarbone/Base Human001LArmUpperarm
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001LArmCollarbone/Base Human001LArmUpperarm/Base
+          Human001LArmForearm
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001LArmCollarbone/Base Human001LArmUpperarm/Base
+          Human001LArmForearm/Base Human001LArmPalm
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001LArmCollarbone/Base Human001LArmUpperarm/Base
+          Human001LArmForearm/Base Human001LArmPalm/Base Human001LArmDigit11
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001LArmCollarbone/Base Human001LArmUpperarm/Base
+          Human001LArmForearm/Base Human001LArmPalm/Base Human001LArmDigit11/Base
+          Human001LArmDigit12
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001LArmCollarbone/Base Human001LArmUpperarm/Base
+          Human001LArmForearm/Base Human001LArmPalm/Base Human001LArmDigit11/Base
+          Human001LArmDigit12/Base Human001LArmDigit13
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001LArmCollarbone/Base Human001LArmUpperarm/Base
+          Human001LArmForearm/Base Human001LArmPalm/Base Human001LArmDigit21
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001LArmCollarbone/Base Human001LArmUpperarm/Base
+          Human001LArmForearm/Base Human001LArmPalm/Base Human001LArmDigit21/Base
+          Human001LArmDigit22
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001LArmCollarbone/Base Human001LArmUpperarm/Base
+          Human001LArmForearm/Base Human001LArmPalm/Base Human001LArmDigit21/Base
+          Human001LArmDigit22/Base Human001LArmDigit23
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001Neck1
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001Neck1/Base Human001Neck2
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001Neck1/Base Human001Neck2/Base
+          Human001Head
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001Neck1/Base Human001Neck2/Base
+          Human001Head/Base Human001LEar02
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001Neck1/Base Human001Neck2/Base
+          Human001Head/Base Human001LEar02/Base Human001LEar01
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001Neck1/Base Human001Neck2/Base
+          Human001Head/Base Human001Nose
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001Neck1/Base Human001Neck2/Base
+          Human001Head/Base Human001REar02
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001Neck1/Base Human001Neck2/Base
+          Human001Head/Base Human001REar02/Base Human001REar01
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001RCollarbone
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001RCollarbone/Base Human001RUpperarm
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001RCollarbone/Base Human001RUpperarm/Base
+          Human001RForearm
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001RCollarbone/Base Human001RUpperarm/Base
+          Human001RForearm/Base Human001RPalm
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001RCollarbone/Base Human001RUpperarm/Base
+          Human001RForearm/Base Human001RPalm/Base Human001RDigit11
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001RCollarbone/Base Human001RUpperarm/Base
+          Human001RForearm/Base Human001RPalm/Base Human001RDigit11/Base Human001RDigit12
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001RCollarbone/Base Human001RUpperarm/Base
+          Human001RForearm/Base Human001RPalm/Base Human001RDigit11/Base Human001RDigit12/Base
+          Human001RDigit13
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001RCollarbone/Base Human001RUpperarm/Base
+          Human001RForearm/Base Human001RPalm/Base Human001RDigit21
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001RCollarbone/Base Human001RUpperarm/Base
+          Human001RForearm/Base Human001RPalm/Base Human001RDigit21/Base Human001RDigit22
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001RCollarbone/Base Human001RUpperarm/Base
+          Human001RForearm/Base Human001RPalm/Base Human001RDigit21/Base Human001RDigit22/Base
+          Human001RDigit23
+        weight: 1
+      - path: Base HumanPelvis
+        weight: 1
+      - path: Base HumanPelvis/Base HumanLThigh
+        weight: 1
+      - path: Base HumanPelvis/Base HumanLThigh/Base HumanLCalf
+        weight: 1
+      - path: Base HumanPelvis/Base HumanLThigh/Base HumanLCalf/Base HumanLFoot
+        weight: 1
+      - path: Base HumanPelvis/Base HumanRThigh
+        weight: 1
+      - path: Base HumanPelvis/Base HumanRThigh/Base HumanRCalf
+        weight: 1
+      - path: Base HumanPelvis/Base HumanRThigh/Base HumanRCalf/Base HumanRFoot
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage/Base HumanLCollarbone
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage/Base HumanLCollarbone/Base HumanLUpperarm
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage/Base HumanLCollarbone/Base HumanLUpperarm/Base
+          HumanLForearm
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage/Base HumanLCollarbone/Base HumanLUpperarm/Base
+          HumanLForearm/Base HumanLPalm
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage/Base HumanNeck1
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage/Base HumanNeck1/Base HumanNeck2
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage/Base HumanNeck1/Base HumanNeck2/Base HumanHead
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage/Base HumanRCollarbone
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage/Base HumanRCollarbone/Base HumanRUpperarm
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage/Base HumanRCollarbone/Base HumanRUpperarm/Base
+          HumanRForearm
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage/Base HumanRCollarbone/Base HumanRUpperarm/Base
+          HumanRForearm/Base HumanRPalm
+        weight: 1
+      - path: Goblin_Mesh
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Attack
+      takeName: Take 001
+      firstFrame: 330
+      lastFrame: 350
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves:
+      - name: Curve
+        curve:
+          serializedVersion: 2
+          curve:
+          - time: 0
+            value: 0
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+          - time: 1
+            value: 0
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+          preInfinity: 3
+          postInfinity: 3
+          rotationOrder: 0
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Base Human001Pelvis
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001LLegThigh
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001LLegThigh/Base Human001LLegCalf
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001LLegThigh/Base Human001LLegCalf/Base
+          Human001LLegFoot
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001RThigh
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001RThigh/Base Human001RCalf
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001RThigh/Base Human001RCalf/Base Human001RFoot
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001LArmCollarbone
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001LArmCollarbone/Base Human001LArmUpperarm
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001LArmCollarbone/Base Human001LArmUpperarm/Base
+          Human001LArmForearm
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001LArmCollarbone/Base Human001LArmUpperarm/Base
+          Human001LArmForearm/Base Human001LArmPalm
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001LArmCollarbone/Base Human001LArmUpperarm/Base
+          Human001LArmForearm/Base Human001LArmPalm/Base Human001LArmDigit11
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001LArmCollarbone/Base Human001LArmUpperarm/Base
+          Human001LArmForearm/Base Human001LArmPalm/Base Human001LArmDigit11/Base
+          Human001LArmDigit12
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001LArmCollarbone/Base Human001LArmUpperarm/Base
+          Human001LArmForearm/Base Human001LArmPalm/Base Human001LArmDigit11/Base
+          Human001LArmDigit12/Base Human001LArmDigit13
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001LArmCollarbone/Base Human001LArmUpperarm/Base
+          Human001LArmForearm/Base Human001LArmPalm/Base Human001LArmDigit21
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001LArmCollarbone/Base Human001LArmUpperarm/Base
+          Human001LArmForearm/Base Human001LArmPalm/Base Human001LArmDigit21/Base
+          Human001LArmDigit22
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001LArmCollarbone/Base Human001LArmUpperarm/Base
+          Human001LArmForearm/Base Human001LArmPalm/Base Human001LArmDigit21/Base
+          Human001LArmDigit22/Base Human001LArmDigit23
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001Neck1
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001Neck1/Base Human001Neck2
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001Neck1/Base Human001Neck2/Base
+          Human001Head
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001Neck1/Base Human001Neck2/Base
+          Human001Head/Base Human001LEar02
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001Neck1/Base Human001Neck2/Base
+          Human001Head/Base Human001LEar02/Base Human001LEar01
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001Neck1/Base Human001Neck2/Base
+          Human001Head/Base Human001Nose
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001Neck1/Base Human001Neck2/Base
+          Human001Head/Base Human001REar02
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001Neck1/Base Human001Neck2/Base
+          Human001Head/Base Human001REar02/Base Human001REar01
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001RCollarbone
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001RCollarbone/Base Human001RUpperarm
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001RCollarbone/Base Human001RUpperarm/Base
+          Human001RForearm
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001RCollarbone/Base Human001RUpperarm/Base
+          Human001RForearm/Base Human001RPalm
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001RCollarbone/Base Human001RUpperarm/Base
+          Human001RForearm/Base Human001RPalm/Base Human001RDigit11
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001RCollarbone/Base Human001RUpperarm/Base
+          Human001RForearm/Base Human001RPalm/Base Human001RDigit11/Base Human001RDigit12
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001RCollarbone/Base Human001RUpperarm/Base
+          Human001RForearm/Base Human001RPalm/Base Human001RDigit11/Base Human001RDigit12/Base
+          Human001RDigit13
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001RCollarbone/Base Human001RUpperarm/Base
+          Human001RForearm/Base Human001RPalm/Base Human001RDigit21
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001RCollarbone/Base Human001RUpperarm/Base
+          Human001RForearm/Base Human001RPalm/Base Human001RDigit21/Base Human001RDigit22
+        weight: 1
+      - path: Base Human001Pelvis/Base Human001Spine1/Base Human001Spine2/Base Human001Spine3/Base
+          Human001Spine4/Base Human001Ribcage/Base Human001RCollarbone/Base Human001RUpperarm/Base
+          Human001RForearm/Base Human001RPalm/Base Human001RDigit21/Base Human001RDigit22/Base
+          Human001RDigit23
+        weight: 1
+      - path: Base HumanPelvis
+        weight: 1
+      - path: Base HumanPelvis/Base HumanLThigh
+        weight: 1
+      - path: Base HumanPelvis/Base HumanLThigh/Base HumanLCalf
+        weight: 1
+      - path: Base HumanPelvis/Base HumanLThigh/Base HumanLCalf/Base HumanLFoot
+        weight: 1
+      - path: Base HumanPelvis/Base HumanRThigh
+        weight: 1
+      - path: Base HumanPelvis/Base HumanRThigh/Base HumanRCalf
+        weight: 1
+      - path: Base HumanPelvis/Base HumanRThigh/Base HumanRCalf/Base HumanRFoot
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage/Base HumanLCollarbone
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage/Base HumanLCollarbone/Base HumanLUpperarm
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage/Base HumanLCollarbone/Base HumanLUpperarm/Base
+          HumanLForearm
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage/Base HumanLCollarbone/Base HumanLUpperarm/Base
+          HumanLForearm/Base HumanLPalm
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage/Base HumanNeck1
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage/Base HumanNeck1/Base HumanNeck2
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage/Base HumanNeck1/Base HumanNeck2/Base HumanHead
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage/Base HumanRCollarbone
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage/Base HumanRCollarbone/Base HumanRUpperarm
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage/Base HumanRCollarbone/Base HumanRUpperarm/Base
+          HumanRForearm
+        weight: 1
+      - path: Base HumanPelvis/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Base
+          HumanSpine4/Base HumanRibcage/Base HumanRCollarbone/Base HumanRUpperarm/Base
+          HumanRForearm/Base HumanRPalm
+        weight: 1
+      - path: Goblin_Mesh
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
