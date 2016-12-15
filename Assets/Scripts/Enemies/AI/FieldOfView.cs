@@ -29,10 +29,6 @@ public class FieldOfView : MonoBehaviour
     public MeshFilter viewMeshFilter;
     public float viewRadius = 10f;
 
-    public Vector3 targetPosition;
-    public bool TargetFound = false;
-
-
     [HideInInspector]
     public List<Transform> visibleTargets = new List<Transform>();
 
@@ -156,8 +152,7 @@ public class FieldOfView : MonoBehaviour
         {
             //Can't find player, turn off chasing
             isChasing = false;
-            
-            
+
             //We are no longer chasing the player so return to my original location
             if (hadPlayer)
             {
@@ -165,7 +160,6 @@ public class FieldOfView : MonoBehaviour
                 viewRadius = viewRadius / playerFoundDetectionRadiusMultiplier;
                 viewAngle = previousViewAngle;
                 hadPlayer = false;
-                TargetFound = false;
                 agent.speed = agent.speed / playerFoundAgentSpeedMultiplier;
                 agent.SetDestination(initialPosition);
             }
@@ -180,8 +174,30 @@ public class FieldOfView : MonoBehaviour
 
             float dstToTarget = Vector3.Distance(transform.position, target.position);
 
+            // - DRK 12/1 Commented out, but left this code in.  Didn't seem to be used and was throwing compiler warnings.
+            //float adjustedViewAngle = viewAngle;
+
+            ////if we're really close to the target, regardless of if they are facing us
+            ////or not, double the view angle (simulate sixth sense or sound)
+            //if (!hadPlayer)
+            //{
+            //    if (dstToTarget <= 10f && dstToTarget >= 5f)
+            //    {
+            //        adjustedViewAngle = viewAngle * 2;
+            //    }
+            //    else if (dstToTarget < 5)
+            //    {
+            //        adjustedViewAngle = viewAngle * 3;
+            //    }
+            //    else
+            //    {
+            //        adjustedViewAngle = viewAngle;
+            //    }
+            //}
+
             if (Vector3.Angle(transform.forward, dirToTarget) < viewAngle / 2)
             {
+                //float dstToTarget = Vector3.Distance(transform.position, target.position);
                 if (!Physics.Raycast(transform.position, dirToTarget, dstToTarget, obstacleMask))
                 {
                     visibleTargets.Add(target);
@@ -197,13 +213,12 @@ public class FieldOfView : MonoBehaviour
 
                     isChasing = true;
                     hadPlayer = true;
-                    TargetFound = true;
 
-                    targetPosition = target.transform.position;
+                    var playerPosition = target.transform.position;
+                    agent.SetDestination(playerPosition);
                     break;
                 }
             }
-            
         }
     }
 
@@ -229,17 +244,7 @@ public class FieldOfView : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         //Save off initial position
         initialPosition = transform.position;
-        //StartCoroutine("FindTargetsWithDelay", .5f);
-    }
-
-    public void StartFOV()
-    {
         StartCoroutine("FindTargetsWithDelay", .5f);
-    }
-
-    public void StopFOV()
-    {
-        StopCoroutine("FindTargetsWithDelay");
     }
 
     private void UpdateDebugGUIDisplay()
@@ -262,43 +267,6 @@ public class FieldOfView : MonoBehaviour
         }
     }
 
-    public Transform Target;
-    float speed = 20;
-
-    Vector3[] path;
-    int targetIndex;
-
-    public void OnPathFound(Vector3[] newPath, bool pathSuccessful)
-    {
-        if (pathSuccessful)
-        {
-            path = newPath;
-            StopCoroutine("FollowPath");
-            StartCoroutine("FollowPath");
-        }
-    }
-
-    IEnumerator FollowPath()
-    {
-        Vector3 currentWaypoint = path[0];
-        while (true)
-        {
-            if (transform.position == currentWaypoint)
-            {
-                targetIndex++;
-                if (targetIndex >= path.Length)
-                {
-                    yield break;
-                }
-                else
-                {
-                    currentWaypoint = path[targetIndex];
-                }
-            }
-            transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, speed * Time.deltaTime);
-            yield return null;
-        }
-    }
 
     public struct EdgeInfo
     {
