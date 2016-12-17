@@ -116,6 +116,7 @@ public class MeshGenerator : MonoBehaviour
 
         wallmesh.uv = uvs.ToArray();
         Walls.mesh = wallmesh;
+       
 
         WallCollider.sharedMesh = wallmesh;
     }

@@ -12,15 +12,43 @@ namespace Assets.Scripts.Enemies
     public class Enemy : MonoBehaviour
     {
         public bool CanAttack = false;
-        public StateMachine.StateMachine StateMachine;
+        [HideInInspector]
+        public StateMachine.StateMachine stateMachine;
+        [HideInInspector]
+        public LevelManager LevelManager;
         private GameObject _gameObject;
-        private WanderState _wanderState;
 
+        //States
+        public WanderState wanderState;
+        public LookState lookState;
+        public ChaseState chaseState;
+        public IdleState idleState;
+
+        //Wander Properties
+        [Header("Wander State")]
         public float wanderRadius = 5f;
         public float wanderTimer = 5f;
-
         public int maxWanderMoves = 5;
         public bool isWandering = true;
+
+        //Look Properties
+        [Header("Look State")]
+        public LayerMask obstacleMask;
+        public float targetDetectionRadius = 10f;
+        public LayerMask targetMask;
+
+        //Chase Properties
+        [Header("Chase State")]
+        public int ChaseSpeed = 5;
+        public Transform ChaseTarget;
+        [HideInInspector]
+        public bool isChasing = false;
+
+        [HideInInspector]
+        public Vector3[] path;
+        [HideInInspector]
+        public int targetIndex;
+
 
         public bool Active
         {
@@ -32,7 +60,9 @@ namespace Assets.Scripts.Enemies
             }
         }
 
+        [HideInInspector]
         public List<Enemy> EnemyPool;
+        [HideInInspector]
         public List<Enemy> DeadEnemyPool;
 
         public void Awake()
@@ -40,34 +70,23 @@ namespace Assets.Scripts.Enemies
             _gameObject = gameObject;
             _gameObject.tag = "Enemy";
             _gameObject.layer = LayerMask.NameToLayer("Enemies");
-            _wanderState = new Scripts.StateMachine.States.EnemyStates.WanderState();
 
-            StateMachine = GetComponent<Scripts.StateMachine.StateMachine>();
-            //Set initial state
+            //Get yo states!
+            wanderState = new WanderState();
+            lookState = new LookState();
+            chaseState = new ChaseState();
+            idleState = new IdleState();
+
+            //Instantiate the state machine
+            stateMachine = GetComponent<StateMachine.StateMachine>();
             
-            StateMachine.ChangeState(_wanderState, null);
+            //Set initial state
+            stateMachine.ChangeGlobalState(wanderState, null);
+            stateMachine.ChangeState(lookState, null);
         }
-
         public void Update()
         {
-            //if(_chaseTarget.isChasing)
-            //{
-            //    _fieldOfView.TargetFound = false;
-            //    _wander.isWandering = false;
-            //    CanAttack = true;
-            //}
-            //else if (_fieldOfView.TargetFound)
-            //{
-            //    _fieldOfView.StopFOV();
-            //    _chaseTarget.Chase(_fieldOfView.targetPosition);
-            //    CanAttack = true;
-            //}
-            //else
-            //{
-            //    _wander.isWandering = true;
-            //    _fieldOfView.StartFOV();
-            //    CanAttack = false;
-            //}
+
         }
 
         public void OnCollisionEnter(Collision collision)
@@ -83,6 +102,28 @@ namespace Assets.Scripts.Enemies
                 DeadEnemyPool.Add(this);
             }
         }
+
+        //public void OnDrawGizmos()
+        //{
+        //    if (path != null)
+        //    {
+        //        for (int i = targetIndex; i < path.Length; i++)
+        //        {
+        //            Gizmos.color = Color.black;
+        //            Gizmos.DrawCube(path[i], Vector3.one);
+
+        //            if (i == targetIndex)
+        //            {
+        //                Gizmos.DrawLine(transform.position, path[i]);
+        //            }
+        //            else
+        //            {
+        //                Gizmos.DrawLine(path[i - 1], path[i]);
+        //            }
+
+        //        }
+        //    }
+        //}
 
 
 

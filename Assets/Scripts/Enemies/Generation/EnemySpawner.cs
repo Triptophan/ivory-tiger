@@ -11,6 +11,7 @@ namespace Assets.Scripts.Enemies.Generation
 
         public List<Enemy> EnemyPool;
         public List<Enemy> DeadEnemyPool;
+        public LevelManager LevelManager;
 
         public void Awake()
         {
@@ -48,7 +49,7 @@ namespace Assets.Scripts.Enemies.Generation
                 enemy.transform.parent = _transform;
                 enemy.EnemyPool = EnemyPool;
                 enemy.DeadEnemyPool = DeadEnemyPool;
-
+                enemy.LevelManager = LevelManager;
                 EnemyPool.Add(enemy);
             }
         }

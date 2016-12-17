@@ -71,12 +71,13 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Combat\PlayerHealth.cs" />
     <Compile Include="Assets\Scripts\Combat\Projectiles\Rock.cs" />
     <Compile Include="Assets\Scripts\Enemies\AI\ChaseBehavior.cs" />
     <Compile Include="Assets\Scripts\Enemies\AI\FieldOfView.cs" />
+    <Compile Include="Assets\Scripts\Enemies\AI\Pathfinding\ChaseTarget.cs" />
     <Compile Include="Assets\Scripts\Enemies\AI\Pathfinding\Grid.cs" />
     <Compile Include="Assets\Scripts\Enemies\AI\Pathfinding\Pathfinding.cs" />
-    <Compile Include="Assets\Scripts\Enemies\AI\Pathfinding\ChaseTarget.cs" />
     <Compile Include="Assets\Scripts\Enemies\AI\Pathfinding\Utility\Heap.cs" />
     <Compile Include="Assets\Scripts\Enemies\AI\Pathfinding\Utility\PathRequestManager.cs" />
     <Compile Include="Assets\Scripts\Enemies\AI\ProjectileMovement.cs" />
@@ -99,6 +100,13 @@
     <Compile Include="Assets\Scripts\MapGeneration\Types\Tile.cs" />
     <Compile Include="Assets\Scripts\MapGeneration\Types\Triangle.cs" />
     <Compile Include="Assets\Scripts\Player\CombatController.cs" />
+    <Compile Include="Assets\Scripts\StateMachine\State.cs" />
+    <Compile Include="Assets\Scripts\StateMachine\StateMachine.cs" />
+    <Compile Include="Assets\Scripts\StateMachine\States\EnemyStates\ChaseState.cs" />
+    <Compile Include="Assets\Scripts\StateMachine\States\EnemyStates\IdleState.cs" />
+    <Compile Include="Assets\Scripts\StateMachine\States\EnemyStates\LookState.cs" />
+    <Compile Include="Assets\Scripts\StateMachine\States\EnemyStates\WanderState.cs" />
+    <Compile Include="Assets\Scripts\StateMachine\States\MenuStates\TitleState.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Standard Assets\Characters\FirstPersonCharacter\FirstPersonCharacterGuidelines.txt" />

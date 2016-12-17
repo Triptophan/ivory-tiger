@@ -11,15 +11,17 @@ namespace Assets.Scripts
     public class LevelManager : MonoBehaviour
     {
         private List<Room> _rooms;
-        private GameObject _playerObject;
+        [HideInInspector]
+        public GameObject PlayerObject;
         private CombatController _playerCombatController;
 
         public MachineOfStates StateMachine;
         public MapGenerator MapGenerator;
         public EnemySpawner EnemySpawner;
         public GUIManager GUIManager;
-
+        public Pathfinding PathFinding;
         public GameObject PlayerPrefab;
+        public LayerMask WalkableLayer;
 
         public int EnemyScale = 2;
 
@@ -34,6 +36,7 @@ namespace Assets.Scripts
         private void Awake()
         {
             GUIManager.LevelManager = this;
+            PathFinding = GetComponent<Pathfinding>();
         }
 
         private void Start()
@@ -73,15 +76,15 @@ namespace Assets.Scripts
             var roomPosition = mainRoom.Tiles[randomTileIndex];
             var playerPosition = new Vector3(roomPosition.X * MapGenerator.SquareSize, MapGenerator.PlayerStartingY - .5f, roomPosition.Y * MapGenerator.SquareSize);
 
-            if (_playerObject == null)
+            if (PlayerObject == null)
             {
                 PlayerPrefab.layer = LayerMask.NameToLayer("Players");
-                _playerObject = (GameObject)Instantiate(PlayerPrefab, playerPosition, Quaternion.identity);
-                GUIManager.PlayerCombatController = _playerObject.GetComponent<CombatController>();
+                PlayerObject = (GameObject)Instantiate(PlayerPrefab, playerPosition, Quaternion.identity);
+                GUIManager.PlayerCombatController = PlayerObject.GetComponent<CombatController>();
                 return;
             }
 
-            var playerTransform = _playerObject.transform;
+            var playerTransform = PlayerObject.transform;
             playerTransform.position = playerPosition;
             playerTransform.LookAt(mainRoom.Center);
 

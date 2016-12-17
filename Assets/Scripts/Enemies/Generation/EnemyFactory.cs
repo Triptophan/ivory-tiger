@@ -10,7 +10,7 @@ namespace Assets.Scripts.Enemies.Generation
         {
             var index = Random.Range(0, Enemies.GetLength(0));
             var gameObject = (GameObject)(Instantiate(Enemies[index], Vector3.zero, Quaternion.identity));
-            var enemy = gameObject.AddComponent<Enemy>();
+            var enemy = gameObject.GetComponent<Enemy>();
             return enemy;
         }
     }
