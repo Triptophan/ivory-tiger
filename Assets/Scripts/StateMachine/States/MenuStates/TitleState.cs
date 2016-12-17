@@ -19,19 +19,16 @@ namespace Assets.Scripts.StateMachine.States.MenuStates
             }
         }
 
-        public override void Enter(GameObject entity, params GameObject[] args)
+        public override void Enter(GameObject entity)
         {
-            if (_titleMenuObject == null) _titleMenuObject = args[0];
-            if (_levelManager == null) _levelManager = _titleMenuObject.GetComponent<LevelManager>();
-
-            _titleMenuObject.SetActive(true);
+           
         }
 
-        public override void Execute(GameObject entity, params GameObject[] args)
+        public override void Execute(GameObject entity)
         {
         }
 
-        public override void Exit(GameObject entity, params GameObject[] args)
+        public override void Exit(GameObject entity)
         {
             if (_titleMenuObject != null) _titleMenuObject.SetActive(false);
         }
