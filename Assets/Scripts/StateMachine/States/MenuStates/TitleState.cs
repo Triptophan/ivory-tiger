@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Assets.Scripts.StateMachine.States.MenuStates
 {
@@ -7,8 +8,6 @@ namespace Assets.Scripts.StateMachine.States.MenuStates
         private static TitleState _instance;
 
         private GameObject _titleMenuObject;
-
-        private LevelManager _levelManager;
 
         public static State Instance
         {
@@ -21,8 +20,6 @@ namespace Assets.Scripts.StateMachine.States.MenuStates
 
         public override void Enter(GameObject entity, params GameObject[] args)
         {
-            if (_titleMenuObject == null) _titleMenuObject = args[0];
-            if (_levelManager == null) _levelManager = _titleMenuObject.GetComponent<LevelManager>();
 
             _titleMenuObject.SetActive(true);
         }

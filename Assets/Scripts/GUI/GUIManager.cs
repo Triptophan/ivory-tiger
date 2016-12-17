@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts;
 using Assets.Scripts.Player;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,12 +14,19 @@ public class GUIManager : MonoBehaviour
     public GameObject InGameMenuObject;
     public GameObject GameOverScreen;
     public GameObject HealthBar;
+    public GameObject TitleMenu;
 
     public CombatController PlayerCombatController;
 
     public LevelManager LevelManager;
 
     public Image PlayerHealthIndicator;
+
+    #region Public Events
+    
+    public Action OnGameStart { get; set; }
+
+    #endregion
 
     #region Button Events
 
@@ -46,6 +54,7 @@ public class GUIManager : MonoBehaviour
 
     public void StartNewGame()
     {
+        OnGameStart();
         Time.timeScale = 1f;
         Cursor.visible = false;
         GameOverScreen.SetActive(false);
