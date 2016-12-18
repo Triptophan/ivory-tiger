@@ -1,13 +1,10 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Assets.Scripts.StateMachine.States.MenuStates
 {
     public class TitleState : State
     {
         private static TitleState _instance;
-
-        private GameObject _titleMenuObject;
 
         public static State Instance
         {
@@ -20,7 +17,9 @@ namespace Assets.Scripts.StateMachine.States.MenuStates
 
         public override void Enter(GameObject entity)
         {
-           
+            var gameManager = entity.GetComponent<GameManager>();
+
+            gameManager.GuiManager.TitleMenu.SetActive(true);
         }
 
         public override void Execute(GameObject entity)
@@ -29,7 +28,9 @@ namespace Assets.Scripts.StateMachine.States.MenuStates
 
         public override void Exit(GameObject entity)
         {
-            if (_titleMenuObject != null) _titleMenuObject.SetActive(false);
+            var gameManager = entity.GetComponent<GameManager>();
+
+            gameManager.GuiManager.TitleMenu.SetActive(false);
         }
     }
 }

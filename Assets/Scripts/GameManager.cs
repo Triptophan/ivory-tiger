@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts;
 using Assets.Scripts.StateMachine;
+using Assets.Scripts.StateMachine.States.GameFlowStates;
 using Assets.Scripts.StateMachine.States.MenuStates;
 using UnityEngine;
 
@@ -12,8 +13,7 @@ public class GameManager : MonoBehaviour
     // Use this for initialization
     private void Start()
     {
-        GuiManager.OnGameStart = StartGame;
-        StateMachine.ChangeGlobalState(TitleState.Instance, GuiManager.gameObject);
+        StateMachine.ChangeGlobalState(TitleState.Instance);
     }
 
     // Update is called once per frame
@@ -24,6 +24,6 @@ public class GameManager : MonoBehaviour
 
     private void StartGame()
     {
-        
+        StateMachine.ChangeGlobalState(GameStartState.Instance);
     }
 }

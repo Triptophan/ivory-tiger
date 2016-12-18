@@ -36,20 +36,15 @@ namespace Assets.Scripts
             GUIManager.LevelManager = this;
         }
 
-        private void Start()
-        {
-            SetupLevel();
-        }
-
         private void Update()
         {
-            if (!MapDebugMode && (CanPlayerProceedLevels() || Input.GetKeyUp(KeyCode.F12)))
-            {
-                RestartNewLevel();
-            }
+            //if (!MapDebugMode && (CanPlayerProceedLevels() || Input.GetKeyUp(KeyCode.F12)))
+            //{
+            //    RestartNewLevel();
+            //}
         }
 
-        private void SetupLevel()
+        public void SetupLevel()
         {
             while (_rooms == null || _rooms.Count < 2)
             {

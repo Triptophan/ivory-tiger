@@ -21,13 +21,7 @@ public class GUIManager : MonoBehaviour
     public LevelManager LevelManager;
 
     public Image PlayerHealthIndicator;
-
-    #region Public Events
     
-    public Action OnGameStart { get; set; }
-
-    #endregion
-
     #region Button Events
 
     public void ResumeGame()
@@ -54,7 +48,6 @@ public class GUIManager : MonoBehaviour
 
     public void StartNewGame()
     {
-        OnGameStart();
         Time.timeScale = 1f;
         Cursor.visible = false;
         GameOverScreen.SetActive(false);
