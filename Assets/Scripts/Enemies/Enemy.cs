@@ -4,6 +4,7 @@ using Assets.Scripts.StateMachine;
 using Assets.Scripts.StateMachine.States.EnemyStates;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Collections;
 
 namespace Assets.Scripts.Enemies
 {
@@ -44,18 +45,17 @@ namespace Assets.Scripts.Enemies
         //Chase Properties
         [Header("Chase State")]
         public int ChaseSpeed = 5;
+		public int TurnSpeed = 10;
         public Transform ChaseTarget;
         //[HideInInspector]
-        public bool isChasing = false;
-        //[HideInInspector]
-        public bool PathFound = false;
-        //[HideInInspector]
-        public bool PathRequested = false;
+        public bool isTraveling = false;
         //[HideInInspector]
         public Vector3[] Path;
         //[HideInInspector]
         public int TargetIndex;
 
+		[HideInInspector]
+		private List<Transform> visibleTargets = new List<Transform>();
 
         public bool Active
         {
@@ -86,10 +86,53 @@ namespace Assets.Scripts.Enemies
             stateMachine.ChangeGlobalState(WanderState.Instance, null);
             stateMachine.ChangeState(LookState.Instance, null);
         }
-        public void Update()
-        {
 
-        }
+
+		public void Chase()
+		{
+			if(!isTraveling && ChaseTarget != null)
+				PathRequestManager.RequestPath(transform.position, ChaseTarget.position, OnPathFound);
+		}
+
+		public void GoHome()
+		{
+			if(!isTraveling)
+				PathRequestManager.RequestPath(transform.position, StartPosition, OnPathFound);
+		}
+
+
+		IEnumerator FollowPath()
+		{
+			Vector3 currentWaypoint = Path[0];
+			while(true)
+			{
+				if(transform.position == currentWaypoint)
+				{
+					TargetIndex++;
+					if(TargetIndex >= Path.Length)
+					{
+						isTraveling = false;
+						yield break;
+					}
+					else
+					{
+						isTraveling = true;
+						currentWaypoint = Path[TargetIndex];
+					}
+				}
+
+				float chaseStep = ChaseSpeed * Time.deltaTime;
+				transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, chaseStep);
+
+				float turnStep = TurnSpeed * Time.deltaTime;
+				Vector3 targetDir = ChaseTarget.position - transform.position;
+				Vector3 newDir = Vector3.RotateTowards(transform.forward, targetDir, turnStep, 0.0F);
+				transform.rotation = Quaternion.LookRotation(newDir);
+
+				yield return null;
+			}
+		}
+
 
         public void OnCollisionEnter(Collision collision)
         {
@@ -107,24 +150,48 @@ namespace Assets.Scripts.Enemies
 
         public void OnPathFound(Vector3[] newPath, bool pathSuccessful)
         {
-            if (pathSuccessful)
-            {
-                Path = newPath;
-                PathFound = true;
-                PathRequested = false;
-            }
+			if (pathSuccessful)
+			{
+				Path = newPath;
+				StopCoroutine("FollowPath");
+				StartCoroutine("FollowPath");
+			}
             else
             {
-                ResetEnemyPath();
+				Path = null;
+				StopCoroutine("FollowPath");
             }
         }
 
-        private void ResetEnemyPath()
-        {
-            PathFound = false;
-            PathRequested = false;
-            Path = null;
-        }
+		public void FindVisibleTargets()
+		{
+
+			visibleTargets.Clear();
+			Transform tempTarget = null;
+
+			Collider[] targetsInviewRadius = Physics.OverlapSphere(transform.position, targetDetectionRadius, targetMask); //TargetMask should be looking for player
+			//If we have no "targets", clean up and get outta here!
+			if (targetsInviewRadius.Length != 0)
+			{
+				for (int i = 0; i < targetsInviewRadius.Length; i++)
+				{
+					Transform target = targetsInviewRadius[i].transform;
+					Vector3 dirToTarget = (target.position - transform.position).normalized;
+
+					float dstToTarget = Vector3.Distance(transform.position, target.position);
+					if (!Physics.Raycast(transform.position, dirToTarget, dstToTarget, obstacleMask))
+					{
+						visibleTargets.Add(target);
+						var playerPosition = target.transform.position;
+						tempTarget = target;
+						break;
+					}
+				}
+			}
+			ChaseTarget = tempTarget;
+		}
+
+
         public void OnDrawGizmos()
         {
             if (Path != null)
