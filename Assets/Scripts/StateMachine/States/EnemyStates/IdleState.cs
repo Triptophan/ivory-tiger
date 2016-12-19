@@ -8,6 +8,15 @@ namespace Assets.Scripts.StateMachine.States.EnemyStates
 {
     public class IdleState : State
     {
+        private static IdleState _instance;
+        public static State Instance
+        {
+            get
+            {
+                if (_instance == null) _instance = new IdleState();
+                return _instance;
+            }
+        }
         public override void Enter(GameObject entity, params GameObject[] args)
         {
             

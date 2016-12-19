@@ -9,12 +9,7 @@ namespace Assets.Scripts.StateMachine.States.EnemyStates
 {
     public class LookState : State
     {
-
-
-        private static WanderState _instance;
-        private Enemy _EnemyObject;
-        private LevelManager _levelManager;
-        private Transform mob;
+        private static LookState _instance;
 
         [HideInInspector]
         public List<Transform> visibleTargets = new List<Transform>();
@@ -23,31 +18,30 @@ namespace Assets.Scripts.StateMachine.States.EnemyStates
         {
             get
             {
-                if (_instance == null) _instance = new WanderState();
+                if (_instance == null) _instance = new LookState();
                 return _instance;
             }
         }
 
         public override void Enter(GameObject entity, params GameObject[] args)
         {
-            _EnemyObject = entity.GetComponent<Enemy>();
-            _levelManager = _EnemyObject.LevelManager;
-            mob = entity.transform;
         }
 
         public override void Execute(GameObject entity, params GameObject[] args)
         {
-            FindVisibleTargets();
+            var enemy = entity.GetComponent<Enemy>();
+            FindVisibleTargets(enemy);
         }
 
         public override void Exit(GameObject entity, params GameObject[] args) { }
 
-        private void FindVisibleTargets()
+        private void FindVisibleTargets(Enemy enemy)
         {
+            var mob = enemy.transform;
             visibleTargets.Clear();
-            _EnemyObject.ChaseTarget = null;
+            enemy.ChaseTarget = null;
 
-            Collider[] targetsInviewRadius = Physics.OverlapSphere(mob.position, _EnemyObject.targetDetectionRadius, _EnemyObject.targetMask); //TargetMask should be looking for player
+            Collider[] targetsInviewRadius = Physics.OverlapSphere(mob.position, enemy.targetDetectionRadius, enemy.targetMask); //TargetMask should be looking for player
             //If we have no "targets", clean up and get outta here!
             if (targetsInviewRadius.Length == 0)
             {
@@ -60,20 +54,20 @@ namespace Assets.Scripts.StateMachine.States.EnemyStates
                 Vector3 dirToTarget = (target.position - mob.position).normalized;
 
                 float dstToTarget = Vector3.Distance(mob.position, target.position);
-                if (!Physics.Raycast(mob.position, dirToTarget, dstToTarget, _EnemyObject.obstacleMask))
+                if (!Physics.Raycast(mob.position, dirToTarget, dstToTarget, enemy.obstacleMask))
                 {
                     visibleTargets.Add(target);
                     var playerPosition = target.transform.position;
-                    _EnemyObject.ChaseTarget = target;
+                    enemy.ChaseTarget = target;
                     break;
                 }
             }
 
             //if we have found the player and we can see him, chase his ass
-            if (_EnemyObject.ChaseTarget != null)
+            if (enemy.ChaseTarget != null)
             {
-                _EnemyObject.stateMachine.ChangeGlobalState(_EnemyObject.chaseState, null);
-                _EnemyObject.stateMachine.ChangeState(_EnemyObject.idleState, null);
+                enemy.stateMachine.ChangeGlobalState(ChaseState.Instance, null);
+                enemy.stateMachine.ChangeState(IdleState.Instance, null);
             }
 
         }

@@ -11,25 +11,29 @@ namespace Assets.Scripts.Enemies
     [RequireComponent(typeof(Scripts.StateMachine.StateMachine))]
     public class Enemy : MonoBehaviour
     {
-        public bool CanAttack = false;
+        
         [HideInInspector]
         public StateMachine.StateMachine stateMachine;
         [HideInInspector]
         public LevelManager LevelManager;
         private GameObject _gameObject;
 
-        //States
-        public WanderState wanderState;
-        public LookState lookState;
-        public ChaseState chaseState;
-        public IdleState idleState;
+
+        //Atack Properties
+        [HideInInspector]
+        public bool CanAttack = false;
 
         //Wander Properties
         [Header("Wander State")]
-        public float wanderRadius = 5f;
-        public float wanderTimer = 5f;
-        public int maxWanderMoves = 5;
+        public float WanderRadius = 5f;
+        public float WanderTimer = 5f;
+        public int MaximumWanderMoves = 5;
+        public float WanderSpeed = 5;
+        [HideInInspector]
         public bool isWandering = true;
+        [HideInInspector]
+        public Vector3 StartPosition;
+
 
         //Look Properties
         [Header("Look State")]
@@ -41,13 +45,16 @@ namespace Assets.Scripts.Enemies
         [Header("Chase State")]
         public int ChaseSpeed = 5;
         public Transform ChaseTarget;
-        [HideInInspector]
+        //[HideInInspector]
         public bool isChasing = false;
-
-        [HideInInspector]
-        public Vector3[] path;
-        [HideInInspector]
-        public int targetIndex;
+        //[HideInInspector]
+        public bool PathFound = false;
+        //[HideInInspector]
+        public bool PathRequested = false;
+        //[HideInInspector]
+        public Vector3[] Path;
+        //[HideInInspector]
+        public int TargetIndex;
 
 
         public bool Active
@@ -70,19 +77,14 @@ namespace Assets.Scripts.Enemies
             _gameObject = gameObject;
             _gameObject.tag = "Enemy";
             _gameObject.layer = LayerMask.NameToLayer("Enemies");
-
-            //Get yo states!
-            wanderState = new WanderState();
-            lookState = new LookState();
-            chaseState = new ChaseState();
-            idleState = new IdleState();
+            StartPosition = transform.position;
 
             //Instantiate the state machine
             stateMachine = GetComponent<StateMachine.StateMachine>();
             
             //Set initial state
-            stateMachine.ChangeGlobalState(wanderState, null);
-            stateMachine.ChangeState(lookState, null);
+            stateMachine.ChangeGlobalState(WanderState.Instance, null);
+            stateMachine.ChangeState(LookState.Instance, null);
         }
         public void Update()
         {
@@ -103,27 +105,47 @@ namespace Assets.Scripts.Enemies
             }
         }
 
-        //public void OnDrawGizmos()
-        //{
-        //    if (path != null)
-        //    {
-        //        for (int i = targetIndex; i < path.Length; i++)
-        //        {
-        //            Gizmos.color = Color.black;
-        //            Gizmos.DrawCube(path[i], Vector3.one);
+        public void OnPathFound(Vector3[] newPath, bool pathSuccessful)
+        {
+            if (pathSuccessful)
+            {
+                Path = newPath;
+                PathFound = true;
+                PathRequested = false;
+            }
+            else
+            {
+                ResetEnemyPath();
+            }
+        }
 
-        //            if (i == targetIndex)
-        //            {
-        //                Gizmos.DrawLine(transform.position, path[i]);
-        //            }
-        //            else
-        //            {
-        //                Gizmos.DrawLine(path[i - 1], path[i]);
-        //            }
+        private void ResetEnemyPath()
+        {
+            PathFound = false;
+            PathRequested = false;
+            Path = null;
+        }
+        public void OnDrawGizmos()
+        {
+            if (Path != null)
+            {
+                for (int i = TargetIndex; i < Path.Length; i++)
+                {
+                    Gizmos.color = Color.black;
+                    Gizmos.DrawCube(Path[i], Vector3.one);
 
-        //        }
-        //    }
-        //}
+                    if (i == TargetIndex)
+                    {
+                        Gizmos.DrawLine(transform.position, Path[i]);
+                    }
+                    else
+                    {
+                        Gizmos.DrawLine(Path[i - 1], Path[i]);
+                    }
+
+                }
+            }
+        }
 
 
 
