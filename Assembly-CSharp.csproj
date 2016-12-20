@@ -79,6 +79,7 @@
      <Compile Include="Assets\Scripts\StateMachine\States\EnemyStates\ChaseState.cs" />
      <Compile Include="Assets\Scripts\StateMachine\States\EnemyStates\IdleState.cs" />
      <Compile Include="Assets\Scripts\StateMachine\States\EnemyStates\LookState.cs" />
+     <Compile Include="Assets\Scripts\StateMachine\States\EnemyStates\PatrolState.cs" />
      <Compile Include="Assets\Scripts\StateMachine\States\EnemyStates\WanderState.cs" />
      <Compile Include="Assets\Scripts\StateMachine\States\MenuStates\TitleState.cs" />
      <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />

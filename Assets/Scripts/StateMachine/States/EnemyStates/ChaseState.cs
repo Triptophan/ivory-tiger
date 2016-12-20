@@ -19,7 +19,11 @@ namespace Assets.Scripts.StateMachine.States.EnemyStates
             }
         }
 
-		public override void Enter(GameObject entity, params GameObject[] args) {}
+		public override void Enter(GameObject entity, params GameObject[] args) 
+		{ 
+			var enemy = entity.GetComponent<Enemy>();
+			enemy.isChasing = true;
+		}
 
 
         public override void Execute(GameObject entity, params GameObject[] args)
@@ -41,7 +45,10 @@ namespace Assets.Scripts.StateMachine.States.EnemyStates
 
 		}
 
-		public override void Exit(GameObject entity, params GameObject[] args) {}
-
+		public override void Exit(GameObject entity, params GameObject[] args)
+		{ 
+			var enemy = entity.GetComponent<Enemy>();
+			enemy.isChasing = false;
+		}
     }
 }

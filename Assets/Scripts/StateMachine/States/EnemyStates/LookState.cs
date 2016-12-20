@@ -32,6 +32,8 @@ namespace Assets.Scripts.StateMachine.States.EnemyStates
         {
             var enemy = entity.GetComponent<Enemy>();
             enemy.FindVisibleTargets();
+
+
 			//if we have found the player and we can see him, chase his ass
 			if (enemy.ChaseTarget != null)
 			{

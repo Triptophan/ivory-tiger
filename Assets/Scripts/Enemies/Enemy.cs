@@ -53,9 +53,20 @@ namespace Assets.Scripts.Enemies
         public Vector3[] Path;
         //[HideInInspector]
         public int TargetIndex;
+		public bool isChasing;
 
 		[HideInInspector]
 		private List<Transform> visibleTargets = new List<Transform>();
+
+
+		[Header("Patrol State")]
+		public Vector3[] PatrolWayPoints = null;
+		public int MaxPatrolWayPoints = 4;
+		public int MinPatrolWayPoints = 2;
+		public float MaxPatrolWayPointRadius = 3f;
+		public float MinPatrolWayPointRadius = 1f;
+		//[HideInInspector]
+		public bool isPatrolling = false;
 
         public bool Active
         {
@@ -78,12 +89,12 @@ namespace Assets.Scripts.Enemies
             _gameObject.tag = "Enemy";
             _gameObject.layer = LayerMask.NameToLayer("Enemies");
             StartPosition = transform.position;
-
+			CalculateRandomPatrolWayPoints();
             //Instantiate the state machine
             stateMachine = GetComponent<StateMachine.StateMachine>();
             
             //Set initial state
-            stateMachine.ChangeGlobalState(WanderState.Instance, null);
+            stateMachine.ChangeGlobalState(PatrolState.Instance, null);
             stateMachine.ChangeState(LookState.Instance, null);
         }
 
@@ -124,10 +135,13 @@ namespace Assets.Scripts.Enemies
 				float chaseStep = ChaseSpeed * Time.deltaTime;
 				transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, chaseStep);
 
-				float turnStep = TurnSpeed * Time.deltaTime;
-				Vector3 targetDir = ChaseTarget.position - transform.position;
-				Vector3 newDir = Vector3.RotateTowards(transform.forward, targetDir, turnStep, 0.0F);
-				transform.rotation = Quaternion.LookRotation(newDir);
+				if(isChasing)
+				{
+					float turnStep = TurnSpeed * Time.deltaTime;
+					Vector3 targetDir = ChaseTarget.position - transform.position;
+					Vector3 newDir = Vector3.RotateTowards(transform.forward, targetDir, turnStep, 0.0F);
+					transform.rotation = Quaternion.LookRotation(newDir);
+				}
 
 				yield return null;
 			}
@@ -191,6 +205,37 @@ namespace Assets.Scripts.Enemies
 			ChaseTarget = tempTarget;
 		}
 
+		public void Patrol()
+		{
+			if(isTraveling)
+				return;
+
+			int wayPoint = Random.Range(0,PatrolWayPoints.Length);
+			//PathRequestManager.RequestPath(transform.position, PatrolWayPoints[wayPoint], OnPathFound);
+		}
+
+		private void CalculateRandomPatrolWayPoints()
+		{
+			List<Vector3> wayPoints = new List<Vector3>();
+			wayPoints.Add(StartPosition); // the start position should always be in the waypoint list
+
+			//Generate random number of waypoints between min and max waypoints
+			for (int i = 0; i < Random.Range(MinPatrolWayPoints,MaxPatrolWayPoints) - 1; i++) 
+			{
+				float dstToWayPoint =  Random.Range(MinPatrolWayPointRadius,MaxPatrolWayPointRadius);
+				Vector3 randDirection = Random.insideUnitSphere * dstToWayPoint;
+				randDirection += StartPosition;
+				if(!Physics.Raycast(StartPosition,randDirection,dstToWayPoint, obstacleMask))
+				{
+					Vector3 target = StartPosition + (randDirection * dstToWayPoint);
+					wayPoints.Add(target);
+
+				}
+			}
+
+			PatrolWayPoints = wayPoints.ToArray();
+		}
+
 
         public void OnDrawGizmos()
         {
@@ -212,6 +257,22 @@ namespace Assets.Scripts.Enemies
 
                 }
             }
+
+			if (PatrolWayPoints != null)
+			{
+				for (int i = 0; i < PatrolWayPoints.Length; i++) 
+				{
+					Gizmos.color = Color.red;
+					Gizmos.DrawCube(PatrolWayPoints[i], Vector3.one);
+					if(i > 0)
+						Gizmos.DrawLine(PatrolWayPoints[i], PatrolWayPoints[i-1]);
+					if(i==PatrolWayPoints.Length)
+						Gizmos.DrawLine(PatrolWayPoints[i], PatrolWayPoints[1]);
+					
+				}
+			
+			}
+
         }
 
 
