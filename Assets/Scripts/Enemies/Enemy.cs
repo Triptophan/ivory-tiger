@@ -8,7 +8,7 @@ using System.Collections;
 
 namespace Assets.Scripts.Enemies
 {
-    [RequireComponent(typeof(NavMeshAgent))]
+    //[RequireComponent(typeof(NavMeshAgent))]
     [RequireComponent(typeof(Scripts.StateMachine.StateMachine))]
     public class Enemy : MonoBehaviour
     {
@@ -211,7 +211,7 @@ namespace Assets.Scripts.Enemies
 				return;
 
 			int wayPoint = Random.Range(0,PatrolWayPoints.Length);
-			//PathRequestManager.RequestPath(transform.position, PatrolWayPoints[wayPoint], OnPathFound);
+			PathRequestManager.RequestPath(transform.position, PatrolWayPoints[wayPoint], OnPathFound);
 		}
 
 		private void CalculateRandomPatrolWayPoints()
@@ -224,11 +224,14 @@ namespace Assets.Scripts.Enemies
 			{
 				float dstToWayPoint =  Random.Range(MinPatrolWayPointRadius,MaxPatrolWayPointRadius);
 				Vector3 randDirection = Random.insideUnitSphere * dstToWayPoint;
+                
 				randDirection += StartPosition;
-				if(!Physics.Raycast(StartPosition,randDirection,dstToWayPoint, obstacleMask))
+                randDirection.y = StartPosition.y;
+                if (!Physics.Raycast(StartPosition,randDirection,dstToWayPoint, obstacleMask))
 				{
 					Vector3 target = StartPosition + (randDirection * dstToWayPoint);
-					wayPoints.Add(target);
+
+					wayPoints.Add(randDirection);
 
 				}
 			}
