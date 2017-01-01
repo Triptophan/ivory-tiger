@@ -1,6 +1,6 @@
 ﻿using Assets.Scripts.Combat.Projectiles;
 using UnityEngine;
-using UnityEngine.UI;
+using System;
 
 namespace Assets.Scripts.Player
 {
@@ -23,6 +23,7 @@ namespace Assets.Scripts.Player
         public bool CanFire;
 
         public bool IsDead = false;
+        public Action OnDeath { get; set; }
 
         public void Awake()
         {
@@ -76,6 +77,7 @@ namespace Assets.Scripts.Player
                 _playerHealth.DoDamage(10f);
 
                 IsDead = _playerHealth.CurrentHealth <= 0;
+                if (IsDead) OnDeath();
             }
         }
     }
