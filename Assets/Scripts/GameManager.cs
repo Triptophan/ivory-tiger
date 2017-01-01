@@ -10,9 +10,12 @@ public class GameManager : MonoBehaviour
     public LevelManager LevelManager;
     public GUIManager GuiManager;
 
+    public bool GameIsPaused;
+
     // Use this for initialization
     private void Start()
     {
+        GuiManager.OnExitGame = ExitGame;
         StateMachine.ChangeGlobalState(TitleState.Instance);
     }
 
@@ -22,8 +25,27 @@ public class GameManager : MonoBehaviour
         StateMachine.Update();
     }
 
-    private void StartGame()
+    public void StartGame()
     {
-        StateMachine.ChangeGlobalState(GameStartState.Instance);
+        StateMachine.ChangeGlobalState(GameSetupState.Instance);
+    }
+
+    public void ResumeGame()
+    {
+        StateMachine.ChangeGlobalState(GamePlayingState.Instance);
+    }
+
+    public void RestartGame()
+    {
+        StateMachine.ChangeGlobalState(GameRestartState.Instance);
+    }
+
+    public void ExitGame()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+         Application.Quit();
+#endif
     }
 }

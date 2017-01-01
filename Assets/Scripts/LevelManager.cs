@@ -12,7 +12,6 @@ namespace Assets.Scripts
     {
         private List<Room> _rooms;
         private GameObject _playerObject;
-        private CombatController _playerCombatController;
 
         public MachineOfStates StateMachine;
         public MapGenerator MapGenerator;
@@ -21,9 +20,13 @@ namespace Assets.Scripts
 
         public GameObject PlayerPrefab;
 
+        public CombatController PlayerCombatController;
+
         public int EnemyScale = 2;
 
         public bool MapDebugMode = false;
+
+        public bool GameReady = false;
 
         public void RestartNewLevel()
         {
@@ -38,14 +41,18 @@ namespace Assets.Scripts
 
         private void Update()
         {
-            //if (!MapDebugMode && (CanPlayerProceedLevels() || Input.GetKeyUp(KeyCode.F12)))
-            //{
-            //    RestartNewLevel();
-            //}
+#if UNITY_EDITOR
+            if (MapDebugMode && Input.GetKeyUp(KeyCode.F12))
+            {
+                RestartNewLevel();
+            }
+#endif
         }
 
         public void SetupLevel()
         {
+            GameReady = false;
+
             while (_rooms == null || _rooms.Count < 2)
             {
                 MapGenerator.GenerateMap();
@@ -59,6 +66,8 @@ namespace Assets.Scripts
             SetPlayer();
 
             EnemySpawner.Spawn(_rooms, MapGenerator.SquareSize, EnemyScale, MapGenerator.PlayerStartingY);
+
+            GameReady = true;
         }
 
         private void SetPlayer()
@@ -72,7 +81,7 @@ namespace Assets.Scripts
             {
                 PlayerPrefab.layer = LayerMask.NameToLayer("Players");
                 _playerObject = (GameObject)Instantiate(PlayerPrefab, playerPosition, Quaternion.identity);
-                GUIManager.PlayerCombatController = _playerObject.GetComponent<CombatController>();
+                PlayerCombatController = _playerObject.GetComponent<CombatController>();
                 return;
             }
 
