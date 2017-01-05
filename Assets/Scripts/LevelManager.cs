@@ -20,6 +20,8 @@ namespace Assets.Scripts
 
         public GameObject PlayerPrefab;
 
+        public GameObject LevelExit;
+
         public CombatController PlayerCombatController;
 
         public int EnemyScale = 2;
@@ -68,6 +70,8 @@ namespace Assets.Scripts
             EnemySpawner.Spawn(_rooms, MapGenerator.SquareSize, EnemyScale, MapGenerator.PlayerStartingY);
 
             GameReady = true;
+
+            PlaceLevelExit();
         }
 
         private void SetPlayer()
@@ -93,6 +97,19 @@ namespace Assets.Scripts
         private bool CanPlayerProceedLevels()
         {
             return EnemySpawner.DeadEnemyPool.Count == EnemySpawner.EnemyPool.Count;
+        }
+
+        private void PlaceLevelExit()
+        {
+            var roomIndex = Random.Range(1, _rooms.Count - 1);
+
+            var room = _rooms[roomIndex];
+
+            var tileIndex = Random.Range(0, room.Tiles.Count);
+
+            var tile = room.Tiles[tileIndex];
+
+            LevelExit.transform.position = new Vector3(tile.X, LevelExit.transform.position.y, tile.Y);
         }
     }
 }

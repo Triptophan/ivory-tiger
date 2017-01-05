@@ -21,7 +21,6 @@ public class MeshGenerator : MonoBehaviour
 
     private int _wallHeight;
     private int _squareSize;
-    private int _roomCount;
 
     private Dictionary<int, List<Triangle>> _triangleDictionary = new Dictionary<int, List<Triangle>>();
     private HashSet<int> _checkedVertices = new HashSet<int>();
@@ -29,7 +28,6 @@ public class MeshGenerator : MonoBehaviour
 
     public void GenerateMesh(TileType[,] map, List<Room> rooms, int wallHeight, int squareSize)
     {
-        _roomCount = rooms.Count;
         _wallHeight = wallHeight;
         _squareSize = squareSize;
         _floorTransform = FloorObject.transform;
