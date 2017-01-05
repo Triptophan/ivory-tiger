@@ -162,7 +162,15 @@ public class MeshGenerator : MonoBehaviour
             wallTriangles.Add(startIndex + 1);
             wallTriangles.Add(startIndex + 3);
 
-            MeshGeneratorHelper.AddUVs(uvs);
+            AddUVs(uvs);
         }
+    }
+
+    private void AddUVs(List<Vector2> uvs)
+    {
+        uvs.Add(new Vector2(0, 1));
+        uvs.Add(new Vector2(1, 1));
+        uvs.Add(new Vector2(0, 0));
+        uvs.Add(new Vector2(1, 0));
     }
 }

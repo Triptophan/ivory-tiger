@@ -50,8 +50,8 @@ namespace Assets.Scripts.MapGeneration.Generators
         {
             uvs.Add(new Vector2(0, 1));
             uvs.Add(new Vector2(1, 1));
-            uvs.Add(new Vector2(0, 0));
             uvs.Add(new Vector2(1, 0));
+            uvs.Add(new Vector2(0, 0));
         }
     }
 }
