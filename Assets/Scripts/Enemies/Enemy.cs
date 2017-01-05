@@ -18,7 +18,7 @@ namespace Assets.Scripts.Enemies
         [HideInInspector]
         public LevelManager LevelManager;
         private GameObject _gameObject;
-
+        private bool travelPathRequested = false;
 
         //Atack Properties
         [HideInInspector]
@@ -88,8 +88,7 @@ namespace Assets.Scripts.Enemies
             _gameObject = gameObject;
             _gameObject.tag = "Enemy";
             _gameObject.layer = LayerMask.NameToLayer("Enemies");
-            StartPosition = transform.position;
-			CalculateRandomPatrolWayPoints();
+
             //Instantiate the state machine
             stateMachine = GetComponent<StateMachine.StateMachine>();
             
@@ -98,6 +97,10 @@ namespace Assets.Scripts.Enemies
             stateMachine.ChangeState(LookState.Instance, null);
         }
 
+        public void OnEnable()
+        {
+
+        }
 
 		public void Chase()
 		{
@@ -123,6 +126,7 @@ namespace Assets.Scripts.Enemies
 					if(TargetIndex >= Path.Length)
 					{
 						isTraveling = false;
+                        travelPathRequested = false;
 						yield break;
 					}
 					else
@@ -164,7 +168,7 @@ namespace Assets.Scripts.Enemies
 
         public void OnPathFound(Vector3[] newPath, bool pathSuccessful)
         {
-			if (pathSuccessful)
+			if (pathSuccessful && newPath != null && newPath.Length > 0)
 			{
 				Path = newPath;
 				StopCoroutine("FollowPath");
@@ -172,8 +176,10 @@ namespace Assets.Scripts.Enemies
 			}
             else
             {
-				Path = null;
-				StopCoroutine("FollowPath");
+                Path = null;
+                isTraveling = false;
+                travelPathRequested = false;
+                StopCoroutine("FollowPath");
             }
         }
 
@@ -207,33 +213,46 @@ namespace Assets.Scripts.Enemies
 
 		public void Patrol()
 		{
-			if(isTraveling)
+			if(isTraveling || travelPathRequested)
 				return;
 
-			int wayPoint = Random.Range(0,PatrolWayPoints.Length);
+			int wayPoint = Random.Range(1,PatrolWayPoints.Length);
 			PathRequestManager.RequestPath(transform.position, PatrolWayPoints[wayPoint], OnPathFound);
+            travelPathRequested = true;
+            
 		}
 
-		private void CalculateRandomPatrolWayPoints()
+		public  void CalculateRandomPatrolWayPoints()
 		{
-			List<Vector3> wayPoints = new List<Vector3>();
+            StartPosition = transform.position;
+            List<Vector3> wayPoints = new List<Vector3>();
 			wayPoints.Add(StartPosition); // the start position should always be in the waypoint list
 
 			//Generate random number of waypoints between min and max waypoints
 			for (int i = 0; i < Random.Range(MinPatrolWayPoints,MaxPatrolWayPoints) - 1; i++) 
 			{
-				float dstToWayPoint =  Random.Range(MinPatrolWayPointRadius,MaxPatrolWayPointRadius);
-				Vector3 randDirection = Random.insideUnitSphere * dstToWayPoint;
-                
-				randDirection += StartPosition;
-                randDirection.y = StartPosition.y;
-                if (!Physics.Raycast(StartPosition,randDirection,dstToWayPoint, obstacleMask))
-				{
-					Vector3 target = StartPosition + (randDirection * dstToWayPoint);
+                int retryCount = 0;
+                while (retryCount <= 3)
+                {
+                    float dstToWayPoint = Random.Range(MinPatrolWayPointRadius, MaxPatrolWayPointRadius);
+                    Vector3 randUnitDirection = Random.insideUnitSphere ;
+                    Vector3 randDirection = randUnitDirection * dstToWayPoint;
+                    randDirection += StartPosition;
+                    randDirection.y = StartPosition.y;
 
-					wayPoints.Add(randDirection);
+                    float dstToTarget = Vector3.Distance(StartPosition, randDirection);
+                    var shift = 1 << LayerMask.NameToLayer("Obstacles");
 
-				}
+                    RaycastHit hit;
+                    if (!Physics.Raycast(StartPosition, randUnitDirection, out hit, dstToTarget))
+                    {
+                        //Vector3 target = randDirection;
+
+                        wayPoints.Add(randDirection);
+                        break;
+                    }
+                    retryCount++;
+                }
 			}
 
 			PatrolWayPoints = wayPoints.ToArray();
@@ -261,20 +280,24 @@ namespace Assets.Scripts.Enemies
                 }
             }
 
-			if (PatrolWayPoints != null)
-			{
-				for (int i = 0; i < PatrolWayPoints.Length; i++) 
-				{
-					Gizmos.color = Color.red;
-					Gizmos.DrawCube(PatrolWayPoints[i], Vector3.one);
-					if(i > 0)
-						Gizmos.DrawLine(PatrolWayPoints[i], PatrolWayPoints[i-1]);
-					if(i==PatrolWayPoints.Length)
-						Gizmos.DrawLine(PatrolWayPoints[i], PatrolWayPoints[1]);
-					
-				}
-			
-			}
+            if (PatrolWayPoints != null)
+            {
+                for (int i = 0; i < PatrolWayPoints.Length; i++)
+                {
+                    if (i == 0)
+                        Gizmos.color = Color.red;
+                    else
+                        Gizmos.color = Color.green;
+
+                    Gizmos.DrawSphere(PatrolWayPoints[i], .5f);
+                    if (i > 0)
+                        Gizmos.DrawLine(PatrolWayPoints[i], PatrolWayPoints[i - 1]);
+                    if (i == PatrolWayPoints.Length)
+                        Gizmos.DrawLine(PatrolWayPoints[i], PatrolWayPoints[1]);
+
+                }
+
+            }
 
         }
 

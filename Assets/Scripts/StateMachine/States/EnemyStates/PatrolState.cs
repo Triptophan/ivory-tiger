@@ -22,8 +22,9 @@ namespace Assets.Scripts.StateMachine.States.EnemyStates
 		public override void Enter(GameObject entity, params GameObject[] args) 
 		{ 
 			var enemy = entity.GetComponent<Enemy>();
-			
-		}
+            enemy.isPatrolling = true;
+
+        }
 
 
 		public override void Execute(GameObject entity, params GameObject[] args)
@@ -32,12 +33,12 @@ namespace Assets.Scripts.StateMachine.States.EnemyStates
 
 
 
-			if(enemy.isTraveling || enemy.isPatrolling) //We are traveling along the calculated path
+			if(enemy.isTraveling) //We are traveling along the calculated path
 				return;
 
             
 			enemy.Patrol();
-            enemy.isPatrolling = true;
+
 
         }
 

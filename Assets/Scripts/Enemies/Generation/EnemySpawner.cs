@@ -37,6 +37,7 @@ namespace Assets.Scripts.Enemies.Generation
                 candidate.transform.position = new Vector3(randomTileX * roomScale, playerStartingY, randomTileY * roomScale);
 
                 candidate.Active = true;
+                //candidate.CalculateRandomPatrolWayPoints();
             }
         }
 
