@@ -37,7 +37,7 @@ namespace Assets.Scripts.MapGeneration.Generators
                 if (square == null || square.TileType != TileType.Room) continue;
                 MeshGeneratorHelper.ResetSquareNodes(square);
                 GenerateSubMeshes(square, vertices);
-                MeshGeneratorHelper.AddUVs(uvs);
+                AddUVs(uvs);
             }
 
             mesh.vertices = vertices.ToArray();
@@ -56,6 +56,14 @@ namespace Assets.Scripts.MapGeneration.Generators
             _meshFilter.mesh = mesh;
 
             _meshCollider.sharedMesh = mesh;
+        }
+
+        private void AddUVs(List<Vector2> uvs)
+        {
+            uvs.Add(new Vector2(0, 1));
+            uvs.Add(new Vector2(1, 1));
+            uvs.Add(new Vector2(1, 0));
+            uvs.Add(new Vector2(0, 0));
         }
 
         private void GenerateSubMeshes(Square square, List<Vector3> vertices)
