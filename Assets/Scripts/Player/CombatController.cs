@@ -1,26 +1,47 @@
 ﻿using Assets.Scripts.Combat.Projectiles;
 using UnityEngine;
+using System;
 
 namespace Assets.Scripts.Player
 {
     public class CombatController : MonoBehaviour
     {
+        private GameObject _playerObject;
         private Transform _viewTransform;
+
+        private PlayerHealth _playerHealth;
 
         public GameObject Projectile;
 
         public Camera PlayerView;
 
+        public float PlayerHealthIndicatorFillAmount
+        {
+            get { return _playerHealth.HealthIndicatorFillAmount; }
+        }
+
         public bool CanFire;
 
-        public void Start()
+        public bool IsDead = false;
+        public Action OnDeath { get; set; }
+
+        public void Awake()
         {
+            _playerObject = gameObject;
             if (PlayerView != null) _viewTransform = PlayerView.transform;
+
+            _playerHealth = _playerObject.GetComponent<PlayerHealth>();
         }
 
         public void Update()
         {
             GetInput();
+        }
+
+        public void ResetPlayer()
+        {
+            _playerHealth.ResetHealth();
+            IsDead = false;
         }
 
         private void GetInput()
@@ -37,6 +58,27 @@ namespace Assets.Scripts.Player
         private Vector3 GetCameraCenter()
         {
             return new Vector3(Screen.width / 2, Screen.height / 2, PlayerView.nearClipPlane);
+        }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            CheckEnemyCollision(collision.gameObject);
+        }
+
+        private void OnCollisionStay(Collision collision)
+        {
+            CheckEnemyCollision(collision.gameObject);
+        }
+
+        private void CheckEnemyCollision(GameObject collidedObject)
+        {
+            if (collidedObject.tag == "Enemy")
+            {
+                _playerHealth.DoDamage(10f);
+
+                IsDead = _playerHealth.CurrentHealth <= 0;
+                if (IsDead) OnDeath();
+            }
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts.MapGeneration.Enumerations;
 using UnityEngine;
+using System.Collections.Generic;
 
 namespace Assets.Scripts.MapGeneration.Types
 {
@@ -7,7 +8,7 @@ namespace Assets.Scripts.MapGeneration.Types
     {
         public Square[,] Squares;
 
-        public SquareGrid(TileType[,] map, float squareSize)
+        public SquareGrid(TileType[,] map, List<Room> rooms, float squareSize)
         {
             int nodeCountX = map.GetLength(0) + 1;
             int nodeCountY = map.GetLength(1) + 1;
@@ -16,6 +17,15 @@ namespace Assets.Scripts.MapGeneration.Types
 
             Node[,] nodes = new Node[nodeCountX, nodeCountY];
 
+            GenerateNodes(map, squareSize, mapWidth, mapHeight, nodes);
+
+            GenerateSquares(map, nodeCountX, nodeCountY, nodes, rooms);
+
+            MarkEdges();
+        }
+
+        private static void GenerateNodes(TileType[,] map, float squareSize, float mapWidth, float mapHeight, Node[,] nodes)
+        {
             for (int x = 0; x < map.GetLength(0); x++)
                 for (int y = 0; y < map.GetLength(1); y++)
                 {
@@ -27,7 +37,10 @@ namespace Assets.Scripts.MapGeneration.Types
                             nodes[nx, ny] = new Node(position);
                         }
                 }
+        }
 
+        private void GenerateSquares(TileType[,] map, int nodeCountX, int nodeCountY, Node[,] nodes, List<Room> rooms)
+        {
             Squares = new Square[nodeCountX - 1, nodeCountY - 1];
             for (int x = 0; x < nodeCountX - 1; x++)
                 for (int y = 0; y < nodeCountY - 1; y++)
@@ -42,7 +55,15 @@ namespace Assets.Scripts.MapGeneration.Types
                     Squares[x, y] = new Square(map[x, y], topLeft, topRight, bottomLeft, bottomRight);
                 }
 
-            MarkEdges();
+            var roomIndex = 0;
+            foreach(var room in rooms)
+            {
+                foreach(var tile in room.Tiles)
+                {
+                    Squares[tile.X+1, tile.Y+1].RoomIndex = roomIndex;
+                }
+                roomIndex++;
+            }
         }
 
         private bool IsANotSquare(Node topLeft, Node topRight, Node bottomLeft, Node bottomRight)
