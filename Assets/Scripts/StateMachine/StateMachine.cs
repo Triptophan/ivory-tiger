@@ -23,38 +23,38 @@ namespace Assets.Scripts.StateMachine
             if (_currentState != null) _currentState.Execute(_gameObject);
         }
 
-        public void ChangeState(State newState, params GameObject[] args)
+        public void ChangeState(State newState)
         {
             if (newState == null) return;
 
             _previousState = _currentState;
 
-            if (_currentState != null) _currentState.Exit(_gameObject, args);
+            if (_currentState != null) _currentState.Exit(_gameObject);
 
             _currentState = newState;
-            _currentState.Enter(_gameObject, args);
+            _currentState.Enter(_gameObject);
         }
 
-        public void ChangeGlobalState(State newState, params GameObject[] args)
+        public void ChangeGlobalState(State newState)
         {
             if (newState == null) return;
 
             _previousGlobalState = _currentGlobalState;
 
-            if (_currentGlobalState != null) _currentGlobalState.Exit(_gameObject, args);
+            if (_currentGlobalState != null) _currentGlobalState.Exit(_gameObject);
 
             _currentGlobalState = newState;
-            _currentGlobalState.Enter(_gameObject, args);
+            _currentGlobalState.Enter(_gameObject);
         }
 
-        public void RevertToPreviousState(params GameObject[] args)
+        public void RevertToPreviousState()
         {
-            if (_previousState != null) ChangeState(_previousState, args);
+            if (_previousState != null) ChangeState(_previousState);
         }
 
-        public void RevertToPreviousGlobalState(params GameObject[] args)
+        public void RevertToPreviousGlobalState()
         {
-            if (_previousGlobalState != null) ChangeGlobalState(_previousGlobalState, args);
+            if (_previousGlobalState != null) ChangeGlobalState(_previousGlobalState);
         }
 
         public bool IsInState(State state)

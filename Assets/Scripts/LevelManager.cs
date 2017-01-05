@@ -11,9 +11,7 @@ namespace Assets.Scripts
     public class LevelManager : MonoBehaviour
     {
         private List<Room> _rooms;
-        [HideInInspector]
-        public GameObject PlayerObject;
-        private CombatController _playerCombatController;
+        private GameObject _playerObject;
 
         public MachineOfStates StateMachine;
         public MapGenerator MapGenerator;
@@ -23,9 +21,13 @@ namespace Assets.Scripts
         public GameObject PlayerPrefab;
         public LayerMask WalkableLayer;
 
+        public CombatController PlayerCombatController;
+
         public int EnemyScale = 2;
 
         public bool MapDebugMode = false;
+
+        public bool GameReady = false;
 
         public void RestartNewLevel()
         {
@@ -39,21 +41,20 @@ namespace Assets.Scripts
             PathFinding = GetComponent<Pathfinding>();
         }
 
-        private void Start()
-        {
-            //SetupLevel();
-        }
-
         private void Update()
         {
-            if (!MapDebugMode && (CanPlayerProceedLevels() || Input.GetKeyUp(KeyCode.F12)))
+#if UNITY_EDITOR
+            if (MapDebugMode && Input.GetKeyUp(KeyCode.F12))
             {
                 RestartNewLevel();
             }
+#endif
         }
 
-        private void SetupLevel()
+        public void SetupLevel()
         {
+            GameReady = false;
+
             while (_rooms == null || _rooms.Count < 2)
             {
                 MapGenerator.GenerateMap();
@@ -67,6 +68,8 @@ namespace Assets.Scripts
             SetPlayer();
 
             EnemySpawner.Spawn(_rooms, MapGenerator.SquareSize, EnemyScale, MapGenerator.PlayerStartingY);
+
+            GameReady = true;
         }
 
         private void SetPlayer()
@@ -79,15 +82,14 @@ namespace Assets.Scripts
             if (PlayerObject == null)
             {
                 PlayerPrefab.layer = LayerMask.NameToLayer("Players");
-                PlayerObject = (GameObject)Instantiate(PlayerPrefab, playerPosition, Quaternion.identity);
-                GUIManager.PlayerCombatController = PlayerObject.GetComponent<CombatController>();
+                _playerObject = (GameObject)Instantiate(PlayerPrefab, playerPosition, Quaternion.identity);
+                PlayerCombatController = _playerObject.GetComponent<CombatController>();
                 return;
             }
 
             var playerTransform = PlayerObject.transform;
             playerTransform.position = playerPosition;
             playerTransform.LookAt(mainRoom.Center);
-
         }
 
         private bool CanPlayerProceedLevels()

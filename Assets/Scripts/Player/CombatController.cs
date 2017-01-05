@@ -1,6 +1,6 @@
 ﻿using Assets.Scripts.Combat.Projectiles;
 using UnityEngine;
-using UnityEngine.UI;
+using System;
 
 namespace Assets.Scripts.Player
 {
@@ -15,15 +15,15 @@ namespace Assets.Scripts.Player
 
         public Camera PlayerView;
 
-        public Image PlayerHealthIndicator
+        public float PlayerHealthIndicatorFillAmount
         {
-            get { return _playerHealth.HealthIndicatorImage; }
-            set { if (_playerHealth) _playerHealth.HealthIndicatorImage = value; }
+            get { return _playerHealth.HealthIndicatorFillAmount; }
         }
 
         public bool CanFire;
 
         public bool IsDead = false;
+        public Action OnDeath { get; set; }
 
         public void Awake()
         {
@@ -74,10 +74,10 @@ namespace Assets.Scripts.Player
         {
             if (collidedObject.tag == "Enemy")
             {
-                Debug.Log("Collided with " + collidedObject.name);
                 _playerHealth.DoDamage(10f);
 
                 IsDead = _playerHealth.CurrentHealth <= 0;
+                if (IsDead) OnDeath();
             }
         }
     }

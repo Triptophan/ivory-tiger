@@ -6,10 +6,6 @@ namespace Assets.Scripts.StateMachine.States.MenuStates
     {
         private static TitleState _instance;
 
-        private GameObject _titleMenuObject;
-
-        private LevelManager _levelManager;
-
         public static State Instance
         {
             get
@@ -19,21 +15,22 @@ namespace Assets.Scripts.StateMachine.States.MenuStates
             }
         }
 
-        public override void Enter(GameObject entity, params GameObject[] args)
+        public override void Enter(GameObject entity)
         {
-            if (_titleMenuObject == null) _titleMenuObject = args[0];
-            if (_levelManager == null) _levelManager = _titleMenuObject.GetComponent<LevelManager>();
+            var gameManager = entity.GetComponent<GameManager>();
 
-            _titleMenuObject.SetActive(true);
+            gameManager.GuiManager.TitleMenu.SetActive(true);
         }
 
-        public override void Execute(GameObject entity, params GameObject[] args)
+        public override void Execute(GameObject entity)
         {
         }
 
-        public override void Exit(GameObject entity, params GameObject[] args)
+        public override void Exit(GameObject entity)
         {
-            if (_titleMenuObject != null) _titleMenuObject.SetActive(false);
+            var gameManager = entity.GetComponent<GameManager>();
+
+            gameManager.GuiManager.TitleMenu.SetActive(false);
         }
     }
 }
