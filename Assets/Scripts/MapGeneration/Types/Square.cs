@@ -4,7 +4,7 @@ using System;
 
 namespace Assets.Scripts.MapGeneration.Types
 {
-    [DebuggerDisplay("Type: {TileTypeName}")]
+    [DebuggerDisplay("Type: {TileTypeName}, RoomIndex: {RoomIndex}")]
     public class Square
     {
         public Node TopLeft;
@@ -18,6 +18,8 @@ namespace Assets.Scripts.MapGeneration.Types
         public bool BottomEdgeActive;
 
         public TileType TileType;
+
+        public int RoomIndex = -1;
 
         protected string TileTypeName { get { return Enum.GetName(typeof(TileType), TileType); } }
 

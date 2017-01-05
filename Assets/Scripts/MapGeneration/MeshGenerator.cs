@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.MapGeneration.Enumerations;
+using Assets.Scripts.MapGeneration.Generators;
 using Assets.Scripts.MapGeneration.Types;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,8 +12,6 @@ public class MeshGenerator : MonoBehaviour
     public GameObject FloorObject;
     public GameObject CeilingObject;
 
-    private MeshFilter _floorMesh;
-    private MeshCollider _floorCollider;
     private Transform _floorTransform;
     private MeshFilter _ceilingMesh;
     private MeshCollider _ceilingCollider;
@@ -22,19 +21,19 @@ public class MeshGenerator : MonoBehaviour
 
     private int _wallHeight;
     private int _squareSize;
+    private int _roomCount;
 
     private Dictionary<int, List<Triangle>> _triangleDictionary = new Dictionary<int, List<Triangle>>();
     private HashSet<int> _checkedVertices = new HashSet<int>();
     private List<List<int>> _outlines = new List<List<int>>();
 
-    public void GenerateMesh(TileType[,] map, int wallHeight, int squareSize)
+    public void GenerateMesh(TileType[,] map, List<Room> rooms, int wallHeight, int squareSize)
     {
+        _roomCount = rooms.Count;
         _wallHeight = wallHeight;
         _squareSize = squareSize;
         _floorTransform = FloorObject.transform;
         _floorTransform.position = new Vector3(_floorTransform.position.x, wallHeight * -squareSize, _floorTransform.position.z);
-        _floorMesh = FloorObject.GetComponent<MeshFilter>();
-        _floorCollider = FloorObject.GetComponent<MeshCollider>();
         _ceilingTransform = CeilingObject.transform;
         _ceilingTransform.position = new Vector3(_ceilingTransform.position.x, 0, _ceilingTransform.position.z);
         _ceilingMesh = CeilingObject.GetComponent<MeshFilter>();
@@ -43,7 +42,7 @@ public class MeshGenerator : MonoBehaviour
         _outlines.Clear();
         _checkedVertices.Clear();
 
-        SquareGrid = new SquareGrid(map, squareSize);
+        SquareGrid = new SquareGrid(map, rooms, squareSize);
 
         _vertices = new List<Vector3>();
         _triangles = new List<int>();
@@ -54,7 +53,7 @@ public class MeshGenerator : MonoBehaviour
                 var square = SquareGrid.Squares[x, y];
                 if (square == null || square.TileType != TileType.Wall) continue;
 
-                MeshFromPoints(_vertices, _triangles, square.TopLeft, square.TopRight, square.BottomRight, square.BottomLeft);
+                MeshGeneratorHelper.MeshFromPoints(_vertices, _triangles, square.TopLeft, square.TopRight, square.BottomRight, square.BottomLeft);
             }
 
         Mesh mesh = new Mesh();
@@ -67,33 +66,6 @@ public class MeshGenerator : MonoBehaviour
         CreateWallMesh();
         CreateFloorMesh();
         CreateCeilingMesh();
-    }
-
-    private void MeshFromPoints(List<Vector3> vertices, List<int> triangles, params Node[] points)
-    {
-        AssignVertices(vertices, points);
-
-        CreateTriangle(triangles, points[1], points[3], points[0]);
-        CreateTriangle(triangles, points[1], points[2], points[3]);
-    }
-
-    private void AssignVertices(List<Vector3> vertices, Node[] points)
-    {
-        for (int i = 0; i < points.Length; i++)
-        {
-            if (points[i].VertexIndex == -1)
-            {
-                points[i].VertexIndex = vertices.Count;
-                vertices.Add(points[i].Position);
-            }
-        }
-    }
-
-    private void CreateTriangle(List<int> triangles, Node a, Node b, Node c)
-    {
-        triangles.Add(a.VertexIndex);
-        triangles.Add(b.VertexIndex);
-        triangles.Add(c.VertexIndex);
     }
 
     private void CreateWallMesh()
@@ -121,27 +93,11 @@ public class MeshGenerator : MonoBehaviour
 
     private void CreateFloorMesh()
     {
-        List<Vector3> floorVertices = new List<Vector3>();
-        List<int> floorTriangles = new List<int>();
-        Mesh floorMesh = new Mesh();
-        List<Vector2> uvs = new List<Vector2>();
+        var _floorMesh = FloorObject.GetComponent<MeshFilter>();
+        var _floorCollider = FloorObject.GetComponent<MeshCollider>();
+        var floorMeshGenerator = new FloorMeshGenerator(SquareGrid, _floorMesh, _floorCollider);
 
-        foreach(var square in SquareGrid.Squares)
-        {
-            if (square == null || square.TileType != TileType.Room) continue;
-            ResetSquareNodes(square);
-            MeshFromPoints(floorVertices, floorTriangles, square.TopLeft, square.TopRight, square.BottomRight, square.BottomLeft);
-            AddUVs(uvs);
-        }
-
-        floorMesh.vertices = floorVertices.ToArray();
-        floorMesh.triangles = floorTriangles.ToArray();
-        floorMesh.RecalculateNormals();
-
-        floorMesh.uv = uvs.ToArray();
-        _floorMesh.mesh = floorMesh;
-
-        _floorCollider.sharedMesh = floorMesh;
+        floorMeshGenerator.Generate();
     }
 
     private void CreateCeilingMesh()
@@ -154,9 +110,9 @@ public class MeshGenerator : MonoBehaviour
         foreach (var square in SquareGrid.Squares)
         {
             if (square == null || square.TileType != TileType.Room) continue;
-            ResetSquareNodes(square);
-            MeshFromPoints(ceilingVertices, ceilingTriangles, square.TopRight, square.TopLeft, square.BottomLeft, square.BottomRight);
-            AddUVs(uvs);
+            MeshGeneratorHelper.ResetSquareNodes(square);
+            MeshGeneratorHelper.MeshFromPoints(ceilingVertices, ceilingTriangles, square.TopRight, square.TopLeft, square.BottomLeft, square.BottomRight);
+            MeshGeneratorHelper.AddUVs(uvs);
         }
 
         ceilingMesh.vertices = ceilingVertices.ToArray();
@@ -208,28 +164,7 @@ public class MeshGenerator : MonoBehaviour
             wallTriangles.Add(startIndex + 1);
             wallTriangles.Add(startIndex + 3);
 
-            AddUVs(uvs);
+            MeshGeneratorHelper.AddUVs(uvs);
         }
-    }
-
-    private void AddUVs(List<Vector2> uvs)
-    {
-        uvs.Add(new Vector2(0, 1));
-        uvs.Add(new Vector2(1, 1));
-        uvs.Add(new Vector2(0, 0));
-        uvs.Add(new Vector2(1, 0));
-    }
-
-    private void ResetSquareNodes(Square square)
-    {
-        ResetNodeIndex(square.TopLeft);
-        ResetNodeIndex(square.TopRight);
-        ResetNodeIndex(square.BottomRight);
-        ResetNodeIndex(square.BottomLeft);
-    }
-
-    private void ResetNodeIndex(Node node)
-    {
-        node.VertexIndex = -1;
     }
 }

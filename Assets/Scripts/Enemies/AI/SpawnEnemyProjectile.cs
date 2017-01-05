@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
-using System.Collections;
+
 namespace Assets.Scripts.Enemies
 {
     public class SpawnEnemyProjectile : MonoBehaviour
     {
-
         public GameObject projectile;
         public float delay = 1.0f;
 
@@ -12,22 +11,22 @@ namespace Assets.Scripts.Enemies
         public Enemy enemyBehaviorScript;
 
         // Use this for initialization
-        void Start()
+        private void Start()
         {
             enemyParent = gameObject.transform.parent.gameObject;
             enemyBehaviorScript = enemyParent.GetComponentInChildren<Enemy>();
         }
 
         // Update is called once per frame
-        void Update()
+        private void Update()
         {
             delay = Mathf.Clamp01(delay);
-            if (delay> 0.0f)
+            if (delay > 0.0f)
             {
                 delay -= Time.deltaTime;
             }
 
-            if(delay < 0.01f)
+            if (delay < 0.01f)
             {
                 delay = 1.0f;
             }
@@ -35,6 +34,7 @@ namespace Assets.Scripts.Enemies
             if (enemyBehaviorScript.CanAttack && delay == 1.0f)
             {
                 var projectileObject = (GameObject)Instantiate(projectile, transform.position, transform.rotation);
+                projectileObject.tag = "Enemy";
                 var projectileBehavior = projectileObject.GetComponent<ProjectileMovement>();
                 projectileBehavior.OwnerTransform = enemyParent.transform;
             }
