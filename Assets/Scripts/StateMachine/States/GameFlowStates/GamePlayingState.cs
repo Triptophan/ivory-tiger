@@ -29,6 +29,8 @@ namespace Assets.Scripts.StateMachine.States.GameFlowStates
             gameManager.GuiManager.CrosshairImageObject.SetActive(true);
             gameManager.GuiManager.InGameMenuObject.SetActive(false);
 
+            gameManager.LevelManager.PlayerCombatController.CanFire = true; 
+
 #if UNITY_EDITOR
             _menuKeyCode = KeyCode.BackQuote;
 #else
@@ -60,6 +62,8 @@ namespace Assets.Scripts.StateMachine.States.GameFlowStates
             gameManager.GuiManager.CrosshairImageObject.SetActive(true);
 
             //Deactivate player & enemies
+
+            gameManager.LevelManager.PlayerCombatController.CanFire = false;
 
             _timer = 0f;
             _canPause = false;

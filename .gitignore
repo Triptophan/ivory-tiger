@@ -16,6 +16,7 @@ ExportedObj/
 *.pidb
 *.booproj
 *.svd
+*.csproj
 
 
 # Unity3D generated meta files
@@ -28,3 +29,4 @@ sysinfo.txt
 *.apk
 *.unitypackage
 /Assets/Scenes/Dean's Dungeon Generation
+*.meta

@@ -107,8 +107,8 @@ namespace Assets.Scripts
 
             var tileIndex = Random.Range(0, room.Tiles.Count);
 
-            var tile = room.Tiles[tileIndex];
-
+            var tile = room.WorldTiles[tileIndex];
+            
             LevelExit.transform.position = new Vector3(tile.X, LevelExit.transform.position.y, tile.Y);
         }
     }
