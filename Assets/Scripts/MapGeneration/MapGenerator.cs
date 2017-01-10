@@ -44,7 +44,10 @@ public class MapGenerator : MonoBehaviour
 
         ProcessMap();
 
-        //PrintMap(_map, "Bordered Map");
+#if UNITY_EDITOR
+        PrintMap(_map, "Bordered Map");
+#endif
+
         MeshGenerator meshGenerator = GetComponent<MeshGenerator>();
         meshGenerator.GenerateMesh(_map, _rooms, WallHeight, SquareSize);
         PlayerStartingY = WallHeight * -SquareSize + 1;
@@ -86,14 +89,14 @@ public class MapGenerator : MonoBehaviour
             roomLocations.Add(new RoomLocation(x, y, sizeX, sizeY));
         }
 
-        //PrintMap(_map, "Post Room Location: Room Count = " + roomCount);
+        PrintMap(_map, "Post Room Location: Room Count = " + roomCount);
 
         foreach (var location in roomLocations)
         {
             FillRoomSize(location);
         }
 
-        //PrintMap(_map, "Post Room Fill");
+        PrintMap(_map, "Post Room Fill");
     }
 
     private void FillRoomSize(RoomLocation location)

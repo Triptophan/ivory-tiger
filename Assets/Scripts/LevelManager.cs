@@ -3,8 +3,8 @@ using Assets.Scripts.MapGeneration.Types;
 using Assets.Scripts.Player;
 using System.Collections.Generic;
 using UnityEditor;
-using MachineOfStates = Assets.Scripts.StateMachine.StateMachine;
 using UnityEngine;
+using MachineOfStates = Assets.Scripts.StateMachine.StateMachine;
 
 namespace Assets.Scripts
 {
@@ -28,6 +28,7 @@ namespace Assets.Scripts
 
         public bool MapDebugMode = false;
 
+        [HideInInspector]
         public bool GameReady = false;
 
         public void RestartNewLevel()
@@ -79,7 +80,7 @@ namespace Assets.Scripts
             var mainRoom = _rooms[0];
             var randomTileIndex = Random.Range(0, mainRoom.Tiles.Count);
             var roomPosition = mainRoom.Tiles[randomTileIndex];
-            var playerPosition = new Vector3(roomPosition.X * MapGenerator.SquareSize, MapGenerator.PlayerStartingY - .5f, roomPosition.Y * MapGenerator.SquareSize);
+            var playerPosition = new Vector3((roomPosition.X + .5f) * MapGenerator.SquareSize, MapGenerator.PlayerStartingY - .5f, (roomPosition.Y + .5f) * MapGenerator.SquareSize);
 
             if (_playerObject == null)
             {
@@ -108,7 +109,7 @@ namespace Assets.Scripts
             var tileIndex = Random.Range(0, room.Tiles.Count);
 
             var tile = room.WorldTiles[tileIndex];
-            
+
             LevelExit.transform.position = new Vector3(tile.X, LevelExit.transform.position.y, tile.Y);
         }
     }

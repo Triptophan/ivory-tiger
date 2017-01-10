@@ -1,6 +1,6 @@
 ﻿using Assets.Scripts.MapGeneration.Enumerations;
-using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Assets.Scripts.MapGeneration.Types
 {
@@ -56,11 +56,11 @@ namespace Assets.Scripts.MapGeneration.Types
                 }
 
             var roomIndex = 0;
-            foreach(var room in rooms)
+            foreach (var room in rooms)
             {
-                foreach(var tile in room.Tiles)
+                foreach (var tile in room.Tiles)
                 {
-                    Squares[tile.X+1, tile.Y+1].RoomIndex = roomIndex;
+                    Squares[tile.X + 1, tile.Y + 1].RoomIndex = roomIndex;
                 }
                 roomIndex++;
             }
