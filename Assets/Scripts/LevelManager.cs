@@ -111,9 +111,11 @@ namespace Assets.Scripts
 
             var tileIndex = Random.Range(0, room.Tiles.Count);
 
-            var tile = room.WorldTiles[tileIndex];
+            var tile = room.Tiles[tileIndex];
 
-            LevelExit.transform.position = new Vector3(tile.X, LevelExit.transform.position.y, tile.Y);
+            LevelExit.transform.position = new Vector3(Scale(tile.X) + Scale(.5f), 
+                                                       LevelExit.transform.position.y,
+                                                       Scale(tile.Y) + Scale(.5f));
         }
 
         private float Scale(float value)

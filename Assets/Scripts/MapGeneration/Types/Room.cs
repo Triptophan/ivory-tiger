@@ -12,7 +12,6 @@ namespace Assets.Scripts.MapGeneration.Types
     {
         public List<Tile> Tiles;
         public List<Tile> EdgeTiles;
-        public List<Tile> WorldTiles;
 
         public List<Room> ConnectedRooms;
 
@@ -39,14 +38,12 @@ namespace Assets.Scripts.MapGeneration.Types
             RoomSize = Tiles.Count;
             ConnectedRooms = new List<Room>();
             EdgeTiles = new List<Tile>();
-            WorldTiles = new List<Tile>();
 
             ParseDimensionInfo();
 
             foreach (var tile in Tiles)
             {
                 MapEdgeTiles(tile, map);
-                MapWorldTile(tile);
             }
         }
 
@@ -108,12 +105,6 @@ namespace Assets.Scripts.MapGeneration.Types
                         EdgeTiles.Add(tile);
                     }
                 }
-        }
-
-        private void MapWorldTile(Tile tile)
-        {
-            var multiplier = TileSize / 2;
-            WorldTiles.Add(new Tile(tile.X * multiplier, tile.Y * multiplier));
         }
 
         private bool IsNonCheckedNonCurrentInMapTile(TileType[,] map, Tile tile, int x, int y)
