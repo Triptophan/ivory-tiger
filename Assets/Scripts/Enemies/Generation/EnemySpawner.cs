@@ -30,9 +30,9 @@ namespace Assets.Scripts.Enemies.Generation
                 var randomRoomIndex = Random.Range(1, rooms.Count - 1);
                 var room = rooms[randomRoomIndex];
 
-                var randomTileX = (int)Random.Range(room.MinimumBounds.x + 1, room.MaximumBounds.x - 1);
-                var randomTileY = (int)Random.Range(room.MinimumBounds.y + 1, room.MaximumBounds.y - 1);
-                candidate.transform.position = new Vector3(randomTileX * roomScale, playerStartingY, randomTileY * roomScale);
+                var randomTileIndex = Random.Range(0, room.Tiles.Count - 1);
+                var randomTile = room.Tiles[randomTileIndex];
+                candidate.transform.position = new Vector3(randomTile.X * roomScale, playerStartingY, randomTile.Y * roomScale);
 
                 candidate.Active = true;
             }
