@@ -58,11 +58,12 @@ namespace Assets.Scripts
                 MapGenerator.GenerateMap();
 
                 _rooms = MapGenerator.GetRooms();
-
-                if (MapDebugMode) return;
-
-                NavMeshBuilder.BuildNavMesh();
             }
+
+            if (MapDebugMode) return;
+
+            NavMeshBuilder.BuildNavMesh();
+            
             SetPlayer();
 
             EnemySpawner.Spawn(_rooms, MapGenerator.SquareSize, EnemyScale, MapGenerator.PlayerStartingY);
@@ -75,7 +76,9 @@ namespace Assets.Scripts
             var mainRoom = _rooms[0];
             var randomTileIndex = Random.Range(0, mainRoom.Tiles.Count);
             var roomPosition = mainRoom.Tiles[randomTileIndex];
-            var playerPosition = new Vector3(roomPosition.X * MapGenerator.SquareSize, MapGenerator.PlayerStartingY - .5f, roomPosition.Y * MapGenerator.SquareSize);
+            var playerPosition = new Vector3(Scale(roomPosition.X) + Scale(.5f),
+                                             MapGenerator.PlayerStartingY - .5f,
+                                             Scale(roomPosition.Y) + Scale(.5f));
 
             if (_playerObject == null)
             {
@@ -93,6 +96,16 @@ namespace Assets.Scripts
         private bool CanPlayerProceedLevels()
         {
             return EnemySpawner.DeadEnemyPool.Count == EnemySpawner.EnemyPool.Count;
+        }
+
+        private float Scale(float value)
+        {
+            return MapGenerator.SquareSize * value;
+        }
+
+        private float Scale(int value)
+        {
+            return MapGenerator.SquareSize * value;
         }
     }
 }
