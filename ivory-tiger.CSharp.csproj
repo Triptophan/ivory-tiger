@@ -87,6 +87,7 @@
     <Compile Include="Assets\Scripts\Enemies\Enemy.cs" />
     <Compile Include="Assets\Scripts\Enemies\Generation\EnemyFactory.cs" />
     <Compile Include="Assets\Scripts\Enemies\Generation\EnemySpawner.cs" />
+    <Compile Include="Assets\Scripts\Environment\LevelExit.cs" />
     <Compile Include="Assets\Scripts\GUI\GUIManager.cs" />
     <Compile Include="Assets\Scripts\GUI\MouseManager.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />

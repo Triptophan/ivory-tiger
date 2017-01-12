@@ -1,6 +1,6 @@
 ﻿using Assets.Scripts.Combat.Projectiles;
-using UnityEngine;
 using System;
+using UnityEngine;
 
 namespace Assets.Scripts.Player
 {
@@ -20,9 +20,11 @@ namespace Assets.Scripts.Player
             get { return _playerHealth.HealthIndicatorFillAmount; }
         }
 
+        [HideInInspector]
         public bool CanFire;
 
-        public bool IsDead = false;
+        [HideInInspector]
+        public bool IsDead;
         public Action OnDeath { get; set; }
 
         public void Awake()

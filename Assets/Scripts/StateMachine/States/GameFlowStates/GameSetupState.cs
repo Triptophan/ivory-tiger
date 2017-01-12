@@ -6,9 +6,6 @@ namespace Assets.Scripts.StateMachine.States.GameFlowStates
     {
         private KeyCode _menuKeyCode;
 
-        private float _timer;
-        private bool _canPause = false;
-
         private static GameSetupState _instance;
 
         public static State Instance

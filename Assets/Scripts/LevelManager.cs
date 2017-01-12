@@ -3,8 +3,8 @@ using Assets.Scripts.MapGeneration.Types;
 using Assets.Scripts.Player;
 using System.Collections.Generic;
 using UnityEditor;
-using MachineOfStates = Assets.Scripts.StateMachine.StateMachine;
 using UnityEngine;
+using MachineOfStates = Assets.Scripts.StateMachine.StateMachine;
 
 namespace Assets.Scripts
 {
@@ -20,12 +20,15 @@ namespace Assets.Scripts
 
         public GameObject PlayerPrefab;
 
+        public GameObject LevelExit;
+
         public CombatController PlayerCombatController;
 
         public int EnemyScale = 2;
 
         public bool MapDebugMode = false;
 
+        [HideInInspector]
         public bool GameReady = false;
 
         public void RestartNewLevel()
@@ -69,6 +72,8 @@ namespace Assets.Scripts
             EnemySpawner.Spawn(_rooms, MapGenerator.SquareSize, EnemyScale, MapGenerator.PlayerStartingY);
 
             GameReady = true;
+
+            PlaceLevelExit();
         }
 
         private void SetPlayer()
@@ -96,6 +101,21 @@ namespace Assets.Scripts
         private bool CanPlayerProceedLevels()
         {
             return EnemySpawner.DeadEnemyPool.Count == EnemySpawner.EnemyPool.Count;
+        }
+
+        private void PlaceLevelExit()
+        {
+            var roomIndex = Random.Range(1, _rooms.Count - 1);
+
+            var room = _rooms[roomIndex];
+
+            var tileIndex = Random.Range(0, room.Tiles.Count);
+
+            var tile = room.Tiles[tileIndex];
+
+            LevelExit.transform.position = new Vector3(Scale(tile.X) + Scale(.5f), 
+                                                       LevelExit.transform.position.y,
+                                                       Scale(tile.Y) + Scale(.5f));
         }
 
         private float Scale(float value)

@@ -15,13 +15,11 @@ public class MeshGenerator : MonoBehaviour
     private Transform _floorTransform;
     private MeshFilter _ceilingMesh;
     private MeshCollider _ceilingCollider;
-    private Transform _ceilingTransform;
     private List<Vector3> _vertices;
     private List<int> _triangles;
 
     private int _wallHeight;
     private int _squareSize;
-    private int _roomCount;
 
     private Dictionary<int, List<Triangle>> _triangleDictionary = new Dictionary<int, List<Triangle>>();
     private HashSet<int> _checkedVertices = new HashSet<int>();
@@ -29,13 +27,10 @@ public class MeshGenerator : MonoBehaviour
 
     public void GenerateMesh(TileType[,] map, List<Room> rooms, int wallHeight, int squareSize)
     {
-        _roomCount = rooms.Count;
         _wallHeight = wallHeight;
         _squareSize = squareSize;
         _floorTransform = FloorObject.transform;
         _floorTransform.position = new Vector3(_floorTransform.position.x, wallHeight * -squareSize, _floorTransform.position.z);
-        _ceilingTransform = CeilingObject.transform;
-        _ceilingTransform.position = new Vector3(_ceilingTransform.position.x, 0, _ceilingTransform.position.z);
         _ceilingMesh = CeilingObject.GetComponent<MeshFilter>();
         _ceilingCollider = CeilingObject.GetComponent<MeshCollider>();
         _triangleDictionary.Clear();
