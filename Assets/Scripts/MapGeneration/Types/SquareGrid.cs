@@ -1,30 +1,31 @@
 ﻿using Assets.Scripts.MapGeneration.Enumerations;
-using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Assets.Scripts.MapGeneration.Types
 {
     public class SquareGrid
     {
+        private float _squareSize;
+
         public Square[,] Squares;
 
         public SquareGrid(TileType[,] map, List<Room> rooms, float squareSize)
         {
+            _squareSize = squareSize;
             int nodeCountX = map.GetLength(0) + 1;
             int nodeCountY = map.GetLength(1) + 1;
-            float mapWidth = nodeCountX * squareSize;
-            float mapHeight = nodeCountY * squareSize;
 
             Node[,] nodes = new Node[nodeCountX, nodeCountY];
 
-            GenerateNodes(map, squareSize, mapWidth, mapHeight, nodes);
+            GenerateNodes(map, nodes);
 
             GenerateSquares(map, nodeCountX, nodeCountY, nodes, rooms);
 
             MarkEdges();
         }
 
-        private static void GenerateNodes(TileType[,] map, float squareSize, float mapWidth, float mapHeight, Node[,] nodes)
+        private void GenerateNodes(TileType[,] map, Node[,] nodes)
         {
             for (int x = 0; x < map.GetLength(0); x++)
                 for (int y = 0; y < map.GetLength(1); y++)
@@ -33,7 +34,7 @@ namespace Assets.Scripts.MapGeneration.Types
                         for (int ny = y; ny <= y + 1; ny++)
                         {
                             if (map[x, y] == TileType.Nothing) continue;
-                            Vector3 position = new Vector3(-mapWidth / 2 + nx * squareSize + squareSize / 2, 0, -mapHeight / 2 + ny * squareSize + squareSize / 2);
+                            Vector3 position = new Vector3(Scale(nx) - Scale(1), 0, Scale(ny) - Scale(1));
                             nodes[nx, ny] = new Node(position);
                         }
                 }
@@ -56,11 +57,11 @@ namespace Assets.Scripts.MapGeneration.Types
                 }
 
             var roomIndex = 0;
-            foreach(var room in rooms)
+            foreach (var room in rooms)
             {
-                foreach(var tile in room.Tiles)
+                foreach (var tile in room.Tiles)
                 {
-                    Squares[tile.X+1, tile.Y+1].RoomIndex = roomIndex;
+                    Squares[tile.X + 1, tile.Y + 1].RoomIndex = roomIndex;
                 }
                 roomIndex++;
             }
@@ -90,6 +91,16 @@ namespace Assets.Scripts.MapGeneration.Types
         private bool IsTileEdge(Square square)
         {
             return square == null || square.TileType != TileType.Wall;
+        }
+
+        private float Scale(float value)
+        {
+            return _squareSize * value;
+        }
+
+        private float Scale(int value)
+        {
+            return _squareSize * value;
         }
     }
 }
