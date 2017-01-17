@@ -19,7 +19,7 @@ namespace Assets.Scripts.StateMachine.States.EnemyStates
 			}
 		}
 
-		public override void Enter(GameObject entity, params GameObject[] args) 
+		public override void Enter(GameObject entity) 
 		{ 
 			var enemy = entity.GetComponent<Enemy>();
             enemy.isPatrolling = true;
@@ -27,7 +27,7 @@ namespace Assets.Scripts.StateMachine.States.EnemyStates
         }
 
 
-		public override void Execute(GameObject entity, params GameObject[] args)
+		public override void Execute(GameObject entity)
 		{
 			var enemy = entity.GetComponent<Enemy>();
 
@@ -42,7 +42,7 @@ namespace Assets.Scripts.StateMachine.States.EnemyStates
 
         }
 
-		public override void Exit(GameObject entity, params GameObject[] args)
+		public override void Exit(GameObject entity)
 		{ 
 			var enemy = entity.GetComponent<Enemy>();
 			enemy.isPatrolling = false;

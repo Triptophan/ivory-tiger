@@ -93,8 +93,8 @@ namespace Assets.Scripts.Enemies
             stateMachine = GetComponent<StateMachine.StateMachine>();
             
             //Set initial state
-            stateMachine.ChangeGlobalState(PatrolState.Instance, null);
-            stateMachine.ChangeState(LookState.Instance, null);
+            stateMachine.ChangeGlobalState(PatrolState.Instance);
+            stateMachine.ChangeState(LookState.Instance);
         }
 
         public void OnEnable()

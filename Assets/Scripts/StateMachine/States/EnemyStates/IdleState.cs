@@ -17,17 +17,17 @@ namespace Assets.Scripts.StateMachine.States.EnemyStates
                 return _instance;
             }
         }
-        public override void Enter(GameObject entity, params GameObject[] args)
+        public override void Enter(GameObject entity)
         {
             
         }
 
-        public override void Execute(GameObject entity, params GameObject[] args)
+        public override void Execute(GameObject entity)
         {
             
         }
 
-        public override void Exit(GameObject entity, params GameObject[] args)
+        public override void Exit(GameObject entity)
         {
             
         }

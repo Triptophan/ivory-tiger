@@ -79,7 +79,7 @@ namespace Assets.Scripts
             var roomPosition = mainRoom.Tiles[randomTileIndex];
             var playerPosition = new Vector3(roomPosition.X * MapGenerator.SquareSize, MapGenerator.PlayerStartingY - .5f, roomPosition.Y * MapGenerator.SquareSize);
 
-            if (PlayerObject == null)
+            if (_playerObject == null)
             {
                 PlayerPrefab.layer = LayerMask.NameToLayer("Players");
                 _playerObject = (GameObject)Instantiate(PlayerPrefab, playerPosition, Quaternion.identity);
@@ -87,7 +87,7 @@ namespace Assets.Scripts
                 return;
             }
 
-            var playerTransform = PlayerObject.transform;
+            var playerTransform = _playerObject.transform;
             playerTransform.position = playerPosition;
             playerTransform.LookAt(mainRoom.Center);
         }

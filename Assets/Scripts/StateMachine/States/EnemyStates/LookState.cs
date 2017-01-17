@@ -23,12 +23,12 @@ namespace Assets.Scripts.StateMachine.States.EnemyStates
             }
         }
 
-        public override void Enter(GameObject entity, params GameObject[] args)
+        public override void Enter(GameObject entity)
         {
 			System.Diagnostics.Debug.WriteLine("Entered Look State");
         }
 
-        public override void Execute(GameObject entity, params GameObject[] args)
+        public override void Execute(GameObject entity)
         {
             var enemy = entity.GetComponent<Enemy>();
             enemy.FindVisibleTargets();
@@ -37,17 +37,17 @@ namespace Assets.Scripts.StateMachine.States.EnemyStates
 			//if we have found the player and we can see him, chase his ass
 			if (enemy.ChaseTarget != null && enemy.isChasing)
 			{
-				enemy.stateMachine.ChangeGlobalState(ChaseState.Instance, null);
+				enemy.stateMachine.ChangeGlobalState(ChaseState.Instance);
 				//enemy.stateMachine.ChangeState(LookState.Instance, null);
 			}
 			else
 			{
                 if (!enemy.isPatrolling)
-				    enemy.stateMachine.ChangeGlobalState(PatrolState.Instance, null);
+				    enemy.stateMachine.ChangeGlobalState(PatrolState.Instance);
 			}
         }
 
-		public override void Exit(GameObject entity, params GameObject[] args) { System.Diagnostics.Debug.WriteLine("Exited Look State");}
+		public override void Exit(GameObject entity) { System.Diagnostics.Debug.WriteLine("Exited Look State");}
 
 
     }
