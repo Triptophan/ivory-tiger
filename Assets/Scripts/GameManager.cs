@@ -1,8 +1,4 @@
-﻿using Assets.Scripts;
-using Assets.Scripts.StateMachine;
-using Assets.Scripts.StateMachine.States.GameFlowStates;
-using Assets.Scripts.StateMachine.States.MenuStates;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {

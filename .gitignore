@@ -18,6 +18,7 @@ ExportedObj/
 *.svd
 *.csproj
 *.sln
+/.vscode/settings.json
 
 # Unity3D generated meta files
 *.pidb.meta
@@ -30,3 +31,4 @@ sysinfo.txt
 *.unitypackage
 /Assets/Scenes/Dean's Dungeon Generation
 *.meta
+

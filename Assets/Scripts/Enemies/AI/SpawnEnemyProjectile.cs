@@ -1,43 +1,40 @@
 ﻿using UnityEngine;
 
-namespace Assets.Scripts.Enemies
+public class SpawnEnemyProjectile : MonoBehaviour
 {
-    public class SpawnEnemyProjectile : MonoBehaviour
+    public GameObject projectile;
+    public float delay = 1.0f;
+
+    public GameObject enemyParent;
+    public Enemy enemyBehaviorScript;
+
+    // Use this for initialization
+    private void Start()
     {
-        public GameObject projectile;
-        public float delay = 1.0f;
+        enemyParent = gameObject.transform.parent.gameObject;
+        enemyBehaviorScript = enemyParent.GetComponentInChildren<Enemy>();
+    }
 
-        public GameObject enemyParent;
-        public Enemy enemyBehaviorScript;
-
-        // Use this for initialization
-        private void Start()
+    // Update is called once per frame
+    private void Update()
+    {
+        delay = Mathf.Clamp01(delay);
+        if (delay > 0.0f)
         {
-            enemyParent = gameObject.transform.parent.gameObject;
-            enemyBehaviorScript = enemyParent.GetComponentInChildren<Enemy>();
+            delay -= Time.deltaTime;
         }
 
-        // Update is called once per frame
-        private void Update()
+        if (delay < 0.01f)
         {
-            delay = Mathf.Clamp01(delay);
-            if (delay > 0.0f)
-            {
-                delay -= Time.deltaTime;
-            }
+            delay = 1.0f;
+        }
 
-            if (delay < 0.01f)
-            {
-                delay = 1.0f;
-            }
-
-            if (enemyBehaviorScript.CanAttack && delay == 1.0f)
-            {
-                var projectileObject = (GameObject)Instantiate(projectile, transform.position, transform.rotation);
-                projectileObject.tag = "Enemy";
-                var projectileBehavior = projectileObject.GetComponent<ProjectileMovement>();
-                projectileBehavior.OwnerTransform = enemyParent.transform;
-            }
+        if (enemyBehaviorScript.CanAttack && delay == 1.0f)
+        {
+            var projectileObject = (GameObject)Instantiate(projectile, transform.position, transform.rotation);
+            projectileObject.tag = "Enemy";
+            var projectileBehavior = projectileObject.GetComponent<ProjectileMovement>();
+            projectileBehavior.OwnerTransform = enemyParent.transform;
         }
     }
 }

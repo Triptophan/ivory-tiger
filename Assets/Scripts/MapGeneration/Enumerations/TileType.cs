@@ -1,9 +1,6 @@
-﻿namespace Assets.Scripts.MapGeneration.Enumerations
+﻿public enum TileType
 {
-    public enum TileType
-    {
-        Nothing = 0,
-        Wall,
-        Room
-    }
+    Nothing = 0,
+    Wall,
+    Room
 }
