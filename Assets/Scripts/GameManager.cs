@@ -1,8 +1,4 @@
-﻿using Assets.Scripts;
-using Assets.Scripts.StateMachine;
-using Assets.Scripts.StateMachine.States.GameFlowStates;
-using Assets.Scripts.StateMachine.States.MenuStates;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,6 +6,7 @@ public class GameManager : MonoBehaviour
     public LevelManager LevelManager;
     public GUIManager GuiManager;
 
+    [HideInInspector]
     public bool GameIsPaused;
 
     // Use this for initialization
@@ -33,6 +30,11 @@ public class GameManager : MonoBehaviour
     public void ResumeGame()
     {
         StateMachine.ChangeGlobalState(GamePlayingState.Instance);
+    }
+
+    public void OnPlayerDeath()
+    {
+        StateMachine.ChangeGlobalState(GameRestartState.Instance);
     }
 
     public void RestartGame()

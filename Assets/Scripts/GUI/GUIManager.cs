@@ -1,7 +1,4 @@
-﻿using Assets.Scripts;
-using Assets.Scripts.GUI;
-using Assets.Scripts.Player;
-using System;
+﻿using System;
 using UnityEngine;
 using UnityEngine.UI;
 

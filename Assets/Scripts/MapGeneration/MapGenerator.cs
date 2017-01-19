@@ -1,6 +1,4 @@
-﻿using Assets.Scripts.MapGeneration.Enumerations;
-using Assets.Scripts.MapGeneration.Types;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
@@ -44,7 +42,10 @@ public class MapGenerator : MonoBehaviour
 
         ProcessMap();
 
-        //PrintMap(_map, "Bordered Map");
+#if UNITY_EDITOR
+        PrintMap(_map, "Bordered Map");
+#endif
+
         MeshGenerator meshGenerator = GetComponent<MeshGenerator>();
         meshGenerator.GenerateMesh(_map, _rooms, WallHeight, SquareSize);
         PlayerStartingY = WallHeight * -SquareSize + 1;
@@ -86,14 +87,14 @@ public class MapGenerator : MonoBehaviour
             roomLocations.Add(new RoomLocation(x, y, sizeX, sizeY));
         }
 
-        //PrintMap(_map, "Post Room Location: Room Count = " + roomCount);
+        PrintMap(_map, "Post Room Location: Room Count = " + roomCount);
 
         foreach (var location in roomLocations)
         {
             FillRoomSize(location);
         }
 
-        //PrintMap(_map, "Post Room Fill");
+        PrintMap(_map, "Post Room Fill");
     }
 
     private void FillRoomSize(RoomLocation location)
@@ -155,11 +156,11 @@ public class MapGenerator : MonoBehaviour
             ConnectClosetRooms(_rooms);
         }
 
-        //PrintMap(_map, "After Passageways");
+        PrintMap(_map, "After Passageways");
 
         BuildBorderedMap();
 
-        //PrintMap(_map, "After bordering");
+        PrintMap(_map, "After bordering");
 
         var wallRegions = GetRegions(TileType.Wall);
         foreach (var wallRegion in wallRegions)
@@ -167,7 +168,7 @@ public class MapGenerator : MonoBehaviour
             RemoveExtraWallTiles(wallRegion);
         }
 
-        //PrintMap(_map, "After wall culling");
+        PrintMap(_map, "After wall culling");
     }
 
     private List<List<Tile>> GetRegions(TileType tileType)
@@ -371,19 +372,7 @@ public class MapGenerator : MonoBehaviour
 
     public List<Room> GetRooms()
     {
-        var rooms = new List<Room>();
-
-        foreach (var room in _rooms)
-        {
-            var tiles = new List<Tile>();
-            foreach (var tile in room.Tiles)
-            {
-                tiles.Add(new Tile(-Width / 2 + tile.X, -Height / 2 + tile.Y));
-            }
-            rooms.Add(new Room(SquareSize, tiles, _map));
-        }
-
-        return rooms;
+        return _rooms;
     }
 
     private void RemoveExtraWallTiles(List<Tile> tiles)
