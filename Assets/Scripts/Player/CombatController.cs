@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityStandardAssets.Characters.FirstPerson;
 
 public class CombatController : MonoBehaviour
 {
@@ -17,22 +18,26 @@ public class CombatController : MonoBehaviour
         get { return _playerHealth.HealthIndicatorFillAmount; }
     }
 
+    public Action PlayerHealthChanged { get; set; }
+    public Action OnDeath { get; set; }
+
     [HideInInspector]
     public bool CanFire;
 
     [HideInInspector]
     public bool IsDead;
-    public Action OnDeath { get; set; }
 
-    public void Awake()
+    private void Awake()
     {
         _playerObject = gameObject;
         if (PlayerView != null) _viewTransform = PlayerView.transform;
 
         _playerHealth = _playerObject.GetComponent<PlayerHealth>();
+        _playerHealth.OnPlayerDeath = PlayerDied;
+        _playerHealth.PlayerHealthChanged = OnPlayerHeathChanged;
     }
 
-    public void Update()
+    private void Update()
     {
         GetInput();
     }
@@ -40,7 +45,6 @@ public class CombatController : MonoBehaviour
     public void ResetPlayer()
     {
         _playerHealth.ResetHealth();
-        IsDead = false;
     }
 
     private void GetInput()
@@ -74,10 +78,27 @@ public class CombatController : MonoBehaviour
         if (collidedObject.tag == "Enemy")
         {
             _playerHealth.DoDamage(10f);
-
-            IsDead = _playerHealth.CurrentHealth <= 0;
-            
-            //State Machine switch to PlayerDeathState
         }
+    }
+
+    private void OnPlayerHeathChanged()
+    {
+        if (PlayerHealthChanged != null)
+        {
+            PlayerHealthChanged();
+        }
+    }
+
+    private void PlayerDied()
+    {
+        if (OnDeath == null)
+        {
+            throw new NotImplementedException("CombatController:OnDeath cannot be null.  Please assign a listener.");
+        }
+
+        CanFire = false;
+
+        //We do not have access to the GameManager state machine here, bubble event up.
+        OnDeath();
     }
 }
