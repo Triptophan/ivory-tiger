@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -11,9 +12,23 @@ public class PlayerHealth : MonoBehaviour
         get { return CurrentHealth / MaxHealth; }
     }
 
+    public Action OnPlayerDeath { get; set; }
+
+    public Action PlayerHealthChanged { get; set; }
+
+    private void Update()
+    {
+#if UNITY_EDITOR
+        if (Input.GetKeyUp(KeyCode.Minus))
+        {
+            DoDamage(50f);
+        }
+#endif
+    }
+
     public void ResetHealth()
     {
-        CurrentHealth = StartingHealth;
+        UpdateHealth(-StartingHealth);
     }
 
     public void DoDamage(float amount)
@@ -29,5 +44,25 @@ public class PlayerHealth : MonoBehaviour
     private void UpdateHealth(float value)
     {
         CurrentHealth = Mathf.Clamp(CurrentHealth - value, 0f, 100f);
+
+        if (OnPlayerDeath == null)
+        {
+            throw new NotImplementedException("OnPlayerDeath is not implemented in PlayerHealth, please assign a listener.");
+        }
+
+        OnPlayerHealthChanged();
+
+        if (CurrentHealth == 0)
+        {
+            OnPlayerDeath();
+        }
+    }
+
+    private void OnPlayerHealthChanged()
+    {
+        if(PlayerHealthChanged != null)
+        {
+            PlayerHealthChanged();
+        }
     }
 }

@@ -20,6 +20,8 @@ public class GameSetupState : State
         var gameManager = entity.GetComponent<GameManager>();
 
         gameManager.LevelManager.SetupLevel();
+
+        gameManager.LevelManager.PlayerCombatController.OnDeath = gameManager.OnPlayerDeath;
     }
 
     public override void Execute(GameObject entity)

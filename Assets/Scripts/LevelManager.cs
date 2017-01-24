@@ -84,11 +84,13 @@ public class LevelManager : MonoBehaviour
             PlayerPrefab.layer = LayerMask.NameToLayer("Players");
             _playerObject = (GameObject)Instantiate(PlayerPrefab, playerPosition, Quaternion.identity);
             PlayerCombatController = _playerObject.GetComponent<CombatController>();
+            GUIManager.PlayerCombatController = PlayerCombatController;
             return;
         }
 
         var playerTransform = _playerObject.transform;
         playerTransform.position = playerPosition;
+        PlayerCombatController.ResetPlayer();
         playerTransform.LookAt(mainRoom.Center);
     }
 

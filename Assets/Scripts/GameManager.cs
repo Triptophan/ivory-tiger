@@ -20,6 +20,11 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         StateMachine.Update();
+
+        if(LevelManager.PlayerCombatController != null && LevelManager.PlayerCombatController.OnDeath == null)
+        {
+            LevelManager.PlayerCombatController.OnDeath = OnPlayerDeath;
+        }
     }
 
     public void StartGame()
@@ -34,7 +39,7 @@ public class GameManager : MonoBehaviour
 
     public void OnPlayerDeath()
     {
-        StateMachine.ChangeGlobalState(GameRestartState.Instance);
+        StateMachine.ChangeGlobalState(PlayerDeathState.Instance);
     }
 
     public void RestartGame()
