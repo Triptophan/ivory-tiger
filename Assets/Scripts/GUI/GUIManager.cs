@@ -12,8 +12,6 @@ public class GUIManager : MonoBehaviour
     public GameObject HealthBar;
     public GameObject TitleMenu;
 
-    public GameObject GuiCamera;
-
     public CombatController PlayerCombatController;
 
     public LevelManager LevelManager;
