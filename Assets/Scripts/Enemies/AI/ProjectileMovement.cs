@@ -1,46 +1,44 @@
 ﻿using UnityEngine;
 
-namespace Assets.Scripts.Enemies
+
+public class ProjectileMovement : MonoBehaviour
 {
-    public class ProjectileMovement : MonoBehaviour
+    private GameObject _gameObject;
+    private Rigidbody _rigidbody;
+
+    public float Speed = 150.0f;
+
+    public float DamageValue = 10f;
+
+    public Transform OwnerTransform;
+
+    private void Start()
     {
-        private GameObject _gameObject;
-        private Rigidbody _rigidbody;
+        _gameObject = gameObject;
+        _rigidbody = GetComponent<Rigidbody>();
 
-        public float Speed = 150.0f;
+        _rigidbody.velocity = OwnerTransform.TransformDirection(Vector3.forward * Speed);
 
-        public float DamageValue = 10f;
+        Destroy(_gameObject, 5f);
+    }
 
-        public Transform OwnerTransform;
-
-        private void Start()
+    public void OnCollisionEnter(Collision collision)
+    {
+        var collisionObject = collision.gameObject;
+        if (collisionObject.tag == "Player")
         {
-            _gameObject = gameObject;
-            _rigidbody = GetComponent<Rigidbody>();
-
-            _rigidbody.velocity = OwnerTransform.TransformDirection(Vector3.forward * Speed);
-
-            Destroy(_gameObject, 5f);
+            var playerHealth = collisionObject.GetComponent<PlayerHealth>();
+            playerHealth.DoDamage(DamageValue);
+            SelfDestruct();
         }
-
-        public void OnCollisionEnter(Collision collision)
+        if (collisionObject.tag == "Walls")
         {
-            var collisionObject = collision.gameObject;
-            if (collisionObject.tag == "Player")
-            {
-                var playerHealth = collisionObject.GetComponent<PlayerHealth>();
-                playerHealth.DoDamage(DamageValue);
-                SelfDestruct();
-            }
-            if (collisionObject.tag == "Walls")
-            {
-                SelfDestruct();
-            }
+            SelfDestruct();
         }
+    }
 
-        private void SelfDestruct()
-        {
-            Destroy(_gameObject);
-        }
+    private void SelfDestruct()
+    {
+        Destroy(_gameObject);
     }
 }

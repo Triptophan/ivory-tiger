@@ -1,38 +1,35 @@
 ﻿using System.Diagnostics;
 
-namespace Assets.Scripts.MapGeneration.Types
+[DebuggerDisplay("A:{VertexIndexA}, B:{VertexIndexB}, C:{VertexIndexC}")]
+internal struct Triangle
 {
-    [DebuggerDisplay("A:{VertexIndexA}, B:{VertexIndexB}, C:{VertexIndexC}")]
-    internal struct Triangle
+    public int VertexIndexA;
+    public int VertexIndexB;
+    public int VertexIndexC;
+
+    private int[] _vertices;
+
+    public Triangle(int a, int b, int c)
     {
-        public int VertexIndexA;
-        public int VertexIndexB;
-        public int VertexIndexC;
+        VertexIndexA = a;
+        VertexIndexB = b;
+        VertexIndexC = c;
 
-        private int[] _vertices;
+        _vertices = new int[3];
+        _vertices[0] = a;
+        _vertices[1] = b;
+        _vertices[2] = c;
+    }
 
-        public Triangle(int a, int b, int c)
-        {
-            VertexIndexA = a;
-            VertexIndexB = b;
-            VertexIndexC = c;
+    public int this[int i]
+    {
+        get { return _vertices[i]; }
+    }
 
-            _vertices = new int[3];
-            _vertices[0] = a;
-            _vertices[1] = b;
-            _vertices[2] = c;
-        }
-
-        public int this[int i]
-        {
-            get { return _vertices[i]; }
-        }
-
-        public bool Contains(int vertexIndex)
-        {
-            return vertexIndex == VertexIndexA ||
-                    vertexIndex == VertexIndexB ||
-                    vertexIndex == VertexIndexC;
-        }
+    public bool Contains(int vertexIndex)
+    {
+        return vertexIndex == VertexIndexA ||
+                vertexIndex == VertexIndexB ||
+                vertexIndex == VertexIndexC;
     }
 }

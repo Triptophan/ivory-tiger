@@ -8,7 +8,7 @@ namespace Assets.Scripts.MapGeneration.Types
     {
         public Vector3 Position;
 
-        public int VertexIndex = -1;
+    public int VertexIndex = -1;
 
         public Node(Vector3 position)
         {

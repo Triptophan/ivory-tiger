@@ -1,48 +1,44 @@
-﻿using Assets.Scripts.MapGeneration.Types;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Assets.Scripts.Enemies.Generation
+public class EnemySpawner : MonoBehaviour
 {
-    public class EnemySpawner : MonoBehaviour
-    {
-        private EnemyFactory _enemyFactory;
-        private Transform _transform;
+    private EnemyFactory _enemyFactory;
+    private Transform _transform;
 
         public List<Enemy> EnemyPool;
         public List<Enemy> DeadEnemyPool;
         public LevelManager LevelManager;
 
-        public void Awake()
+    public void Awake()
+    {
+        _transform = transform;
+        _enemyFactory = GetComponent<EnemyFactory>();
+        EnemyPool = new List<Enemy>();
+        DeadEnemyPool = new List<Enemy>();
+    }
+
+    public void Spawn(List<Room> rooms, int roomScale, int enemyScale, float playerStartingY)
+    {
+        ResetPools();
+        GenerateEnemies(rooms.Count * enemyScale);
+
+        foreach (var candidate in EnemyPool)
         {
-            _transform = transform;
-            _enemyFactory = GetComponent<EnemyFactory>();
-            EnemyPool = new List<Enemy>();
-            DeadEnemyPool = new List<Enemy>();
+            var randomRoomIndex = Random.Range(1, rooms.Count - 1);
+            var room = rooms[randomRoomIndex];
+
+            var randomTileIndex = Random.Range(0, room.Tiles.Count - 1);
+            var randomTile = room.Tiles[randomTileIndex];
+            candidate.transform.position = new Vector3(randomTile.X * roomScale, playerStartingY, randomTile.Y * roomScale);
+
+            candidate.Active = true;
         }
+    }
 
-        public void Spawn(List<Room> rooms, int roomScale, int enemyScale, float playerStartingY)
-        {
-            ResetPools();
-            GenerateEnemies(rooms.Count * enemyScale);
-
-            foreach (var candidate in EnemyPool)
-            {
-                var randomRoomIndex = Random.Range(1, rooms.Count - 1);
-                var room = rooms[randomRoomIndex];
-
-                var randomTileIndex = Random.Range(0, room.Tiles.Count - 1);
-                var randomTile = room.Tiles[randomTileIndex];
-                candidate.transform.position = new Vector3(randomTile.X * roomScale, playerStartingY, randomTile.Y * roomScale);
-
-                candidate.Active = true;
-                //candidate.CalculateRandomPatrolWayPoints();
-            }
-        }
-
-        private void GenerateEnemies(int enemyPoolCapacity)
-        {
-            int enemiesToAddToPool = enemyPoolCapacity - EnemyPool.Count;
+    private void GenerateEnemies(int enemyPoolCapacity)
+    {
+        int enemiesToAddToPool = enemyPoolCapacity - EnemyPool.Count;
 
             for (int i = 0; i < enemiesToAddToPool; i++)
             {
@@ -55,14 +51,13 @@ namespace Assets.Scripts.Enemies.Generation
             }
         }
 
-        private void ResetPools()
+    private void ResetPools()
+    {
+        foreach(var enemy in EnemyPool)
         {
-            foreach(var enemy in EnemyPool)
-            {
-                enemy.Active = false;
-            }
-
-            DeadEnemyPool.Clear();
+            enemy.Active = false;
         }
+
+        DeadEnemyPool.Clear();
     }
 }

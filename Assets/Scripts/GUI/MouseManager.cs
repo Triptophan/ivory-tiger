@@ -1,17 +1,14 @@
 ﻿using UnityEngine;
 
-namespace Assets.Scripts.GUI
+public class MouseManager : MonoBehaviour
 {
-    public class MouseManager : MonoBehaviour
+    private bool _lockCursor = true;
+
+    public void ToggleMouse()
     {
-        private bool _lockCursor = true;
+        _lockCursor = !_lockCursor;
 
-        public void ToggleMouse()
-        {
-            _lockCursor = !_lockCursor;
-
-            Cursor.lockState = _lockCursor ? CursorLockMode.Locked : CursorLockMode.None;
-            Cursor.visible = !_lockCursor;
-        }
+        Cursor.lockState = _lockCursor ? CursorLockMode.Locked : CursorLockMode.None;
+        Cursor.visible = !_lockCursor;
     }
 }

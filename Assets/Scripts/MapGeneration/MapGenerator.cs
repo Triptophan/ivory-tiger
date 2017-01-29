@@ -1,6 +1,4 @@
-﻿using Assets.Scripts.MapGeneration.Enumerations;
-using Assets.Scripts.MapGeneration.Types;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;

@@ -1,7 +1,4 @@
-﻿using Assets.Scripts.MapGeneration.Enumerations;
-using Assets.Scripts.MapGeneration.Generators;
-using Assets.Scripts.MapGeneration.Types;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class MeshGenerator : MonoBehaviour
