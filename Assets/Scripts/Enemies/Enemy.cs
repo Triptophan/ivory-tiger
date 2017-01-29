@@ -256,8 +256,6 @@ namespace Assets.Scripts.Enemies
                     RaycastHit hit;
                     if (!Physics.Raycast(StartPosition, dirToTarget, out hit, dstToTarget))
                     {
-                        //Vector3 target = randDirection;
-
                         wayPoints.Add(randDirection);
                         break;
                     }
@@ -287,7 +285,6 @@ namespace Assets.Scripts.Enemies
 
                 }
             }
-
             if (PatrolWayPoints != null)
             {
                 for (int i = 0; i < PatrolWayPoints.Length; i++)
