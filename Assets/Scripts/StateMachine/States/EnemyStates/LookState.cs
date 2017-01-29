@@ -35,7 +35,7 @@ namespace Assets.Scripts.StateMachine.States.EnemyStates
 
 
 			//if we have found the player and we can see him, chase his ass
-			if (enemy.ChaseTarget != null && enemy.isChasing)
+			if (enemy.ChaseTarget != null && !enemy.isChasing)
 			{
 				enemy.stateMachine.ChangeGlobalState(ChaseState.Instance);
 				//enemy.stateMachine.ChangeState(LookState.Instance, null);

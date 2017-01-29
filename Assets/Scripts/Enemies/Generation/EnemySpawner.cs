@@ -24,8 +24,7 @@ namespace Assets.Scripts.Enemies.Generation
         public void Spawn(List<Room> rooms, int roomScale, int enemyScale, float playerStartingY)
         {
             ResetPools();
-            //GenerateEnemies(rooms.Count * enemyScale);
-            GenerateEnemies(1);
+            GenerateEnemies(rooms.Count * enemyScale);
 
             foreach (var candidate in EnemyPool)
             {

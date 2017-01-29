@@ -31,15 +31,10 @@ namespace Assets.Scripts.StateMachine.States.EnemyStates
 		{
 			var enemy = entity.GetComponent<Enemy>();
 
-
-
 			if(enemy.isTraveling) //We are traveling along the calculated path
 				return;
-
             
 			enemy.Patrol();
-
-
         }
 
 		public override void Exit(GameObject entity)
