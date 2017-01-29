@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Assets.Scripts;
+using Assets.Scripts.Enemies;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
@@ -6,8 +8,9 @@ public class EnemySpawner : MonoBehaviour
     private EnemyFactory _enemyFactory;
     private Transform _transform;
 
-    public List<Enemy> EnemyPool;
-    public List<Enemy> DeadEnemyPool;
+        public List<Enemy> EnemyPool;
+        public List<Enemy> DeadEnemyPool;
+        public LevelManager LevelManager;
 
     public void Awake()
     {
@@ -39,16 +42,16 @@ public class EnemySpawner : MonoBehaviour
     {
         int enemiesToAddToPool = enemyPoolCapacity - EnemyPool.Count;
 
-        for (int i = 0; i < enemiesToAddToPool; i++)
-        {
-            var enemy = _enemyFactory.Spawn();
-            enemy.transform.parent = _transform;
-            enemy.EnemyPool = EnemyPool;
-            enemy.DeadEnemyPool = DeadEnemyPool;
-
-            EnemyPool.Add(enemy);
+            for (int i = 0; i < enemiesToAddToPool; i++)
+            {
+                var enemy = _enemyFactory.Spawn();
+                enemy.transform.parent = _transform;
+                enemy.EnemyPool = EnemyPool;
+                enemy.DeadEnemyPool = DeadEnemyPool;
+                enemy.LevelManager = LevelManager;
+                EnemyPool.Add(enemy);
+            }
         }
-    }
 
     private void ResetPools()
     {

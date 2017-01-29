@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using Assets.Scripts.MapGeneration.Types;
+using System.Diagnostics;
 using UnityEngine;
 
 [DebuggerDisplay("Active: {Active}, Position: {Position}")]

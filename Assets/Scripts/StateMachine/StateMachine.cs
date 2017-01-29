@@ -1,67 +1,69 @@
 ﻿using UnityEngine;
-
-public class StateMachine : MonoBehaviour
+namespace Assets.Scripts.StateMachine
 {
-    private State _previousState;
-    private State _previousGlobalState;
-
-    private State _currentState;
-    private State _currentGlobalState;
-
-    private GameObject _gameObject;
-
-    public void Awake()
+    public class StateMachine : MonoBehaviour
     {
-        _gameObject = gameObject;
-    }
+        private State _previousState;
+        private State _previousGlobalState;
 
-    public void Update()
-    {
-        if (_currentGlobalState != null) _currentGlobalState.Execute(_gameObject);
-        if (_currentState != null) _currentState.Execute(_gameObject);
-    }
+        private State _currentState;
+        private State _currentGlobalState;
 
-    public void ChangeState(State newState)
-    {
-        if (newState == null) return;
+        private GameObject _gameObject;
 
-        _previousState = _currentState;
+        public void Awake()
+        {
+            _gameObject = gameObject;
+        }
 
-        if (_currentState != null) _currentState.Exit(_gameObject);
+        public void Update()
+        {
+            if (_currentGlobalState != null) _currentGlobalState.Execute(_gameObject);
+            if (_currentState != null) _currentState.Execute(_gameObject);
+        }
 
-        _currentState = newState;
-        _currentState.Enter(_gameObject);
-    }
+        public void ChangeState(State newState)
+        {
+            if (newState == null) return;
 
-    public void ChangeGlobalState(State newState)
-    {
-        if (newState == null) return;
+            _previousState = _currentState;
 
-        _previousGlobalState = _currentGlobalState;
+            if (_currentState != null) _currentState.Exit(_gameObject);
 
-        if (_currentGlobalState != null) _currentGlobalState.Exit(_gameObject);
+            _currentState = newState;
+            _currentState.Enter(_gameObject);
+        }
 
-        _currentGlobalState = newState;
-        _currentGlobalState.Enter(_gameObject);
-    }
+        public void ChangeGlobalState(State newState)
+        {
+            if (newState == null) return;
 
-    public void RevertToPreviousState()
-    {
-        if (_previousState != null) ChangeState(_previousState);
-    }
+            _previousGlobalState = _currentGlobalState;
 
-    public void RevertToPreviousGlobalState()
-    {
-        if (_previousGlobalState != null) ChangeGlobalState(_previousGlobalState);
-    }
+            if (_currentGlobalState != null) _currentGlobalState.Exit(_gameObject);
 
-    public bool IsInState(State state)
-    {
-        return _currentState.GetType() == typeof(State);
-    }
+            _currentGlobalState = newState;
+            _currentGlobalState.Enter(_gameObject);
+        }
 
-    public bool IsInGlobalState(State state)
-    {
-        return _currentGlobalState.GetType() == typeof(State);
+        public void RevertToPreviousState()
+        {
+            if (_previousState != null) ChangeState(_previousState);
+        }
+
+        public void RevertToPreviousGlobalState()
+        {
+            if (_previousGlobalState != null) ChangeGlobalState(_previousGlobalState);
+        }
+
+        public bool IsInState(State state)
+        {
+            return _currentState.GetType() == typeof(State);
+        }
+
+        public bool IsInGlobalState(State state)
+        {
+            return _currentGlobalState.GetType() == typeof(State);
+        }
     }
 }

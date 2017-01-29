@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System;
+using Assets.Scripts.MapGeneration.Types;
 
 [DebuggerDisplay("Type: {TileTypeName}, RoomIndex: {RoomIndex}")]
 public class Square
