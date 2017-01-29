@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public LevelManager LevelManager;
     public GUIManager GuiManager;
 
+    [HideInInspector]
     public bool GameIsPaused;
 
     // Use this for initialization
@@ -33,6 +34,11 @@ public class GameManager : MonoBehaviour
     public void ResumeGame()
     {
         StateMachine.ChangeGlobalState(GamePlayingState.Instance);
+    }
+
+    public void OnPlayerDeath()
+    {
+        StateMachine.ChangeGlobalState(GameRestartState.Instance);
     }
 
     public void RestartGame()
