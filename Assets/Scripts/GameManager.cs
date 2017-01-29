@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts;
+using Assets.Scripts.StateMachine;
+using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {

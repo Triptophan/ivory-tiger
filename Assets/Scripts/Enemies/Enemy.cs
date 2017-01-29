@@ -1,15 +1,13 @@
-﻿using Assets.Scripts.Combat.Projectiles;
-using Assets.Scripts.Enemies.AI;
-using Assets.Scripts.StateMachine;
-using Assets.Scripts.StateMachine.States.EnemyStates;
+﻿using Assets.Scripts.StateMachine.States.EnemyStates;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Collections;
+using Assets.Scripts;
 
 namespace Assets.Scripts.Enemies
 {
     //[RequireComponent(typeof(NavMeshAgent))]
-    [RequireComponent(typeof(Scripts.StateMachine.StateMachine))]
+    [RequireComponent(typeof(Assets.Scripts.StateMachine.StateMachine))]
     public class Enemy : MonoBehaviour
     {
         

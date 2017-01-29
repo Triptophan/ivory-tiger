@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.Enemies;
+using UnityEngine;
 
 public class EnemyFactory : MonoBehaviour
 {

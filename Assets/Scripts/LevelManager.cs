@@ -1,11 +1,13 @@
 ﻿using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
-
-public class LevelManager : MonoBehaviour
+using MachineOfStates = Assets.Scripts.StateMachine.StateMachine;
+namespace Assets.Scripts
 {
-    private List<Room> _rooms;
-    private GameObject _playerObject;
+    public class LevelManager : MonoBehaviour
+    {
+        private List<Room> _rooms;
+        private GameObject _playerObject;
 
         public MachineOfStates StateMachine;
         public MapGenerator MapGenerator;
@@ -15,22 +17,22 @@ public class LevelManager : MonoBehaviour
         public GameObject PlayerPrefab;
         public LayerMask WalkableLayer;
 
-    public GameObject LevelExit;
+        public GameObject LevelExit;
 
-    public CombatController PlayerCombatController;
+        public CombatController PlayerCombatController;
 
-    public int EnemyScale = 2;
+        public int EnemyScale = 2;
 
-    public bool MapDebugMode = false;
+        public bool MapDebugMode = false;
 
-    [HideInInspector]
-    public bool GameReady = false;
+        [HideInInspector]
+        public bool GameReady = false;
 
-    public void RestartNewLevel()
-    {
-        _rooms = new List<Room>();
-        SetupLevel();
-    }
+        public void RestartNewLevel()
+        {
+            _rooms = new List<Room>();
+            SetupLevel();
+        }
 
         private void Awake()
         {
@@ -38,91 +40,92 @@ public class LevelManager : MonoBehaviour
             PathFinding = GetComponent<Pathfinding>();
         }
 
-    private void Update()
-    {
+        private void Update()
+        {
 #if UNITY_EDITOR
-        if (MapDebugMode && Input.GetKeyUp(KeyCode.F12))
-        {
-            RestartNewLevel();
-        }
+            if (MapDebugMode && Input.GetKeyUp(KeyCode.F12))
+            {
+                RestartNewLevel();
+            }
 #endif
-    }
-
-    public void SetupLevel()
-    {
-        GameReady = false;
-
-        while (_rooms == null || _rooms.Count < 2)
-        {
-            MapGenerator.GenerateMap();
-
-            _rooms = MapGenerator.GetRooms();
         }
 
-        if (MapDebugMode) return;
-
-        NavMeshBuilder.BuildNavMesh();
-        
-        SetPlayer();
-
-        EnemySpawner.Spawn(_rooms, MapGenerator.SquareSize, EnemyScale, MapGenerator.PlayerStartingY);
-
-        GameReady = true;
-
-        PlaceLevelExit();
-    }
-
-    private void SetPlayer()
-    {
-        var mainRoom = _rooms[0];
-        var randomTileIndex = Random.Range(0, mainRoom.Tiles.Count);
-        var roomPosition = mainRoom.Tiles[randomTileIndex];
-        var playerPosition = new Vector3(Scale(roomPosition.X) + Scale(.5f),
-                                            MapGenerator.PlayerStartingY - .5f,
-                                            Scale(roomPosition.Y) + Scale(.5f));
-
-        if (_playerObject == null)
+        public void SetupLevel()
         {
-            PlayerPrefab.layer = LayerMask.NameToLayer("Players");
-            _playerObject = (GameObject)Instantiate(PlayerPrefab, playerPosition, Quaternion.identity);
-            PlayerCombatController = _playerObject.GetComponent<CombatController>();
-            GUIManager.PlayerCombatController = PlayerCombatController;
-            return;
+            GameReady = false;
+
+            while (_rooms == null || _rooms.Count < 2)
+            {
+                MapGenerator.GenerateMap();
+
+                _rooms = MapGenerator.GetRooms();
+            }
+
+            if (MapDebugMode) return;
+
+            NavMeshBuilder.BuildNavMesh();
+
+            SetPlayer();
+
+            EnemySpawner.Spawn(_rooms, MapGenerator.SquareSize, EnemyScale, MapGenerator.PlayerStartingY);
+
+            GameReady = true;
+
+            PlaceLevelExit();
         }
 
-        var playerTransform = _playerObject.transform;
-        playerTransform.position = playerPosition;
-        PlayerCombatController.ResetPlayer();
-        playerTransform.LookAt(mainRoom.Center);
-    }
+        private void SetPlayer()
+        {
+            var mainRoom = _rooms[0];
+            var randomTileIndex = Random.Range(0, mainRoom.Tiles.Count);
+            var roomPosition = mainRoom.Tiles[randomTileIndex];
+            var playerPosition = new Vector3(Scale(roomPosition.X) + Scale(.5f),
+                                                MapGenerator.PlayerStartingY - .5f,
+                                                Scale(roomPosition.Y) + Scale(.5f));
 
-    private bool CanPlayerProceedLevels()
-    {
-        return EnemySpawner.DeadEnemyPool.Count == EnemySpawner.EnemyPool.Count;
-    }
+            if (_playerObject == null)
+            {
+                PlayerPrefab.layer = LayerMask.NameToLayer("Players");
+                _playerObject = (GameObject)Instantiate(PlayerPrefab, playerPosition, Quaternion.identity);
+                PlayerCombatController = _playerObject.GetComponent<CombatController>();
+                GUIManager.PlayerCombatController = PlayerCombatController;
+                return;
+            }
 
-    private void PlaceLevelExit()
-    {
-        var roomIndex = Random.Range(1, _rooms.Count - 1);
+            var playerTransform = _playerObject.transform;
+            playerTransform.position = playerPosition;
+            PlayerCombatController.ResetPlayer();
+            playerTransform.LookAt(mainRoom.Center);
+        }
 
-        var room = _rooms[roomIndex];
+        private bool CanPlayerProceedLevels()
+        {
+            return EnemySpawner.DeadEnemyPool.Count == EnemySpawner.EnemyPool.Count;
+        }
 
-        var tileIndex = Random.Range(0, room.Tiles.Count);
+        private void PlaceLevelExit()
+        {
+            var roomIndex = Random.Range(1, _rooms.Count - 1);
 
-        var tile = room.Tiles[tileIndex];
+            var room = _rooms[roomIndex];
 
-        LevelExit.transform.position = new Vector3(Scale(tile.X) + Scale(.5f), 
-                                                    LevelExit.transform.position.y,
-                                                    Scale(tile.Y) + Scale(.5f));
-    }
+            var tileIndex = Random.Range(0, room.Tiles.Count);
 
-    private float Scale(float value)
-    {
-        return MapGenerator.SquareSize * value;
-    }
+            var tile = room.Tiles[tileIndex];
 
-    private float Scale(int value)
-    {
-        return MapGenerator.SquareSize * value;
+            LevelExit.transform.position = new Vector3(Scale(tile.X) + Scale(.5f),
+                                                        LevelExit.transform.position.y,
+                                                        Scale(tile.Y) + Scale(.5f));
+        }
+
+        private float Scale(float value)
+        {
+            return MapGenerator.SquareSize * value;
+        }
+
+        private float Scale(int value)
+        {
+            return MapGenerator.SquareSize * value;
+        }
     }
 }

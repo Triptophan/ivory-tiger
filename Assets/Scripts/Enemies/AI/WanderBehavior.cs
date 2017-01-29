@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class WanderBehavior : MonoBehaviour
+public class WanderBehavior1 : MonoBehaviour
 {
     public float wanderRadius = 5f;
     public float wanderTimer = 5f;

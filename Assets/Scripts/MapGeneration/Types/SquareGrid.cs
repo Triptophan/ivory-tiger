@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Assets.Scripts.MapGeneration.Types;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class SquareGrid
